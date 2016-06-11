@@ -35,32 +35,75 @@ SHORTSTRING		{STRINGPREFIX}?([']{SHORTSTRINGITEM}*['])|(["]{SHORTSTRINGITEM}*["]
 LONGSTRING		{STRINGPREFIX}?(([']{3}{LONGSTRINGITEM}*[']{3})|(["]{3}{LONGSTRINGITEM}*["]{3}))
 
 NEWLINE			[\n]
-
 WHITESPACE		[ \t\v\n\f]
 
 %%
 
-"return"			{ return RETURN; }
-"continue"			{ return CONTINUE; }
-"del"				{ return DEL; }
-"global"			{ return GLOBAL; }
-"yield"				{ return YIELD; }
+"False"				{ return FALSE; }
+"None"				{ return NONE; }
+"True"				{ return TRUE; }
+"and"				{ return AND; }
+"as"				{ return AS; }
 "assert"			{ return ASSERT; }
-"pass"				{ return PASS; }
 "break"				{ return BREAK; }
-"in"				{ return IN; }
-"raise"				{ return RAISE; }
+"class"				{ return CLASS; }
+"continue"			{ return CONTINUE; }
+"def"				{ return DEF; }
+"del"				{ return DEL; }
+"elif"				{ return ELIF; }
+"else"				{ return ELSE; }
+"except"			{ return EXCEPT; }
+"finally"			{ return FINALLY; }
+"for"				{ return FOR; }
+"from"				{ return FROM; }
+"global"			{ return GLOBAL; }
+"if"				{ return IF; }
 "import"			{ return IMPORT; }
+"in"				{ return IN; }
+"is"				{ return IS; }
+"lambda"			{ return LAMBDA; }
+"not"				{ return NOT; }
+"or"				{ return OR; }
+"pass"				{ return PASS; }
+"raise"				{ return RAISE; }
+"return"			{ return RETURN; }
+"try"				{ return TRY; }
+"while"				{ return WHILE; }
+"with"				{ return WITH; }
+"yield"				{ return YIELD; }
 
 "print"				{ return PRINT; }
-
 "exec"				{ return EXEC; }
+
+"L"					{ return 'L'; }
+"l"					{ return 'l'; }
+
+"..."				{ return ELLIPSIS; }
+">>="				{ return RIGHT_ASSIGN; }
+"<<="				{ return LEFT_ASSIGN; }
+"+="				{ return ADD_ASSIGN; }
+"-="				{ return SUB_ASSIGN; }
+"*="				{ return MUL_ASSIGN; }
+"**="				{ return POW_ASSIGN; }
+"/="				{ return DIV_ASSIGN; }
+"%="				{ return MOD_ASSIGN; }
+"&="				{ return AND_ASSIGN; }
+"^="				{ return XOR_ASSIGN; }
+"|="				{ return OR_ASSIGN; }
+">>"				{ return RIGHT_OP; }
+"<<"				{ return LEFT_OP; }
+"<="				{ return LE_OP; }
+">="				{ return GE_OP; }
+"=="				{ return EQ_OP; }
+"!="				{ return NE_OP; }
 
 ","					{ return ','; }
 ":"					{ return ':'; }
 "="					{ return '='; }
 "("					{ return '('; }
 ")"					{ return ')'; }
+"["					{ return '['; }
+"]"					{ return ']'; }
 "."					{ return '.'; }
 "&"					{ return '&'; }
 "!"					{ return '!'; }
@@ -75,13 +118,14 @@ WHITESPACE		[ \t\v\n\f]
 "^"					{ return '^'; }
 "|"					{ return '|'; }
 "?"					{ return '?'; }
+"*"					{ return '*'; }
 				
 {IDENTIFIER}		{
 						printf("IDENTIFIER: %s\n", yytext);
 						return IDENTIFIER;
 					}
 
-{DECINTEGER}			{
+{DECINTEGER}		{
 						printf("DECINTEGER: %s\n", yytext);
 						return DECINTEGER;
 					}
@@ -130,7 +174,7 @@ WHITESPACE		[ \t\v\n\f]
 					}
 					
 					
-{WHITESPACE}+				{ /* whitespace separates tokens */ }
+{WHITESPACE}+		{ /* whitespace separates tokens */ }
 .					{ /* discard bad characters */ }
 %%
 

@@ -39,55 +39,135 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     RETURN = 258,
-     CONTINUE = 259,
-     DEL = 260,
-     GLOBAL = 261,
-     YIELD = 262,
+     FALSE = 258,
+     NONE = 259,
+     TRUE = 260,
+     AND = 261,
+     AS = 262,
      ASSERT = 263,
-     PASS = 264,
-     BREAK = 265,
-     IN = 266,
-     RAISE = 267,
-     IMPORT = 268,
-     PRINT = 269,
-     EXEC = 270,
-     IDENTIFIER = 271,
-     SHORTSTRING = 272,
-     LONGSTRING = 273,
-     DECINTEGER = 274,
-     OCTINTEGER = 275,
-     HEXINTEGER = 276,
-     POINTFLOAT = 277,
-     EXPONENTFLOAT = 278,
-     IMAGNUMBER = 279,
-     NEWLINE = 280
+     BREAK = 264,
+     CLASS = 265,
+     CONTINUE = 266,
+     DEF = 267,
+     DEL = 268,
+     ELIF = 269,
+     ELSE = 270,
+     EXCEPT = 271,
+     FINALLY = 272,
+     FOR = 273,
+     FROM = 274,
+     GLOBAL = 275,
+     IF = 276,
+     IMPORT = 277,
+     IN = 278,
+     IS = 279,
+     LAMBDA = 280,
+     NOT = 281,
+     OR = 282,
+     PASS = 283,
+     RAISE = 284,
+     RETURN = 285,
+     TRY = 286,
+     WHILE = 287,
+     WITH = 288,
+     YIELD = 289,
+     PRINT = 290,
+     EXEC = 291,
+     IDENTIFIER = 292,
+     SHORTSTRING = 293,
+     LONGSTRING = 294,
+     DECINTEGER = 295,
+     OCTINTEGER = 296,
+     HEXINTEGER = 297,
+     POINTFLOAT = 298,
+     EXPONENTFLOAT = 299,
+     IMAGNUMBER = 300,
+     ELLIPSIS = 301,
+     RIGHT_ASSIGN = 302,
+     LEFT_ASSIGN = 303,
+     ADD_ASSIGN = 304,
+     SUB_ASSIGN = 305,
+     MUL_ASSIGN = 306,
+     POW_ASSIGN = 307,
+     DIV_ASSIGN = 308,
+     MOD_ASSIGN = 309,
+     AND_ASSIGN = 310,
+     XOR_ASSIGN = 311,
+     OR_ASSIGN = 312,
+     RIGHT_OP = 313,
+     LEFT_OP = 314,
+     PTR_OP = 315,
+     LE_OP = 316,
+     GE_OP = 317,
+     EQ_OP = 318,
+     NE_OP = 319,
+     NEWLINE = 320
    };
 #endif
 /* Tokens.  */
-#define RETURN 258
-#define CONTINUE 259
-#define DEL 260
-#define GLOBAL 261
-#define YIELD 262
+#define FALSE 258
+#define NONE 259
+#define TRUE 260
+#define AND 261
+#define AS 262
 #define ASSERT 263
-#define PASS 264
-#define BREAK 265
-#define IN 266
-#define RAISE 267
-#define IMPORT 268
-#define PRINT 269
-#define EXEC 270
-#define IDENTIFIER 271
-#define SHORTSTRING 272
-#define LONGSTRING 273
-#define DECINTEGER 274
-#define OCTINTEGER 275
-#define HEXINTEGER 276
-#define POINTFLOAT 277
-#define EXPONENTFLOAT 278
-#define IMAGNUMBER 279
-#define NEWLINE 280
+#define BREAK 264
+#define CLASS 265
+#define CONTINUE 266
+#define DEF 267
+#define DEL 268
+#define ELIF 269
+#define ELSE 270
+#define EXCEPT 271
+#define FINALLY 272
+#define FOR 273
+#define FROM 274
+#define GLOBAL 275
+#define IF 276
+#define IMPORT 277
+#define IN 278
+#define IS 279
+#define LAMBDA 280
+#define NOT 281
+#define OR 282
+#define PASS 283
+#define RAISE 284
+#define RETURN 285
+#define TRY 286
+#define WHILE 287
+#define WITH 288
+#define YIELD 289
+#define PRINT 290
+#define EXEC 291
+#define IDENTIFIER 292
+#define SHORTSTRING 293
+#define LONGSTRING 294
+#define DECINTEGER 295
+#define OCTINTEGER 296
+#define HEXINTEGER 297
+#define POINTFLOAT 298
+#define EXPONENTFLOAT 299
+#define IMAGNUMBER 300
+#define ELLIPSIS 301
+#define RIGHT_ASSIGN 302
+#define LEFT_ASSIGN 303
+#define ADD_ASSIGN 304
+#define SUB_ASSIGN 305
+#define MUL_ASSIGN 306
+#define POW_ASSIGN 307
+#define DIV_ASSIGN 308
+#define MOD_ASSIGN 309
+#define AND_ASSIGN 310
+#define XOR_ASSIGN 311
+#define OR_ASSIGN 312
+#define RIGHT_OP 313
+#define LEFT_OP 314
+#define PTR_OP 315
+#define LE_OP 316
+#define GE_OP 317
+#define EQ_OP 318
+#define NE_OP 319
+#define NEWLINE 320
 
 
 
@@ -97,7 +177,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 38 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
+#line 78 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
 
 	int int_type;
 	char* string_type;
@@ -105,7 +185,7 @@ typedef union YYSTYPE
 
 
 /* Line 1676 of yacc.c  */
-#line 109 "y.tab.h"
+#line 189 "y.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

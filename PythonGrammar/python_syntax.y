@@ -1,14 +1,35 @@
-%token RETURN
-%token CONTINUE
-%token DEL
-%token GLOBAL
-%token YIELD
+%token FALSE
+%token NONE
+%token TRUE
+%token AND
+%token AS
 %token ASSERT
-%token PASS
 %token BREAK
-%token IN
-%token RAISE
+%token CLASS
+%token CONTINUE
+%token DEF
+%token DEL
+%token ELIF
+%token ELSE
+%token EXCEPT
+%token FINALLY
+%token FOR
+%token FROM
+%token GLOBAL
+%token IF
 %token IMPORT
+%token IN
+%token IS
+%token LAMBDA
+%token NOT
+%token OR
+%token PASS
+%token RAISE
+%token RETURN
+%token TRY
+%token WHILE
+%token WITH
+%token YIELD
 
 %token PRINT
 %token EXEC
@@ -22,6 +43,26 @@
 %token POINTFLOAT
 %token EXPONENTFLOAT
 %token IMAGNUMBER
+
+%token ELLIPSIS
+%token RIGHT_ASSIGN
+%token LEFT_ASSIGN
+%token ADD_ASSIGN
+%token SUB_ASSIGN
+%token MUL_ASSIGN
+%token POW_ASSIGN
+%token DIV_ASSIGN
+%token MOD_ASSIGN
+%token AND_ASSIGN
+%token XOR_ASSIGN
+%token OR_ASSIGN
+%token RIGHT_OP
+%token LEFT_OP
+%token PTR_OP
+%token LE_OP
+%token GE_OP
+%token EQ_OP
+%token NE_OP
 
 %token NEWLINE
 
@@ -49,7 +90,7 @@
 		SHORTSTRING | LONGSTRING
 
 	longinteger:
-		integer "l" | integer "L"
+		integer 'l' | integer 'L'
 		
 	integer:
 		DECINTEGER | OCTINTEGER | HEXINTEGER
@@ -79,11 +120,20 @@
 		YIELD
 		| YIELD expression_list
 		
+	attributeref:
+		"TODO"
+
+	subscription:
+		"TODO"
+
+	slicing:
+		"TODO"
+		
 	or_expr:
 		"TODO"
 		
 	simple_stmt:
-		expression_list
+		expression_stmt
 		| assert_stmt
 		| assignment_stmt
 		| augmented_assignment_stmt
@@ -99,18 +149,42 @@
 		| global_stmt
 		| exec_stmt
 		
+	expression_stmt:
+		expression_list
+		
 	assert_stmt:
 		ASSERT expression
-		| ASSERT expression "," expression
+		| ASSERT expression ',' expression
 		
 	assignment_stmt:
-		"TODO"
+		assignment_stmt_targer_list expression_list
+		| assignment_stmt_targer_list yield_expression
+		
+	assignment_stmt_targer_list:
+		target_list '='
+		| assignment_stmt_targer_list target_list '='
 		
 	target_list:
-		"TODO"
+		target
+		| target_list ',' target
+		| target_list ','
+		
+	target:
+		identifier
+		| '(' target_list ')'
+		| '[' target_list ']'
+		| attributeref
+		| subscription
+		| slicing
 		
 	augmented_assignment_stmt:
-		"TODO"
+		target augop expression_list
+		| target augop yield_expression
+		
+	augop:
+		RIGHT_ASSIGN | LEFT_ASSIGN | ADD_ASSIGN | SUB_ASSIGN | MUL_ASSIGN
+		| POW_ASSIGN | DIV_ASSIGN | MOD_ASSIGN | AND_ASSIGN | XOR_ASSIGN
+		| OR_ASSIGN | RIGHT_OP | LEFT_OP
 	
 	pass_stmt:
 		PASS
@@ -119,7 +193,18 @@
 		DEL target_list
 	
 	print_stmt:
-		PRINT "TODO"
+		PRINT
+		| PRINT expression
+		| PRINT expression ','
+		| PRINT expression expressions
+		| PRINT expression expressions ','
+		| PRINT RIGHT_OP expression
+		| PRINT RIGHT_OP expression expressions
+		| PRINT RIGHT_OP expression expressions ','
+		
+	expressions:
+		',' expression
+		| expressions ',' expression
 	
 	return_stmt:
 		RETURN
@@ -142,10 +227,51 @@
 		
 	import_stmt:
 		IMPORT module
+		| IMPORT module AS name
+		| IMPORT module modules
+		| IMPORT module AS name modules
+		| FROM relative_module IMPORT identifier
+		| FROM relative_module IMPORT identifier AS name
+		| FROM relative_module IMPORT identifier import_stmt_identifiers
+		| FROM relative_module IMPORT identifier AS name import_stmt_identifiers
+		| FROM relative_module IMPORT '(' identifier ')'
+		| FROM relative_module IMPORT '(' identifier AS name ')'
+		| FROM relative_module IMPORT '(' identifier import_stmt_identifiers ')'
+		| FROM relative_module IMPORT '(' identifier AS name import_stmt_identifiers ')'
+		| FROM relative_module IMPORT '(' identifier ',' ')'
+		| FROM relative_module IMPORT '(' identifier AS name ',' ')'
+		| FROM relative_module IMPORT '(' identifier import_stmt_identifiers ',' ')'
+		| FROM relative_module IMPORT '(' identifier AS name import_stmt_identifiers ',' ')'
+		| FROM module IMPORT '*'
 		
 	module:
 		identifier
 		| module '.' module
+		
+	relative_module:
+		module
+		| dot_modules
+		| dots
+	
+	dot_modules:
+		'.' module
+		| dot_modules '.' module
+		
+	dots:
+		'.'
+		| dots '.'
+		
+	modules:
+		',' module
+		| ',' module AS name
+		| modules ',' module
+		| modules ',' module AS name
+	
+	import_stmt_identifiers:
+		',' identifier
+		| ',' identifier AS name
+		| import_stmt_identifiers ',' identifier
+		| import_stmt_identifiers ',' identifier AS name
 	
 	name:
 		identifier

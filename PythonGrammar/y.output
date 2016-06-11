@@ -1,0 +1,446 @@
+Грамматика
+
+    0 $accept: program $end
+
+    1 program: operation ';'
+    2        | program operation ';'
+
+    3 operation: ID '=' polyexpr
+    4          | '?' ID
+
+    5 polyexpr: term
+    6         | ID
+    7         | polyexpr POW polyexpr
+    8         | polyexpr '+' polyexpr
+    9         | polyexpr '-' polyexpr
+   10         | polyexpr '*' polyexpr
+   11         | '-' polyexpr
+   12         | '+' polyexpr
+   13         | '(' polyexpr ')'
+
+   14 term: INTEGER
+   15     | VAR
+   16     | INTEGER VAR
+   17     | VAR '^' INTEGER
+   18     | INTEGER VAR '^' INTEGER
+
+
+Терминальные символы с правилами, в которых они появляются
+
+$end (0) 0
+'(' (40) 13
+')' (41) 13
+'*' (42) 10
+'+' (43) 8 12
+'-' (45) 9 11
+';' (59) 1 2
+'=' (61) 3
+'?' (63) 4
+'^' (94) 17 18
+error (256)
+INTEGER (258) 14 16 17 18
+ID (259) 3 4 6
+VAR (260) 15 16 17 18
+POW (261) 7
+
+
+Нетерминальные символы с правилами, в которых они появляются
+
+$accept (16)
+    налево: 0
+program (17)
+    налево: 1 2, направо: 0 2
+operation (18)
+    налево: 3 4, направо: 1 2
+polyexpr (19)
+    налево: 5 6 7 8 9 10 11 12 13, направо: 3 7 8 9 10 11 12 13
+term (20)
+    налево: 14 15 16 17 18, направо: 5
+
+
+состояние 0
+
+    0 $accept: . program $end
+
+    ID   сдвиг, и переход в состояние 1
+    '?'  сдвиг, и переход в состояние 2
+
+    program    переход в состояние 3
+    operation  переход в состояние 4
+
+
+состояние 1
+
+    3 operation: ID . '=' polyexpr
+
+    '='  сдвиг, и переход в состояние 5
+
+
+состояние 2
+
+    4 operation: '?' . ID
+
+    ID  сдвиг, и переход в состояние 6
+
+
+состояние 3
+
+    0 $accept: program . $end
+    2 program: program . operation ';'
+
+    $end  сдвиг, и переход в состояние 7
+    ID    сдвиг, и переход в состояние 1
+    '?'   сдвиг, и переход в состояние 2
+
+    operation  переход в состояние 8
+
+
+состояние 4
+
+    1 program: operation . ';'
+
+    ';'  сдвиг, и переход в состояние 9
+
+
+состояние 5
+
+    3 operation: ID '=' . polyexpr
+
+    INTEGER  сдвиг, и переход в состояние 10
+    ID       сдвиг, и переход в состояние 11
+    VAR      сдвиг, и переход в состояние 12
+    '+'      сдвиг, и переход в состояние 13
+    '-'      сдвиг, и переход в состояние 14
+    '('      сдвиг, и переход в состояние 15
+
+    polyexpr  переход в состояние 16
+    term      переход в состояние 17
+
+
+состояние 6
+
+    4 operation: '?' ID .
+
+    $default  вывод с использованием правила 4 (operation)
+
+
+состояние 7
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+состояние 8
+
+    2 program: program operation . ';'
+
+    ';'  сдвиг, и переход в состояние 18
+
+
+состояние 9
+
+    1 program: operation ';' .
+
+    $default  вывод с использованием правила 1 (program)
+
+
+состояние 10
+
+   14 term: INTEGER .
+   16     | INTEGER . VAR
+   18     | INTEGER . VAR '^' INTEGER
+
+    VAR  сдвиг, и переход в состояние 19
+
+    $default  вывод с использованием правила 14 (term)
+
+
+состояние 11
+
+    6 polyexpr: ID .
+
+    $default  вывод с использованием правила 6 (polyexpr)
+
+
+состояние 12
+
+   15 term: VAR .
+   17     | VAR . '^' INTEGER
+
+    '^'  сдвиг, и переход в состояние 20
+
+    $default  вывод с использованием правила 15 (term)
+
+
+состояние 13
+
+   12 polyexpr: '+' . polyexpr
+
+    INTEGER  сдвиг, и переход в состояние 10
+    ID       сдвиг, и переход в состояние 11
+    VAR      сдвиг, и переход в состояние 12
+    '+'      сдвиг, и переход в состояние 13
+    '-'      сдвиг, и переход в состояние 14
+    '('      сдвиг, и переход в состояние 15
+
+    polyexpr  переход в состояние 21
+    term      переход в состояние 17
+
+
+состояние 14
+
+   11 polyexpr: '-' . polyexpr
+
+    INTEGER  сдвиг, и переход в состояние 10
+    ID       сдвиг, и переход в состояние 11
+    VAR      сдвиг, и переход в состояние 12
+    '+'      сдвиг, и переход в состояние 13
+    '-'      сдвиг, и переход в состояние 14
+    '('      сдвиг, и переход в состояние 15
+
+    polyexpr  переход в состояние 22
+    term      переход в состояние 17
+
+
+состояние 15
+
+   13 polyexpr: '(' . polyexpr ')'
+
+    INTEGER  сдвиг, и переход в состояние 10
+    ID       сдвиг, и переход в состояние 11
+    VAR      сдвиг, и переход в состояние 12
+    '+'      сдвиг, и переход в состояние 13
+    '-'      сдвиг, и переход в состояние 14
+    '('      сдвиг, и переход в состояние 15
+
+    polyexpr  переход в состояние 23
+    term      переход в состояние 17
+
+
+состояние 16
+
+    3 operation: ID '=' polyexpr .
+    7 polyexpr: polyexpr . POW polyexpr
+    8         | polyexpr . '+' polyexpr
+    9         | polyexpr . '-' polyexpr
+   10         | polyexpr . '*' polyexpr
+
+    POW  сдвиг, и переход в состояние 24
+    '+'  сдвиг, и переход в состояние 25
+    '-'  сдвиг, и переход в состояние 26
+    '*'  сдвиг, и переход в состояние 27
+
+    $default  вывод с использованием правила 3 (operation)
+
+
+состояние 17
+
+    5 polyexpr: term .
+
+    $default  вывод с использованием правила 5 (polyexpr)
+
+
+состояние 18
+
+    2 program: program operation ';' .
+
+    $default  вывод с использованием правила 2 (program)
+
+
+состояние 19
+
+   16 term: INTEGER VAR .
+   18     | INTEGER VAR . '^' INTEGER
+
+    '^'  сдвиг, и переход в состояние 28
+
+    $default  вывод с использованием правила 16 (term)
+
+
+состояние 20
+
+   17 term: VAR '^' . INTEGER
+
+    INTEGER  сдвиг, и переход в состояние 29
+
+
+состояние 21
+
+    7 polyexpr: polyexpr . POW polyexpr
+    8         | polyexpr . '+' polyexpr
+    9         | polyexpr . '-' polyexpr
+   10         | polyexpr . '*' polyexpr
+   12         | '+' polyexpr .
+
+    POW  сдвиг, и переход в состояние 24
+
+    $default  вывод с использованием правила 12 (polyexpr)
+
+
+состояние 22
+
+    7 polyexpr: polyexpr . POW polyexpr
+    8         | polyexpr . '+' polyexpr
+    9         | polyexpr . '-' polyexpr
+   10         | polyexpr . '*' polyexpr
+   11         | '-' polyexpr .
+
+    POW  сдвиг, и переход в состояние 24
+
+    $default  вывод с использованием правила 11 (polyexpr)
+
+
+состояние 23
+
+    7 polyexpr: polyexpr . POW polyexpr
+    8         | polyexpr . '+' polyexpr
+    9         | polyexpr . '-' polyexpr
+   10         | polyexpr . '*' polyexpr
+   13         | '(' polyexpr . ')'
+
+    POW  сдвиг, и переход в состояние 24
+    '+'  сдвиг, и переход в состояние 25
+    '-'  сдвиг, и переход в состояние 26
+    '*'  сдвиг, и переход в состояние 27
+    ')'  сдвиг, и переход в состояние 30
+
+
+состояние 24
+
+    7 polyexpr: polyexpr POW . polyexpr
+
+    INTEGER  сдвиг, и переход в состояние 10
+    ID       сдвиг, и переход в состояние 11
+    VAR      сдвиг, и переход в состояние 12
+    '+'      сдвиг, и переход в состояние 13
+    '-'      сдвиг, и переход в состояние 14
+    '('      сдвиг, и переход в состояние 15
+
+    polyexpr  переход в состояние 31
+    term      переход в состояние 17
+
+
+состояние 25
+
+    8 polyexpr: polyexpr '+' . polyexpr
+
+    INTEGER  сдвиг, и переход в состояние 10
+    ID       сдвиг, и переход в состояние 11
+    VAR      сдвиг, и переход в состояние 12
+    '+'      сдвиг, и переход в состояние 13
+    '-'      сдвиг, и переход в состояние 14
+    '('      сдвиг, и переход в состояние 15
+
+    polyexpr  переход в состояние 32
+    term      переход в состояние 17
+
+
+состояние 26
+
+    9 polyexpr: polyexpr '-' . polyexpr
+
+    INTEGER  сдвиг, и переход в состояние 10
+    ID       сдвиг, и переход в состояние 11
+    VAR      сдвиг, и переход в состояние 12
+    '+'      сдвиг, и переход в состояние 13
+    '-'      сдвиг, и переход в состояние 14
+    '('      сдвиг, и переход в состояние 15
+
+    polyexpr  переход в состояние 33
+    term      переход в состояние 17
+
+
+состояние 27
+
+   10 polyexpr: polyexpr '*' . polyexpr
+
+    INTEGER  сдвиг, и переход в состояние 10
+    ID       сдвиг, и переход в состояние 11
+    VAR      сдвиг, и переход в состояние 12
+    '+'      сдвиг, и переход в состояние 13
+    '-'      сдвиг, и переход в состояние 14
+    '('      сдвиг, и переход в состояние 15
+
+    polyexpr  переход в состояние 34
+    term      переход в состояние 17
+
+
+состояние 28
+
+   18 term: INTEGER VAR '^' . INTEGER
+
+    INTEGER  сдвиг, и переход в состояние 35
+
+
+состояние 29
+
+   17 term: VAR '^' INTEGER .
+
+    $default  вывод с использованием правила 17 (term)
+
+
+состояние 30
+
+   13 polyexpr: '(' polyexpr ')' .
+
+    $default  вывод с использованием правила 13 (polyexpr)
+
+
+состояние 31
+
+    7 polyexpr: polyexpr . POW polyexpr
+    7         | polyexpr POW polyexpr .
+    8         | polyexpr . '+' polyexpr
+    9         | polyexpr . '-' polyexpr
+   10         | polyexpr . '*' polyexpr
+
+    $default  вывод с использованием правила 7 (polyexpr)
+
+
+состояние 32
+
+    7 polyexpr: polyexpr . POW polyexpr
+    8         | polyexpr . '+' polyexpr
+    8         | polyexpr '+' polyexpr .
+    9         | polyexpr . '-' polyexpr
+   10         | polyexpr . '*' polyexpr
+
+    POW  сдвиг, и переход в состояние 24
+    '*'  сдвиг, и переход в состояние 27
+
+    $default  вывод с использованием правила 8 (polyexpr)
+
+
+состояние 33
+
+    7 polyexpr: polyexpr . POW polyexpr
+    8         | polyexpr . '+' polyexpr
+    9         | polyexpr . '-' polyexpr
+    9         | polyexpr '-' polyexpr .
+   10         | polyexpr . '*' polyexpr
+
+    POW  сдвиг, и переход в состояние 24
+    '*'  сдвиг, и переход в состояние 27
+
+    $default  вывод с использованием правила 9 (polyexpr)
+
+
+состояние 34
+
+    7 polyexpr: polyexpr . POW polyexpr
+    8         | polyexpr . '+' polyexpr
+    9         | polyexpr . '-' polyexpr
+   10         | polyexpr . '*' polyexpr
+   10         | polyexpr '*' polyexpr .
+
+    POW  сдвиг, и переход в состояние 24
+
+    $default  вывод с использованием правила 10 (polyexpr)
+
+
+состояние 35
+
+   18 term: INTEGER VAR '^' INTEGER .
+
+    $default  вывод с использованием правила 18 (term)

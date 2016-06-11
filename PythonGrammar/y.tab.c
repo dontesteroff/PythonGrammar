@@ -68,11 +68,11 @@
 /* Copy the first part of user declarations.  */
 
 /* Line 189 of yacc.c  */
-#line 10 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
+#line 14 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
 
 
 /* Line 189 of yacc.c  */
-#line 14 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
+#line 18 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
 
 	#define YYDEBUG 1
 
@@ -110,7 +110,10 @@
      LONGSTRING = 260,
      DECINTEGER = 261,
      OCTINTEGER = 262,
-     HEXINTEGER = 263
+     HEXINTEGER = 263,
+     POINTFLOAT = 264,
+     EXPONENTFLOAT = 265,
+     IMAGNUMBER = 266
    };
 #endif
 /* Tokens.  */
@@ -120,6 +123,9 @@
 #define DECINTEGER 261
 #define OCTINTEGER 262
 #define HEXINTEGER 263
+#define POINTFLOAT 264
+#define EXPONENTFLOAT 265
+#define IMAGNUMBER 266
 
 
 
@@ -129,7 +135,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 19 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
+#line 23 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
 
 	int int_type;
 	char* string_type;
@@ -137,7 +143,7 @@ typedef union YYSTYPE
 
 
 /* Line 214 of yacc.c  */
-#line 141 "y.tab.c"
+#line 147 "y.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -149,7 +155,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 153 "y.tab.c"
+#line 159 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -362,22 +368,22 @@ union yyalloc
 #endif
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  9
+#define YYFINAL  16
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   5
+#define YYLAST   11
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  11
+#define YYNTOKENS  14
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  4
+#define YYNNTS  7
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  8
+#define YYNRULES  17
 /* YYNRULES -- Number of states.  */
-#define YYNSTATES  10
+#define YYNSTATES  19
 
 /* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   265
+#define YYMAXUTOK   268
 
 #define YYTRANSLATE(YYX)						\
   ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
@@ -411,7 +417,7 @@ static const yytype_uint8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6,     7,     8,     9,    10
+       5,     6,     7,     8,     9,    10,    11,    12,    13
 };
 
 #if YYDEBUG
@@ -419,20 +425,24 @@ static const yytype_uint8 yytranslate[] =
    YYRHS.  */
 static const yytype_uint8 yyprhs[] =
 {
-       0,     0,     3,     5,     7,     9,    11,    13,    15
+       0,     0,     3,     5,     7,     9,    11,    14,    17,    19,
+      21,    23,    25,    27,    29,    31,    33,    35
 };
 
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const yytype_int8 yyrhs[] =
 {
-      12,     0,    -1,    13,    -1,    14,    -1,     4,    -1,     5,
-      -1,     6,    -1,     7,    -1,     8,    -1
+      15,     0,    -1,     3,    -1,    20,    -1,     4,    -1,     5,
+      -1,    18,    12,    -1,    18,    13,    -1,     6,    -1,     7,
+      -1,     8,    -1,     9,    -1,    10,    -1,    16,    -1,    18,
+      -1,    17,    -1,    19,    -1,    11,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    27,    27,    27,    30,    30,    36,    36,    36
+       0,    31,    31,    32,    35,    35,    38,    38,    41,    41,
+      41,    44,    44,    47,    48,    49,    50,    51
 };
 #endif
 
@@ -442,8 +452,9 @@ static const yytype_uint8 yyrline[] =
 static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "IDENTIFIER", "SHORTSTRING",
-  "LONGSTRING", "DECINTEGER", "OCTINTEGER", "HEXINTEGER", "\"l\"", "\"L\"",
-  "$accept", "program", "stringliteral", "integer", 0
+  "LONGSTRING", "DECINTEGER", "OCTINTEGER", "HEXINTEGER", "POINTFLOAT",
+  "EXPONENTFLOAT", "IMAGNUMBER", "\"l\"", "\"L\"", "$accept", "atom",
+  "stringliteral", "longinteger", "integer", "floatnumber", "literal", 0
 };
 #endif
 
@@ -453,20 +464,22 @@ static const char *const yytname[] =
 static const yytype_uint16 yytoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265
+     265,   266,   267,   268
 };
 # endif
 
 /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    11,    12,    12,    13,    13,    14,    14,    14
+       0,    14,    15,    15,    16,    16,    17,    17,    18,    18,
+      18,    19,    19,    20,    20,    20,    20,    20
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     1,     1,     1,     1,     1,     1,     1
+       0,     2,     1,     1,     1,     1,     2,     2,     1,     1,
+       1,     1,     1,     1,     1,     1,     1,     1
 };
 
 /* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
@@ -474,27 +487,29 @@ static const yytype_uint8 yyr2[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     4,     5,     6,     7,     8,     0,     2,     3,     1
+       0,     2,     4,     5,     8,     9,    10,    11,    12,    17,
+       0,    13,    15,    14,    16,     3,     1,     6,     7
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     6,     7,     8
+      -1,    10,    11,    12,    13,    14,    15
 };
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-#define YYPACT_NINF -5
+#define YYPACT_NINF -4
 static const yytype_int8 yypact[] =
 {
-      -4,    -5,    -5,    -5,    -5,    -5,     5,    -5,    -5,    -5
+      -3,    -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,
+       9,    -4,    -4,    -2,    -4,    -4,    -4,    -4,    -4
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -5,    -5,    -5,    -5
+      -4,    -4,    -4,    -4,    -4,    -4,    -4
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -504,19 +519,22 @@ static const yytype_int8 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-       1,     2,     3,     4,     5,     9
+       1,     2,     3,     4,     5,     6,     7,     8,     9,    16,
+      17,    18
 };
 
 static const yytype_uint8 yycheck[] =
 {
-       4,     5,     6,     7,     8,     0
+       3,     4,     5,     6,     7,     8,     9,    10,    11,     0,
+      12,    13
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
    symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     4,     5,     6,     7,     8,    12,    13,    14,     0
+       0,     3,     4,     5,     6,     7,     8,     9,    10,    11,
+      15,    16,    17,    18,    19,    20,     0,    12,    13
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1330,7 +1348,7 @@ yyreduce:
       
 
 /* Line 1455 of yacc.c  */
-#line 1334 "y.tab.c"
+#line 1352 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1542,5 +1560,5 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 38 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
+#line 52 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
 

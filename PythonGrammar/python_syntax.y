@@ -6,6 +6,10 @@
 %token DECINTEGER
 %token OCTINTEGER
 %token HEXINTEGER
+%token POINTFLOAT
+%token EXPONENTFLOAT
+
+%token IMAGNUMBER
 
 %{
 %}
@@ -23,8 +27,9 @@
 
 %%
 
-	program:
-		stringliteral | integer
+	atom:
+		IDENTIFIER
+		| literal
 		
 	stringliteral:
 		SHORTSTRING | LONGSTRING
@@ -35,4 +40,13 @@
 	integer:
 		DECINTEGER | OCTINTEGER | HEXINTEGER
 		
+	floatnumber:
+		POINTFLOAT | EXPONENTFLOAT
+	
+	literal:
+		stringliteral
+		| integer
+		| longinteger
+		| floatnumber
+		| IMAGNUMBER
 %%

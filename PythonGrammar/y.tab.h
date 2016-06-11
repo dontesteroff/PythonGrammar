@@ -44,7 +44,10 @@
      LONGSTRING = 260,
      DECINTEGER = 261,
      OCTINTEGER = 262,
-     HEXINTEGER = 263
+     HEXINTEGER = 263,
+     POINTFLOAT = 264,
+     EXPONENTFLOAT = 265,
+     IMAGNUMBER = 266
    };
 #endif
 /* Tokens.  */
@@ -54,6 +57,9 @@
 #define DECINTEGER 261
 #define OCTINTEGER 262
 #define HEXINTEGER 263
+#define POINTFLOAT 264
+#define EXPONENTFLOAT 265
+#define IMAGNUMBER 266
 
 
 
@@ -63,7 +69,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 19 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
+#line 23 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
 
 	int int_type;
 	char* string_type;
@@ -71,7 +77,7 @@ typedef union YYSTYPE
 
 
 /* Line 1676 of yacc.c  */
-#line 75 "y.tab.h"
+#line 81 "y.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

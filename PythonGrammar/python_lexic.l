@@ -20,6 +20,13 @@ DECINTEGER		{NONZERODIGIT}{DIGIT}*|"0"
 OCTINTEGER		"0"{OCTDIGIT}+
 HEXINTEGER		"0"("x"|"X"){HEXDIGIT}+
 
+INTPART			({DIGIT}+)?
+FRACTION		"."{DIGIT}+
+POINTFLOAT		({INTPART}?{FRACTION})|({INTPART}".")|{FRACTION}
+EXPONENT		("e"|"E")("+"|"-")?{DIGIT}+
+EXPONENTFLOAT	({INTPART}|{POINTFLOAT}){EXPONENT}
+
+IMAGNUMBER		({POINTFLOAT}|{EXPONENTFLOAT}|{INTPART})("j"|"J")
 
 STRINGPREFIX	("r"|"u"|"ur"|"R"|"U"|"UR"|"Ur"|"uR")?
 SHORTSTRINGITEM	([^\n\'\"\\])|([\\].)
@@ -39,17 +46,31 @@ LONGSTRING		{STRINGPREFIX}?(([']{3}{LONGSTRINGITEM}*[']{3})|(["]{3}{LONGSTRINGIT
 						return DECINTEGER;
 					}
 					
-{OCTINTEGER}			{
+{OCTINTEGER}		{
 						printf("OCTINTEGER: %s\n", yytext);
 						return OCTINTEGER;
 					}
 					
-{HEXINTEGER}			{
+{HEXINTEGER}		{
 						printf("HEXINTEGER: %s\n", yytext);
 						return HEXINTEGER;
 					}
 
+{POINTFLOAT}		{
+						printf("POINTFLOAT: %s\n", yytext);
+						return POINTFLOAT;
+					}
+					
+{EXPONENTFLOAT}		{
+						printf("EXPONENTFLOAT: %s\n", yytext);
+						return EXPONENTFLOAT;
+					}
 
+{IMAGNUMBER}		{
+						printf("IMAGNUMBER: %s\n", yytext);
+						return IMAGNUMBER;
+					}
+					
 
 {SHORTSTRING}		{
 						printf("SHORTSTRING: %s\n", yytext);

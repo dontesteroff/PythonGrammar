@@ -1,135 +1,213 @@
-Nonterminals useless in grammar
-
-   longinteger
-
-
-Terminals unused in grammar
-
-   IDENTIFIER
-   "l"
-   "L"
-
-
-Rules useless in grammar
-
-    8 longinteger: integer "l"
-    9            | integer "L"
-
-
 Грамматика
 
-    0 $accept: program $end
+    0 $accept: atom $end
 
-    1 program: stringliteral
-    2        | integer
+    1 atom: IDENTIFIER
+    2     | literal
 
     3 stringliteral: SHORTSTRING
     4              | LONGSTRING
 
-    5 integer: DECINTEGER
-    6        | OCTINTEGER
-    7        | HEXINTEGER
+    5 longinteger: integer "l"
+    6            | integer "L"
+
+    7 integer: DECINTEGER
+    8        | OCTINTEGER
+    9        | HEXINTEGER
+
+   10 floatnumber: POINTFLOAT
+   11            | EXPONENTFLOAT
+
+   12 literal: stringliteral
+   13        | integer
+   14        | longinteger
+   15        | floatnumber
+   16        | IMAGNUMBER
 
 
 Терминальные символы с правилами, в которых они появляются
 
 $end (0) 0
 error (256)
-IDENTIFIER (258)
+IDENTIFIER (258) 1
 SHORTSTRING (259) 3
 LONGSTRING (260) 4
-DECINTEGER (261) 5
-OCTINTEGER (262) 6
-HEXINTEGER (263) 7
-"l" (264)
-"L" (265)
+DECINTEGER (261) 7
+OCTINTEGER (262) 8
+HEXINTEGER (263) 9
+POINTFLOAT (264) 10
+EXPONENTFLOAT (265) 11
+IMAGNUMBER (266) 16
+"l" (267) 5
+"L" (268) 6
 
 
 Нетерминальные символы с правилами, в которых они появляются
 
-$accept (11)
+$accept (14)
     налево: 0
-program (12)
+atom (15)
     налево: 1 2, направо: 0
-stringliteral (13)
-    налево: 3 4, направо: 1
-integer (14)
-    налево: 5 6 7, направо: 2
+stringliteral (16)
+    налево: 3 4, направо: 12
+longinteger (17)
+    налево: 5 6, направо: 14
+integer (18)
+    налево: 7 8 9, направо: 5 6 13
+floatnumber (19)
+    налево: 10 11, направо: 15
+literal (20)
+    налево: 12 13 14 15 16, направо: 2
 
 
 состояние 0
 
-    0 $accept: . program $end
+    0 $accept: . atom $end
 
-    SHORTSTRING  сдвиг, и переход в состояние 1
-    LONGSTRING   сдвиг, и переход в состояние 2
-    DECINTEGER   сдвиг, и переход в состояние 3
-    OCTINTEGER   сдвиг, и переход в состояние 4
-    HEXINTEGER   сдвиг, и переход в состояние 5
+    IDENTIFIER     сдвиг, и переход в состояние 1
+    SHORTSTRING    сдвиг, и переход в состояние 2
+    LONGSTRING     сдвиг, и переход в состояние 3
+    DECINTEGER     сдвиг, и переход в состояние 4
+    OCTINTEGER     сдвиг, и переход в состояние 5
+    HEXINTEGER     сдвиг, и переход в состояние 6
+    POINTFLOAT     сдвиг, и переход в состояние 7
+    EXPONENTFLOAT  сдвиг, и переход в состояние 8
+    IMAGNUMBER     сдвиг, и переход в состояние 9
 
-    program        переход в состояние 6
-    stringliteral  переход в состояние 7
-    integer        переход в состояние 8
+    atom           переход в состояние 10
+    stringliteral  переход в состояние 11
+    longinteger    переход в состояние 12
+    integer        переход в состояние 13
+    floatnumber    переход в состояние 14
+    literal        переход в состояние 15
 
 
 состояние 1
+
+    1 atom: IDENTIFIER .
+
+    $default  вывод с использованием правила 1 (atom)
+
+
+состояние 2
 
     3 stringliteral: SHORTSTRING .
 
     $default  вывод с использованием правила 3 (stringliteral)
 
 
-состояние 2
+состояние 3
 
     4 stringliteral: LONGSTRING .
 
     $default  вывод с использованием правила 4 (stringliteral)
 
 
-состояние 3
-
-    5 integer: DECINTEGER .
-
-    $default  вывод с использованием правила 5 (integer)
-
-
 состояние 4
 
-    6 integer: OCTINTEGER .
-
-    $default  вывод с использованием правила 6 (integer)
-
-
-состояние 5
-
-    7 integer: HEXINTEGER .
+    7 integer: DECINTEGER .
 
     $default  вывод с использованием правила 7 (integer)
 
 
+состояние 5
+
+    8 integer: OCTINTEGER .
+
+    $default  вывод с использованием правила 8 (integer)
+
+
 состояние 6
 
-    0 $accept: program . $end
+    9 integer: HEXINTEGER .
 
-    $end  сдвиг, и переход в состояние 9
+    $default  вывод с использованием правила 9 (integer)
 
 
 состояние 7
 
-    1 program: stringliteral .
+   10 floatnumber: POINTFLOAT .
 
-    $default  вывод с использованием правила 1 (program)
+    $default  вывод с использованием правила 10 (floatnumber)
 
 
 состояние 8
 
-    2 program: integer .
+   11 floatnumber: EXPONENTFLOAT .
 
-    $default  вывод с использованием правила 2 (program)
+    $default  вывод с использованием правила 11 (floatnumber)
 
 
 состояние 9
 
-    0 $accept: program $end .
+   16 literal: IMAGNUMBER .
+
+    $default  вывод с использованием правила 16 (literal)
+
+
+состояние 10
+
+    0 $accept: atom . $end
+
+    $end  сдвиг, и переход в состояние 16
+
+
+состояние 11
+
+   12 literal: stringliteral .
+
+    $default  вывод с использованием правила 12 (literal)
+
+
+состояние 12
+
+   14 literal: longinteger .
+
+    $default  вывод с использованием правила 14 (literal)
+
+
+состояние 13
+
+    5 longinteger: integer . "l"
+    6            | integer . "L"
+   13 literal: integer .
+
+    "l"  сдвиг, и переход в состояние 17
+    "L"  сдвиг, и переход в состояние 18
+
+    $default  вывод с использованием правила 13 (literal)
+
+
+состояние 14
+
+   15 literal: floatnumber .
+
+    $default  вывод с использованием правила 15 (literal)
+
+
+состояние 15
+
+    2 atom: literal .
+
+    $default  вывод с использованием правила 2 (atom)
+
+
+состояние 16
+
+    0 $accept: atom $end .
 
     $default  accept
+
+
+состояние 17
+
+    5 longinteger: integer "l" .
+
+    $default  вывод с использованием правила 5 (longinteger)
+
+
+состояние 18
+
+    6 longinteger: integer "L" .
+
+    $default  вывод с использованием правила 6 (longinteger)

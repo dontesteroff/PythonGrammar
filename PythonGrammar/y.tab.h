@@ -39,17 +39,21 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     INTEGER = 258,
-     ID = 259,
-     VAR = 260,
-     POW = 261
+     IDENTIFIER = 258,
+     SHORTSTRING = 259,
+     LONGSTRING = 260,
+     DECINTEGER = 261,
+     OCTINTEGER = 262,
+     HEXINTEGER = 263
    };
 #endif
 /* Tokens.  */
-#define INTEGER 258
-#define ID 259
-#define VAR 260
-#define POW 261
+#define IDENTIFIER 258
+#define SHORTSTRING 259
+#define LONGSTRING 260
+#define DECINTEGER 261
+#define OCTINTEGER 262
+#define HEXINTEGER 263
 
 
 
@@ -59,16 +63,15 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 15 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
+#line 19 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
 
 	int int_type;
 	char* string_type;
-	char char_type;
 
 
 
 /* Line 1676 of yacc.c  */
-#line 72 "y.tab.h"
+#line 75 "y.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

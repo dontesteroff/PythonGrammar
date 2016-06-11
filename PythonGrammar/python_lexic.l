@@ -9,42 +9,59 @@
 
 	unsigned int line_number = 1;
 %}
-  
-DIGIT	[0-9]
-ID 		[\$][a-zA-Z_][a-zA-Z0-9_]*
-VAR		[a-z]
-SIGN 	[-+=;^?()]
+
+IDENTIFIER 		[a-zA-Z_][a-zA-Z0-9_]*
+
+DIGIT			[0-9]
+NONZERODIGIT	[1-9]
+OCTDIGIT		[0-7]
+HEXDIGIT		{DIGIT}|[a-fA-F]
+DECINTEGER		{NONZERODIGIT}{DIGIT}*|"0"
+OCTINTEGER		"0"{OCTDIGIT}+
+HEXINTEGER		"0"("x"|"X"){HEXDIGIT}+
+
+
+STRINGPREFIX	("r"|"u"|"ur"|"R"|"U"|"UR"|"Ur"|"uR")?
+SHORTSTRINGITEM	([^\n\'\"\\])|([\\].)
+LONGSTRINGITEM	([^\\])|([\\].)
+SHORTSTRING		{STRINGPREFIX}?([']{SHORTSTRINGITEM}*['])|(["]{SHORTSTRINGITEM}*["])
+LONGSTRING		{STRINGPREFIX}?(([']{3}{LONGSTRINGITEM}*[']{3})|(["]{3}{LONGSTRINGITEM}*["]{3}))
 
 %%
 
-{DIGIT}+		{
+{IDENTIFIER}		{
+						printf("IDENTIFIER: %s\n", yytext);
+						return IDENTIFIER;
+					}
+
+{DECINTEGER}			{
+						printf("DECINTEGER: %s\n", yytext);
+						return DECINTEGER;
+					}
 					
-				}
-
-{ID}			{
-					char* t = (char*)malloc(strlen(yytext)*sizeof(char));
-					strcpy(t, yytext);
-					yylval.string_type = t;
-					return ID;
-				}
-
-{VAR}			{
+{OCTINTEGER}			{
+						printf("OCTINTEGER: %s\n", yytext);
+						return OCTINTEGER;
+					}
 					
-				}
+{HEXINTEGER}			{
+						printf("HEXINTEGER: %s\n", yytext);
+						return HEXINTEGER;
+					}
 
-([-+^]{2,})|([*]{3,})		{
+
+
+{SHORTSTRING}		{
+						printf("SHORTSTRING: %s\n", yytext);
+						return SHORTSTRING;
+					}
+
+{LONGSTRING}		{
+						printf("LONGSTRING: %s\n", yytext);
+						return LONGSTRING;
+					}
 					
-				}
-
-[*]{1,2}		{
-					
-				}
-
-{SIGN}			return *yytext;
-
 [#].*	
-
-[ \t]+
 	
 [\n]			line_number++;
 

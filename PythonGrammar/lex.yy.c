@@ -282,31 +282,33 @@ static void yy_fatal_error YY_PROTO(( yyconst char msg[] ));
 	*yy_cp = '\0'; \
 	yy_c_buf_p = yy_cp;
 
-#define YY_NUM_RULES 10
-#define YY_END_OF_BUFFER 11
-static yyconst short int yy_accept[25] =
+#define YY_NUM_RULES 9
+#define YY_END_OF_BUFFER 10
+static yyconst short int yy_accept[45] =
     {   0,
-        0,    0,   11,   10,    8,    9,    7,   10,    6,    5,
-        6,    1,    3,    8,    7,    2,    5,    4,    1,    2,
-        4,    4,    4,    0
+        0,    0,   10,    9,    8,    9,    7,    9,    2,    2,
+        1,    1,    1,    1,    0,    5,    0,    7,    0,    5,
+        0,    3,    0,    2,    1,    0,    0,    1,    5,    0,
+        0,    4,    0,    0,    0,    0,    0,    0,    0,    0,
+        0,    6,    6,    0
     } ;
 
 static yyconst int yy_ec[256] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    2,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    2,    1,    1,    4,    5,    1,    1,    1,    6,
-        6,    7,    8,    1,    8,    1,    1,    9,    9,    9,
-        9,    9,    9,    9,    9,    9,    9,    1,    6,    1,
-        6,    1,    6,    1,   10,   10,   10,   10,   10,   10,
+        1,    1,    1,    3,    4,    1,    1,    1,    5,    1,
+        1,    1,    1,    1,    1,    1,    1,    6,    7,    7,
+        7,    7,    7,    7,    7,    8,    8,    1,    1,    1,
+        1,    1,    1,    1,    9,    9,    9,    9,    9,    9,
        10,   10,   10,   10,   10,   10,   10,   10,   10,   10,
-       10,   10,   10,   10,   10,   10,   10,   10,   10,   10,
-        1,    1,    1,    8,   10,    1,   11,   11,   11,   11,
+       10,   11,   10,   10,   12,   10,   10,   13,   10,   10,
+        1,   14,    1,    1,   10,    1,    9,    9,    9,    9,
 
-       11,   11,   11,   11,   11,   11,   11,   11,   11,   11,
-       11,   11,   11,   11,   11,   11,   11,   11,   11,   11,
-       11,   11,    1,    1,    1,    1,    1,    1,    1,    1,
+        9,    9,   10,   10,   10,   10,   10,   10,   10,   10,
+       10,   10,   10,   15,   10,   10,   16,   10,   10,   17,
+       10,   10,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -323,42 +325,66 @@ static yyconst int yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static yyconst int yy_meta[12] =
+static yyconst int yy_meta[18] =
     {   0,
-        1,    1,    2,    1,    1,    1,    1,    1,    3,    4,
-        4
+        1,    2,    3,    1,    4,    5,    5,    5,    6,    7,
+        7,    7,    7,    1,    7,    7,    7
     } ;
 
-static yyconst short int yy_base[28] =
+static yyconst short int yy_base[53] =
     {   0,
-        0,    0,   29,   30,   26,   30,    0,    0,   30,   20,
-       18,   16,   30,   22,    0,    0,   16,   14,   12,    0,
-       13,   11,   11,   30,   11,    9,   13
+        0,    0,   73,  110,  110,   15,    0,   14,   24,    0,
+        0,   17,   39,    0,   18,   68,   62,    0,   19,   61,
+       62,   19,    0,    0,    0,   60,   22,   35,  110,   20,
+       34,    0,   58,   32,   42,   57,   38,   44,   51,   48,
+       50,   54,   55,  110,   69,   76,   83,   42,   86,   89,
+       95,  102
     } ;
 
-static yyconst short int yy_def[28] =
+static yyconst short int yy_def[53] =
     {   0,
-       24,    1,   24,   24,   24,   24,   25,   26,   24,   24,
-       24,   24,   24,   24,   25,   27,   24,   24,   24,   27,
-       24,   24,   24,    0,   24,   24,   24
+       44,    1,   44,   44,   44,   45,   46,   47,   44,   48,
+       49,   49,   49,   13,   45,   44,   45,   46,   47,   44,
+       47,   44,   50,   48,   49,   44,   47,   49,   44,   51,
+       52,   50,   44,   51,   51,   51,   52,   52,   52,   51,
+       52,   51,   52,    0,   44,   44,   44,   44,   44,   44,
+       44,   44
     } ;
 
-static yyconst short int yy_nxt[42] =
+static yyconst short int yy_nxt[128] =
     {   0,
-        4,    5,    6,    7,    8,    9,   10,   11,   12,    4,
-       13,   15,   16,   15,   15,   20,   20,   23,   22,   23,
-       19,   22,   21,   14,   19,   18,   17,   14,   24,    3,
-       24,   24,   24,   24,   24,   24,   24,   24,   24,   24,
-       24
+        4,    5,    6,    7,    8,    9,   10,   10,   11,   11,
+       12,   13,   11,    4,   12,   14,   11,   16,   20,   26,
+       29,   27,   35,   29,   22,   22,   20,   21,   17,   22,
+       22,   17,   21,   36,   35,   21,   23,   26,   38,   27,
+       23,   26,   38,   27,   40,   36,   24,   39,   41,   28,
+       42,   39,   44,   28,   43,   36,   42,   39,   44,   43,
+       30,   36,   33,   39,   19,   31,   15,   36,   39,   15,
+       30,   15,   44,   15,   15,   15,   18,   44,   18,   18,
+       18,   18,   18,   19,   44,   44,   19,   19,   19,   19,
+       25,   25,   25,   32,   32,   34,   34,   34,   34,   34,
+
+       34,   34,   37,   37,   37,   37,   37,   37,   37,    3,
+       44,   44,   44,   44,   44,   44,   44,   44,   44,   44,
+       44,   44,   44,   44,   44,   44,   44
     } ;
 
-static yyconst short int yy_chk[42] =
+static yyconst short int yy_chk[128] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,   25,   26,   25,   25,   27,   27,   23,   22,   21,
-       19,   18,   17,   14,   12,   11,   10,    5,    3,   24,
-       24,   24,   24,   24,   24,   24,   24,   24,   24,   24,
-       24
+        1,    1,    1,    1,    1,    1,    1,    6,    8,   12,
+       15,   12,   30,   19,   22,   22,   27,    8,    6,    9,
+        9,   15,   19,   30,   34,   27,    9,   28,   31,   28,
+        9,   13,   37,   13,   35,   34,   48,   31,   38,   13,
+       40,   37,   39,   13,   41,   35,   42,   38,   36,   43,
+       33,   40,   26,   41,   21,   20,   17,   42,   43,   45,
+       16,   45,    3,   45,   45,   45,   46,    0,   46,   46,
+       46,   46,   46,   47,    0,    0,   47,   47,   47,   47,
+       49,   49,   49,   50,   50,   51,   51,   51,   51,   51,
+
+       51,   51,   52,   52,   52,   52,   52,   52,   52,   44,
+       44,   44,   44,   44,   44,   44,   44,   44,   44,   44,
+       44,   44,   44,   44,   44,   44,   44
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -372,9 +398,9 @@ static char *yy_last_accepting_cpos;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 1 "python_lexic.l"
 #define INITIAL 0
-#line 2 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 2 "python_lexic.l"
 	#pragma warning(disable: 4013)
 	#pragma warning(disable: 4996)
 
@@ -384,7 +410,7 @@ char *yytext;
 	#include "y.tab.h"
 
 	unsigned int line_number = 1;
-#line 388 "lex.yy.c"
+#line 414 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -535,10 +561,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 18 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 30 "python_lexic.l"
 
 
-#line 542 "lex.yy.c"
+#line 568 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -589,13 +615,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 25 )
+				if ( yy_current_state >= 45 )
 					yy_c = yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 30 );
+		while ( yy_base[yy_current_state] != 110 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -623,68 +649,68 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 20 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 32 "python_lexic.l"
 {
-					
-				}
+						printf("IDENTIFIER: %s\n", yytext);
+						return IDENTIFIER;
+					}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 24 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 37 "python_lexic.l"
 {
-					char* t = (char*)malloc(strlen(yytext)*sizeof(char));
-					strcpy(t, yytext);
-					yylval.string_type = t;
-					return ID;
-				}
+						printf("DECINTEGER: %s\n", yytext);
+						return DECINTEGER;
+					}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 31 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 42 "python_lexic.l"
 {
-					
-				}
+						printf("OCTINTEGER: %s\n", yytext);
+						return OCTINTEGER;
+					}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 35 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 47 "python_lexic.l"
 {
-					
-				}
+						printf("HEXINTEGER: %s\n", yytext);
+						return HEXINTEGER;
+					}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 39 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 54 "python_lexic.l"
 {
-					
-				}
+						printf("SHORTSTRING: %s\n", yytext);
+						return SHORTSTRING;
+					}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 43 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
-return *yytext;
+#line 59 "python_lexic.l"
+{
+						printf("LONGSTRING: %s\n", yytext);
+						return LONGSTRING;
+					}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 45 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 64 "python_lexic.l"
 
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 47 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
-
+#line 66 "python_lexic.l"
+line_number++;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 49 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
-line_number++;
-	YY_BREAK
-case 10:
-YY_RULE_SETUP
-#line 51 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 68 "python_lexic.l"
 ECHO;
 	YY_BREAK
-#line 688 "lex.yy.c"
+#line 714 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -976,7 +1002,7 @@ static yy_state_type yy_get_previous_state()
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 25 )
+			if ( yy_current_state >= 45 )
 				yy_c = yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
@@ -1011,11 +1037,11 @@ yy_state_type yy_current_state;
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 25 )
+		if ( yy_current_state >= 45 )
 			yy_c = yy_meta[(unsigned int) yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
-	yy_is_jam = (yy_current_state == 24);
+	yy_is_jam = (yy_current_state == 44);
 
 	return yy_is_jam ? 0 : yy_current_state;
 	}
@@ -1570,7 +1596,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 51 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 68 "python_lexic.l"
 
 
 int yywrap(void) {

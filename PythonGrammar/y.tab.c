@@ -68,11 +68,11 @@
 /* Copy the first part of user declarations.  */
 
 /* Line 189 of yacc.c  */
-#line 6 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
+#line 10 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
 
 
 /* Line 189 of yacc.c  */
-#line 10 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
+#line 14 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
 
 	#define YYDEBUG 1
 
@@ -105,17 +105,21 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     INTEGER = 258,
-     ID = 259,
-     VAR = 260,
-     POW = 261
+     IDENTIFIER = 258,
+     SHORTSTRING = 259,
+     LONGSTRING = 260,
+     DECINTEGER = 261,
+     OCTINTEGER = 262,
+     HEXINTEGER = 263
    };
 #endif
 /* Tokens.  */
-#define INTEGER 258
-#define ID 259
-#define VAR 260
-#define POW 261
+#define IDENTIFIER 258
+#define SHORTSTRING 259
+#define LONGSTRING 260
+#define DECINTEGER 261
+#define OCTINTEGER 262
+#define HEXINTEGER 263
 
 
 
@@ -125,16 +129,15 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 15 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
+#line 19 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
 
 	int int_type;
 	char* string_type;
-	char char_type;
 
 
 
 /* Line 214 of yacc.c  */
-#line 138 "y.tab.c"
+#line 141 "y.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -146,7 +149,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 150 "y.tab.c"
+#line 153 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -359,22 +362,22 @@ union yyalloc
 #endif
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  7
+#define YYFINAL  9
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   39
+#define YYLAST   5
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  16
+#define YYNTOKENS  11
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  5
+#define YYNNTS  4
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  19
+#define YYNRULES  8
 /* YYNRULES -- Number of states.  */
-#define YYNSTATES  36
+#define YYNSTATES  10
 
 /* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   261
+#define YYMAXUTOK   265
 
 #define YYTRANSLATE(YYX)						\
   ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
@@ -386,12 +389,12 @@ static const yytype_uint8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-      13,    14,    10,     8,     2,     9,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,    11,
-       2,     7,     2,    12,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,    15,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -408,7 +411,7 @@ static const yytype_uint8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6
+       5,     6,     7,     8,     9,    10
 };
 
 #if YYDEBUG
@@ -416,27 +419,20 @@ static const yytype_uint8 yytranslate[] =
    YYRHS.  */
 static const yytype_uint8 yyprhs[] =
 {
-       0,     0,     3,     6,    10,    14,    17,    19,    21,    25,
-      29,    33,    37,    40,    43,    47,    49,    51,    54,    58
+       0,     0,     3,     5,     7,     9,    11,    13,    15
 };
 
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const yytype_int8 yyrhs[] =
 {
-      17,     0,    -1,    18,    11,    -1,    17,    18,    11,    -1,
-       4,     7,    19,    -1,    12,     4,    -1,    20,    -1,     4,
-      -1,    19,     6,    19,    -1,    19,     8,    19,    -1,    19,
-       9,    19,    -1,    19,    10,    19,    -1,     9,    19,    -1,
-       8,    19,    -1,    13,    19,    14,    -1,     3,    -1,     5,
-      -1,     3,     5,    -1,     5,    15,     3,    -1,     3,     5,
-      15,     3,    -1
+      12,     0,    -1,    13,    -1,    14,    -1,     4,    -1,     5,
+      -1,     6,    -1,     7,    -1,     8,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    29,    29,    30,    33,    34,    37,    38,    39,    40,
-      41,    42,    43,    44,    45,    48,    49,    50,    51,    52
+       0,    27,    27,    27,    30,    30,    36,    36,    36
 };
 #endif
 
@@ -445,9 +441,9 @@ static const yytype_uint8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "INTEGER", "ID", "VAR", "POW", "'='",
-  "'+'", "'-'", "'*'", "';'", "'?'", "'('", "')'", "'^'", "$accept",
-  "program", "operation", "polyexpr", "term", 0
+  "$end", "error", "$undefined", "IDENTIFIER", "SHORTSTRING",
+  "LONGSTRING", "DECINTEGER", "OCTINTEGER", "HEXINTEGER", "\"l\"", "\"L\"",
+  "$accept", "program", "stringliteral", "integer", 0
 };
 #endif
 
@@ -456,23 +452,21 @@ static const char *const yytname[] =
    token YYLEX-NUM.  */
 static const yytype_uint16 yytoknum[] =
 {
-       0,   256,   257,   258,   259,   260,   261,    61,    43,    45,
-      42,    59,    63,    40,    41,    94
+       0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
+     265
 };
 # endif
 
 /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    16,    17,    17,    18,    18,    19,    19,    19,    19,
-      19,    19,    19,    19,    19,    20,    20,    20,    20,    20
+       0,    11,    12,    12,    13,    13,    14,    14,    14
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     2,     3,     3,     2,     1,     1,     3,     3,
-       3,     3,     2,     2,     3,     1,     1,     2,     3,     4
+       0,     2,     1,     1,     1,     1,     1,     1,     1
 };
 
 /* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
@@ -480,33 +474,27 @@ static const yytype_uint8 yyr2[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     0,     0,     0,     0,     0,     5,     1,     0,     2,
-      15,     7,    16,     0,     0,     0,     4,     6,     3,    17,
-       0,    13,    12,     0,     0,     0,     0,     0,     0,    18,
-      14,     8,     9,    10,    11,    19
+       0,     4,     5,     6,     7,     8,     0,     2,     3,     1
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     3,     4,    16,    17
+      -1,     6,     7,     8
 };
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-#define YYPACT_NINF -14
+#define YYPACT_NINF -5
 static const yytype_int8 yypact[] =
 {
-      20,    -3,     1,     3,     8,    13,   -14,   -14,     9,   -14,
-      18,   -14,    16,    13,    13,    13,     0,   -14,   -14,    21,
-      32,    31,    31,    19,    13,    13,    13,    13,    35,   -14,
-     -14,   -14,    24,    24,    31,   -14
+      -4,    -5,    -5,    -5,    -5,    -5,     5,    -5,    -5,    -5
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -14,   -14,    36,   -13,   -14
+      -5,    -5,    -5,    -5
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -516,28 +504,19 @@ static const yytype_int8 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-      21,    22,    23,     7,     5,     6,    24,     1,    25,    26,
-      27,    31,    32,    33,    34,     2,    10,    11,    12,     9,
-      18,    13,    14,    19,     1,    24,    15,    25,    26,    27,
-      24,    20,     2,    30,    27,    29,    28,    24,    35,     8
+       1,     2,     3,     4,     5,     9
 };
 
 static const yytype_uint8 yycheck[] =
 {
-      13,    14,    15,     0,     7,     4,     6,     4,     8,     9,
-      10,    24,    25,    26,    27,    12,     3,     4,     5,    11,
-      11,     8,     9,     5,     4,     6,    13,     8,     9,    10,
-       6,    15,    12,    14,    10,     3,    15,     6,     3,     3
+       4,     5,     6,     7,     8,     0
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
    symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     4,    12,    17,    18,     7,     4,     0,    18,    11,
-       3,     4,     5,     8,     9,    13,    19,    20,    11,     5,
-      15,    19,    19,    19,     6,     8,     9,    10,    15,     3,
-      14,    19,    19,    19,    19,     3
+       0,     4,     5,     6,     7,     8,    12,    13,    14,     0
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1351,7 +1330,7 @@ yyreduce:
       
 
 /* Line 1455 of yacc.c  */
-#line 1355 "y.tab.c"
+#line 1334 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1563,5 +1542,5 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 54 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
+#line 38 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
 

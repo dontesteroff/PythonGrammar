@@ -1,7 +1,11 @@
-%token INTEGER
-%token ID
-%token VAR
-%token POW
+%token IDENTIFIER
+
+%token SHORTSTRING
+%token LONGSTRING
+
+%token DECINTEGER
+%token OCTINTEGER
+%token HEXINTEGER
 
 %{
 %}
@@ -15,40 +19,20 @@
 {
 	int int_type;
 	char* string_type;
-	char char_type;
 }
-
-%right '='
-%left '+' '-'
-%left '*'
-%left POW
 
 %%
 
 	program:
-		operation ';'
-		| program operation ';'
-
-	operation:
-		ID '=' polyexpr
-		| '?' ID
+		stringliteral | integer
 		
-	polyexpr:
-		term
-		| ID
-		| polyexpr POW polyexpr 
-		| polyexpr '+' polyexpr
-		| polyexpr '-' polyexpr
-		| polyexpr '*' polyexpr
-		| '-' polyexpr %prec '*'
-		| '+' polyexpr %prec '*'
-		| '(' polyexpr ')'
+	stringliteral:
+		SHORTSTRING | LONGSTRING
 
-	term:
-		INTEGER
-		| VAR 
-		| INTEGER VAR
-		| VAR '^' INTEGER
-		| INTEGER VAR '^' INTEGER
-
+	longinteger:
+		integer "l" | integer "L"
+		
+	integer:
+		DECINTEGER | OCTINTEGER | HEXINTEGER
+		
 %%

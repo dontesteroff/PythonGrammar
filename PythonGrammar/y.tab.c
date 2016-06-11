@@ -68,11 +68,11 @@
 /* Copy the first part of user declarations.  */
 
 /* Line 189 of yacc.c  */
-#line 6 "C:\\Users\\glebi\\Documents\\Visual Studio 2015\\Projects\\PythonGrammar\\PythonGrammar\\python_syntax.y"
+#line 6 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
 
 
 /* Line 189 of yacc.c  */
-#line 10 "C:\\Users\\glebi\\Documents\\Visual Studio 2015\\Projects\\PythonGrammar\\PythonGrammar\\python_syntax.y"
+#line 10 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
 
 	#define YYDEBUG 1
 
@@ -125,7 +125,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 15 "C:\\Users\\glebi\\Documents\\Visual Studio 2015\\Projects\\PythonGrammar\\PythonGrammar\\python_syntax.y"
+#line 15 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
 
 	int int_type;
 	char* string_type;
@@ -1563,5 +1563,5 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 54 "C:\\Users\\glebi\\Documents\\Visual Studio 2015\\Projects\\PythonGrammar\\PythonGrammar\\python_syntax.y"
+#line 54 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
 

@@ -372,9 +372,9 @@ static char *yy_last_accepting_cpos;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "C:\\Users\\glebi\\Documents\\Visual Studio 2015\\Projects\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 1 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 #define INITIAL 0
-#line 2 "C:\\Users\\glebi\\Documents\\Visual Studio 2015\\Projects\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 2 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 	#pragma warning(disable: 4013)
 	#pragma warning(disable: 4996)
 
@@ -535,7 +535,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 18 "C:\\Users\\glebi\\Documents\\Visual Studio 2015\\Projects\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 18 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 
 
 #line 542 "lex.yy.c"
@@ -623,14 +623,14 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 20 "C:\\Users\\glebi\\Documents\\Visual Studio 2015\\Projects\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 20 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 {
 					
 				}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 24 "C:\\Users\\glebi\\Documents\\Visual Studio 2015\\Projects\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 24 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 {
 					char* t = (char*)malloc(strlen(yytext)*sizeof(char));
 					strcpy(t, yytext);
@@ -640,48 +640,48 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 31 "C:\\Users\\glebi\\Documents\\Visual Studio 2015\\Projects\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 31 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 {
 					
 				}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 35 "C:\\Users\\glebi\\Documents\\Visual Studio 2015\\Projects\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 35 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 {
 					
 				}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 39 "C:\\Users\\glebi\\Documents\\Visual Studio 2015\\Projects\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 39 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 {
 					
 				}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 43 "C:\\Users\\glebi\\Documents\\Visual Studio 2015\\Projects\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 43 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 return *yytext;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 45 "C:\\Users\\glebi\\Documents\\Visual Studio 2015\\Projects\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 45 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 47 "C:\\Users\\glebi\\Documents\\Visual Studio 2015\\Projects\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 47 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 49 "C:\\Users\\glebi\\Documents\\Visual Studio 2015\\Projects\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 49 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 line_number++;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 51 "C:\\Users\\glebi\\Documents\\Visual Studio 2015\\Projects\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 51 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 ECHO;
 	YY_BREAK
 #line 688 "lex.yy.c"
@@ -1570,7 +1570,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 51 "C:\\Users\\glebi\\Documents\\Visual Studio 2015\\Projects\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 51 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 
 
 int yywrap(void) {

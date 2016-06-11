@@ -59,7 +59,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 15 "C:\\Users\\glebi\\Documents\\Visual Studio 2015\\Projects\\PythonGrammar\\PythonGrammar\\python_syntax.y"
+#line 15 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
 
 	int int_type;
 	char* string_type;

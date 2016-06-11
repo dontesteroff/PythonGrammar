@@ -20,7 +20,7 @@ DECINTEGER		{NONZERODIGIT}{DIGIT}*|"0"
 OCTINTEGER		"0"{OCTDIGIT}+
 HEXINTEGER		"0"("x"|"X"){HEXDIGIT}+
 
-INTPART			({DIGIT}+)?
+INTPART			{DIGIT}+
 FRACTION		"."{DIGIT}+
 POINTFLOAT		({INTPART}?{FRACTION})|({INTPART}".")|{FRACTION}
 EXPONENT		("e"|"E")("+"|"-")?{DIGIT}+
@@ -34,8 +34,48 @@ LONGSTRINGITEM	([^\\])|([\\].)
 SHORTSTRING		{STRINGPREFIX}?([']{SHORTSTRINGITEM}*['])|(["]{SHORTSTRINGITEM}*["])
 LONGSTRING		{STRINGPREFIX}?(([']{3}{LONGSTRINGITEM}*[']{3})|(["]{3}{LONGSTRINGITEM}*["]{3}))
 
+NEWLINE			[\n]
+
+WHITESPACE		[ \t\v\n\f]
+
 %%
 
+"return"			{ return RETURN; }
+"continue"			{ return CONTINUE; }
+"del"				{ return DEL; }
+"global"			{ return GLOBAL; }
+"yield"				{ return YIELD; }
+"assert"			{ return ASSERT; }
+"pass"				{ return PASS; }
+"break"				{ return BREAK; }
+"in"				{ return IN; }
+"raise"				{ return RAISE; }
+"import"			{ return IMPORT; }
+
+"print"				{ return PRINT; }
+
+"exec"				{ return EXEC; }
+
+","					{ return ','; }
+":"					{ return ':'; }
+"="					{ return '='; }
+"("					{ return '('; }
+")"					{ return ')'; }
+"."					{ return '.'; }
+"&"					{ return '&'; }
+"!"					{ return '!'; }
+"~"					{ return '~'; }
+"-"					{ return '-'; }
+"+"					{ return '+'; }
+"*"					{ return '*'; }
+"/"					{ return '/'; }
+"%"					{ return '%'; }
+"<"					{ return '<'; }
+">"					{ return '>'; }
+"^"					{ return '^'; }
+"|"					{ return '|'; }
+"?"					{ return '?'; }
+				
 {IDENTIFIER}		{
 						printf("IDENTIFIER: %s\n", yytext);
 						return IDENTIFIER;
@@ -83,9 +123,15 @@ LONGSTRING		{STRINGPREFIX}?(([']{3}{LONGSTRINGITEM}*[']{3})|(["]{3}{LONGSTRINGIT
 					}
 					
 [#].*	
-	
-[\n]			line_number++;
 
+[\n]				{
+						line_number++;
+						return NEWLINE;
+					}
+					
+					
+{WHITESPACE}+				{ /* whitespace separates tokens */ }
+.					{ /* discard bad characters */ }
 %%
 
 int yywrap(void) {

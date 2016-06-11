@@ -39,27 +39,55 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     IDENTIFIER = 258,
-     SHORTSTRING = 259,
-     LONGSTRING = 260,
-     DECINTEGER = 261,
-     OCTINTEGER = 262,
-     HEXINTEGER = 263,
-     POINTFLOAT = 264,
-     EXPONENTFLOAT = 265,
-     IMAGNUMBER = 266
+     RETURN = 258,
+     CONTINUE = 259,
+     DEL = 260,
+     GLOBAL = 261,
+     YIELD = 262,
+     ASSERT = 263,
+     PASS = 264,
+     BREAK = 265,
+     IN = 266,
+     RAISE = 267,
+     IMPORT = 268,
+     PRINT = 269,
+     EXEC = 270,
+     IDENTIFIER = 271,
+     SHORTSTRING = 272,
+     LONGSTRING = 273,
+     DECINTEGER = 274,
+     OCTINTEGER = 275,
+     HEXINTEGER = 276,
+     POINTFLOAT = 277,
+     EXPONENTFLOAT = 278,
+     IMAGNUMBER = 279,
+     NEWLINE = 280
    };
 #endif
 /* Tokens.  */
-#define IDENTIFIER 258
-#define SHORTSTRING 259
-#define LONGSTRING 260
-#define DECINTEGER 261
-#define OCTINTEGER 262
-#define HEXINTEGER 263
-#define POINTFLOAT 264
-#define EXPONENTFLOAT 265
-#define IMAGNUMBER 266
+#define RETURN 258
+#define CONTINUE 259
+#define DEL 260
+#define GLOBAL 261
+#define YIELD 262
+#define ASSERT 263
+#define PASS 264
+#define BREAK 265
+#define IN 266
+#define RAISE 267
+#define IMPORT 268
+#define PRINT 269
+#define EXEC 270
+#define IDENTIFIER 271
+#define SHORTSTRING 272
+#define LONGSTRING 273
+#define DECINTEGER 274
+#define OCTINTEGER 275
+#define HEXINTEGER 276
+#define POINTFLOAT 277
+#define EXPONENTFLOAT 278
+#define IMAGNUMBER 279
+#define NEWLINE 280
 
 
 
@@ -69,7 +97,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 23 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
+#line 38 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
 
 	int int_type;
 	char* string_type;
@@ -77,7 +105,7 @@ typedef union YYSTYPE
 
 
 /* Line 1676 of yacc.c  */
-#line 81 "y.tab.h"
+#line 109 "y.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

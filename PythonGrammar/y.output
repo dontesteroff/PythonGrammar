@@ -1,213 +1,807 @@
+Nonterminals useless in grammar
+
+   stringliteral
+   longinteger
+   integer
+   floatnumber
+   imagnumber
+   literal
+   atom
+   enclosure
+   name
+
+
+Terminals unused in grammar
+
+   SHORTSTRING
+   LONGSTRING
+   DECINTEGER
+   OCTINTEGER
+   HEXINTEGER
+   POINTFLOAT
+   EXPONENTFLOAT
+   IMAGNUMBER
+   NEWLINE
+   "l"
+   "L"
+
+
+Rules useless in grammar
+
+   51 stringliteral: SHORTSTRING
+   52              | LONGSTRING
+
+   53 longinteger: integer "l"
+   54            | integer "L"
+
+   55 integer: DECINTEGER
+   56        | OCTINTEGER
+   57        | HEXINTEGER
+
+   58 floatnumber: POINTFLOAT
+   59            | EXPONENTFLOAT
+
+   60 imagnumber: IMAGNUMBER
+
+   61 literal: stringliteral
+   62        | integer
+   63        | longinteger
+   64        | floatnumber
+   65        | imagnumber
+
+   66 atom: identifier
+   67     | literal
+   68     | enclosure
+
+   69 enclosure: "TODO"
+
+   70 name: identifier
+
+
+Rules useless in parser due to conflicts
+
+   25 augmented_assignment_stmt: "TODO"
+
+   44 global_stmt_extended: global_stmt_extended
+
+
+Состояние 13 конфликты: 1 вывода/вывода
+Состояние 50 конфликты: 1 вывода/вывода
+Состояние 58 конфликты: 1 сдвига/вывода
+
+
 Грамматика
 
-    0 $accept: atom $end
+    0 $accept: start $end
 
-    1 atom: IDENTIFIER
-    2     | literal
+    1 start: input
 
-    3 stringliteral: SHORTSTRING
-    4              | LONGSTRING
+    2 identifier: IDENTIFIER
 
-    5 longinteger: integer "l"
-    6            | integer "L"
+    3 yield_expression: YIELD
+    4                 | YIELD expression_list
 
-    7 integer: DECINTEGER
-    8        | OCTINTEGER
-    9        | HEXINTEGER
+    5 or_expr: "TODO"
 
-   10 floatnumber: POINTFLOAT
-   11            | EXPONENTFLOAT
+    6 simple_stmt: expression_list
+    7            | assert_stmt
+    8            | assignment_stmt
+    9            | augmented_assignment_stmt
+   10            | pass_stmt
+   11            | del_stmt
+   12            | print_stmt
+   13            | return_stmt
+   14            | yield_stmt
+   15            | raise_stmt
+   16            | break_stmt
+   17            | continue_stmt
+   18            | import_stmt
+   19            | global_stmt
+   20            | exec_stmt
 
-   12 literal: stringliteral
-   13        | integer
-   14        | longinteger
-   15        | floatnumber
-   16        | IMAGNUMBER
+   21 assert_stmt: ASSERT expression
+   22            | ASSERT expression "," expression
+
+   23 assignment_stmt: "TODO"
+
+   24 target_list: "TODO"
+
+   25 augmented_assignment_stmt: "TODO"
+
+   26 pass_stmt: PASS
+
+   27 del_stmt: DEL target_list
+
+   28 print_stmt: PRINT "TODO"
+
+   29 return_stmt: RETURN
+   30            | RETURN expression_list
+
+   31 yield_stmt: yield_expression
+
+   32 raise_stmt: RAISE
+   33           | RAISE expression
+   34           | RAISE expression ',' expression
+   35           | RAISE expression ',' expression ',' expression
+
+   36 break_stmt: BREAK
+
+   37 continue_stmt: CONTINUE
+
+   38 import_stmt: IMPORT module
+
+   39 module: identifier
+   40       | module '.' module
+
+   41 global_stmt: GLOBAL identifier
+   42            | GLOBAL identifier global_stmt_extended
+
+   43 global_stmt_extended: ',' identifier
+   44                     | global_stmt_extended
+
+   45 exec_stmt: EXEC or_expr
+   46          | EXEC or_expr IN expression
+   47          | EXEC or_expr IN expression ',' expression
+
+   48 expression: "TODO"
+
+   49 expression_list: "TODO"
+
+   50 input: simple_stmt
 
 
 Терминальные символы с правилами, в которых они появляются
 
 $end (0) 0
+',' (44) 34 35 43 47
+'.' (46) 40
 error (256)
-IDENTIFIER (258) 1
-SHORTSTRING (259) 3
-LONGSTRING (260) 4
-DECINTEGER (261) 7
-OCTINTEGER (262) 8
-HEXINTEGER (263) 9
-POINTFLOAT (264) 10
-EXPONENTFLOAT (265) 11
-IMAGNUMBER (266) 16
-"l" (267) 5
-"L" (268) 6
+RETURN (258) 29 30
+CONTINUE (259) 37
+DEL (260) 27
+GLOBAL (261) 41 42
+YIELD (262) 3 4
+ASSERT (263) 21 22
+PASS (264) 26
+BREAK (265) 36
+IN (266) 46 47
+RAISE (267) 32 33 34 35
+IMPORT (268) 38
+PRINT (269) 28
+EXEC (270) 45 46 47
+IDENTIFIER (271) 2
+SHORTSTRING (272)
+LONGSTRING (273)
+DECINTEGER (274)
+OCTINTEGER (275)
+HEXINTEGER (276)
+POINTFLOAT (277)
+EXPONENTFLOAT (278)
+IMAGNUMBER (279)
+NEWLINE (280)
+"l" (281)
+"L" (282)
+"TODO" (283) 5 23 24 25 28 48 49
+"," (284) 22
 
 
 Нетерминальные символы с правилами, в которых они появляются
 
-$accept (14)
+$accept (32)
     налево: 0
-atom (15)
-    налево: 1 2, направо: 0
-stringliteral (16)
-    налево: 3 4, направо: 12
-longinteger (17)
-    налево: 5 6, направо: 14
-integer (18)
-    налево: 7 8 9, направо: 5 6 13
-floatnumber (19)
-    налево: 10 11, направо: 15
-literal (20)
-    налево: 12 13 14 15 16, направо: 2
+start (33)
+    налево: 1, направо: 0
+identifier (34)
+    налево: 2, направо: 39 41 42 43
+yield_expression (35)
+    налево: 3 4, направо: 31
+or_expr (36)
+    налево: 5, направо: 45 46 47
+simple_stmt (37)
+    налево: 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20, направо: 50
+assert_stmt (38)
+    налево: 21 22, направо: 7
+assignment_stmt (39)
+    налево: 23, направо: 8
+target_list (40)
+    налево: 24, направо: 27
+augmented_assignment_stmt (41)
+    налево: 25, направо: 9
+pass_stmt (42)
+    налево: 26, направо: 10
+del_stmt (43)
+    налево: 27, направо: 11
+print_stmt (44)
+    налево: 28, направо: 12
+return_stmt (45)
+    налево: 29 30, направо: 13
+yield_stmt (46)
+    налево: 31, направо: 14
+raise_stmt (47)
+    налево: 32 33 34 35, направо: 15
+break_stmt (48)
+    налево: 36, направо: 16
+continue_stmt (49)
+    налево: 37, направо: 17
+import_stmt (50)
+    налево: 38, направо: 18
+module (51)
+    налево: 39 40, направо: 38 40
+global_stmt (52)
+    налево: 41 42, направо: 19
+global_stmt_extended (53)
+    налево: 43 44, направо: 42 44
+exec_stmt (54)
+    налево: 45 46 47, направо: 20
+expression (55)
+    налево: 48, направо: 21 22 33 34 35 46 47
+expression_list (56)
+    налево: 49, направо: 4 6 30
+input (57)
+    налево: 50, направо: 1
 
 
 состояние 0
 
-    0 $accept: . atom $end
+    0 $accept: . start $end
 
-    IDENTIFIER     сдвиг, и переход в состояние 1
-    SHORTSTRING    сдвиг, и переход в состояние 2
-    LONGSTRING     сдвиг, и переход в состояние 3
-    DECINTEGER     сдвиг, и переход в состояние 4
-    OCTINTEGER     сдвиг, и переход в состояние 5
-    HEXINTEGER     сдвиг, и переход в состояние 6
-    POINTFLOAT     сдвиг, и переход в состояние 7
-    EXPONENTFLOAT  сдвиг, и переход в состояние 8
-    IMAGNUMBER     сдвиг, и переход в состояние 9
+    RETURN    сдвиг, и переход в состояние 1
+    CONTINUE  сдвиг, и переход в состояние 2
+    DEL       сдвиг, и переход в состояние 3
+    GLOBAL    сдвиг, и переход в состояние 4
+    YIELD     сдвиг, и переход в состояние 5
+    ASSERT    сдвиг, и переход в состояние 6
+    PASS      сдвиг, и переход в состояние 7
+    BREAK     сдвиг, и переход в состояние 8
+    RAISE     сдвиг, и переход в состояние 9
+    IMPORT    сдвиг, и переход в состояние 10
+    PRINT     сдвиг, и переход в состояние 11
+    EXEC      сдвиг, и переход в состояние 12
+    "TODO"    сдвиг, и переход в состояние 13
 
-    atom           переход в состояние 10
-    stringliteral  переход в состояние 11
-    longinteger    переход в состояние 12
-    integer        переход в состояние 13
-    floatnumber    переход в состояние 14
-    literal        переход в состояние 15
+    start                      переход в состояние 14
+    yield_expression           переход в состояние 15
+    simple_stmt                переход в состояние 16
+    assert_stmt                переход в состояние 17
+    assignment_stmt            переход в состояние 18
+    augmented_assignment_stmt  переход в состояние 19
+    pass_stmt                  переход в состояние 20
+    del_stmt                   переход в состояние 21
+    print_stmt                 переход в состояние 22
+    return_stmt                переход в состояние 23
+    yield_stmt                 переход в состояние 24
+    raise_stmt                 переход в состояние 25
+    break_stmt                 переход в состояние 26
+    continue_stmt              переход в состояние 27
+    import_stmt                переход в состояние 28
+    global_stmt                переход в состояние 29
+    exec_stmt                  переход в состояние 30
+    expression_list            переход в состояние 31
+    input                      переход в состояние 32
 
 
 состояние 1
 
-    1 atom: IDENTIFIER .
+   29 return_stmt: RETURN .
+   30            | RETURN . expression_list
 
-    $default  вывод с использованием правила 1 (atom)
+    "TODO"  сдвиг, и переход в состояние 33
+
+    $default  вывод с использованием правила 29 (return_stmt)
+
+    expression_list  переход в состояние 34
 
 
 состояние 2
 
-    3 stringliteral: SHORTSTRING .
+   37 continue_stmt: CONTINUE .
 
-    $default  вывод с использованием правила 3 (stringliteral)
+    $default  вывод с использованием правила 37 (continue_stmt)
 
 
 состояние 3
 
-    4 stringliteral: LONGSTRING .
+   27 del_stmt: DEL . target_list
 
-    $default  вывод с использованием правила 4 (stringliteral)
+    "TODO"  сдвиг, и переход в состояние 35
+
+    target_list  переход в состояние 36
 
 
 состояние 4
 
-    7 integer: DECINTEGER .
+   41 global_stmt: GLOBAL . identifier
+   42            | GLOBAL . identifier global_stmt_extended
 
-    $default  вывод с использованием правила 7 (integer)
+    IDENTIFIER  сдвиг, и переход в состояние 37
+
+    identifier  переход в состояние 38
 
 
 состояние 5
 
-    8 integer: OCTINTEGER .
+    3 yield_expression: YIELD .
+    4                 | YIELD . expression_list
 
-    $default  вывод с использованием правила 8 (integer)
+    "TODO"  сдвиг, и переход в состояние 33
+
+    $default  вывод с использованием правила 3 (yield_expression)
+
+    expression_list  переход в состояние 39
 
 
 состояние 6
 
-    9 integer: HEXINTEGER .
+   21 assert_stmt: ASSERT . expression
+   22            | ASSERT . expression "," expression
 
-    $default  вывод с использованием правила 9 (integer)
+    "TODO"  сдвиг, и переход в состояние 40
+
+    expression  переход в состояние 41
 
 
 состояние 7
 
-   10 floatnumber: POINTFLOAT .
+   26 pass_stmt: PASS .
 
-    $default  вывод с использованием правила 10 (floatnumber)
+    $default  вывод с использованием правила 26 (pass_stmt)
 
 
 состояние 8
 
-   11 floatnumber: EXPONENTFLOAT .
+   36 break_stmt: BREAK .
 
-    $default  вывод с использованием правила 11 (floatnumber)
+    $default  вывод с использованием правила 36 (break_stmt)
 
 
 состояние 9
 
-   16 literal: IMAGNUMBER .
+   32 raise_stmt: RAISE .
+   33           | RAISE . expression
+   34           | RAISE . expression ',' expression
+   35           | RAISE . expression ',' expression ',' expression
 
-    $default  вывод с использованием правила 16 (literal)
+    "TODO"  сдвиг, и переход в состояние 40
+
+    $default  вывод с использованием правила 32 (raise_stmt)
+
+    expression  переход в состояние 42
 
 
 состояние 10
 
-    0 $accept: atom . $end
+   38 import_stmt: IMPORT . module
 
-    $end  сдвиг, и переход в состояние 16
+    IDENTIFIER  сдвиг, и переход в состояние 37
+
+    identifier  переход в состояние 43
+    module      переход в состояние 44
 
 
 состояние 11
 
-   12 literal: stringliteral .
+   28 print_stmt: PRINT . "TODO"
 
-    $default  вывод с использованием правила 12 (literal)
+    "TODO"  сдвиг, и переход в состояние 45
 
 
 состояние 12
 
-   14 literal: longinteger .
+   45 exec_stmt: EXEC . or_expr
+   46          | EXEC . or_expr IN expression
+   47          | EXEC . or_expr IN expression ',' expression
 
-    $default  вывод с использованием правила 14 (literal)
+    "TODO"  сдвиг, и переход в состояние 46
+
+    or_expr  переход в состояние 47
 
 
 состояние 13
 
-    5 longinteger: integer . "l"
-    6            | integer . "L"
-   13 literal: integer .
+   23 assignment_stmt: "TODO" .
+   25 augmented_assignment_stmt: "TODO" .
+   49 expression_list: "TODO" .
 
-    "l"  сдвиг, и переход в состояние 17
-    "L"  сдвиг, и переход в состояние 18
-
-    $default  вывод с использованием правила 13 (literal)
+    $end      вывод с использованием правила 23 (assignment_stmt)
+    $end      [вывод с использованием правила 25 (augmented_assignment_stmt)]
+    $end      [вывод с использованием правила 49 (expression_list)]
+    $default  вывод с использованием правила 23 (assignment_stmt)
 
 
 состояние 14
 
-   15 literal: floatnumber .
+    0 $accept: start . $end
 
-    $default  вывод с использованием правила 15 (literal)
+    $end  сдвиг, и переход в состояние 48
 
 
 состояние 15
 
-    2 atom: literal .
+   31 yield_stmt: yield_expression .
 
-    $default  вывод с использованием правила 2 (atom)
+    $default  вывод с использованием правила 31 (yield_stmt)
 
 
 состояние 16
 
-    0 $accept: atom $end .
+   50 input: simple_stmt .
 
-    $default  accept
+    $default  вывод с использованием правила 50 (input)
 
 
 состояние 17
 
-    5 longinteger: integer "l" .
+    7 simple_stmt: assert_stmt .
 
-    $default  вывод с использованием правила 5 (longinteger)
+    $default  вывод с использованием правила 7 (simple_stmt)
 
 
 состояние 18
 
-    6 longinteger: integer "L" .
+    8 simple_stmt: assignment_stmt .
 
-    $default  вывод с использованием правила 6 (longinteger)
+    $default  вывод с использованием правила 8 (simple_stmt)
+
+
+состояние 19
+
+    9 simple_stmt: augmented_assignment_stmt .
+
+    $default  вывод с использованием правила 9 (simple_stmt)
+
+
+состояние 20
+
+   10 simple_stmt: pass_stmt .
+
+    $default  вывод с использованием правила 10 (simple_stmt)
+
+
+состояние 21
+
+   11 simple_stmt: del_stmt .
+
+    $default  вывод с использованием правила 11 (simple_stmt)
+
+
+состояние 22
+
+   12 simple_stmt: print_stmt .
+
+    $default  вывод с использованием правила 12 (simple_stmt)
+
+
+состояние 23
+
+   13 simple_stmt: return_stmt .
+
+    $default  вывод с использованием правила 13 (simple_stmt)
+
+
+состояние 24
+
+   14 simple_stmt: yield_stmt .
+
+    $default  вывод с использованием правила 14 (simple_stmt)
+
+
+состояние 25
+
+   15 simple_stmt: raise_stmt .
+
+    $default  вывод с использованием правила 15 (simple_stmt)
+
+
+состояние 26
+
+   16 simple_stmt: break_stmt .
+
+    $default  вывод с использованием правила 16 (simple_stmt)
+
+
+состояние 27
+
+   17 simple_stmt: continue_stmt .
+
+    $default  вывод с использованием правила 17 (simple_stmt)
+
+
+состояние 28
+
+   18 simple_stmt: import_stmt .
+
+    $default  вывод с использованием правила 18 (simple_stmt)
+
+
+состояние 29
+
+   19 simple_stmt: global_stmt .
+
+    $default  вывод с использованием правила 19 (simple_stmt)
+
+
+состояние 30
+
+   20 simple_stmt: exec_stmt .
+
+    $default  вывод с использованием правила 20 (simple_stmt)
+
+
+состояние 31
+
+    6 simple_stmt: expression_list .
+
+    $default  вывод с использованием правила 6 (simple_stmt)
+
+
+состояние 32
+
+    1 start: input .
+
+    $default  вывод с использованием правила 1 (start)
+
+
+состояние 33
+
+   49 expression_list: "TODO" .
+
+    $default  вывод с использованием правила 49 (expression_list)
+
+
+состояние 34
+
+   30 return_stmt: RETURN expression_list .
+
+    $default  вывод с использованием правила 30 (return_stmt)
+
+
+состояние 35
+
+   24 target_list: "TODO" .
+
+    $default  вывод с использованием правила 24 (target_list)
+
+
+состояние 36
+
+   27 del_stmt: DEL target_list .
+
+    $default  вывод с использованием правила 27 (del_stmt)
+
+
+состояние 37
+
+    2 identifier: IDENTIFIER .
+
+    $default  вывод с использованием правила 2 (identifier)
+
+
+состояние 38
+
+   41 global_stmt: GLOBAL identifier .
+   42            | GLOBAL identifier . global_stmt_extended
+
+    ','  сдвиг, и переход в состояние 49
+
+    $default  вывод с использованием правила 41 (global_stmt)
+
+    global_stmt_extended  переход в состояние 50
+
+
+состояние 39
+
+    4 yield_expression: YIELD expression_list .
+
+    $default  вывод с использованием правила 4 (yield_expression)
+
+
+состояние 40
+
+   48 expression: "TODO" .
+
+    $default  вывод с использованием правила 48 (expression)
+
+
+состояние 41
+
+   21 assert_stmt: ASSERT expression .
+   22            | ASSERT expression . "," expression
+
+    ","  сдвиг, и переход в состояние 51
+
+    $default  вывод с использованием правила 21 (assert_stmt)
+
+
+состояние 42
+
+   33 raise_stmt: RAISE expression .
+   34           | RAISE expression . ',' expression
+   35           | RAISE expression . ',' expression ',' expression
+
+    ','  сдвиг, и переход в состояние 52
+
+    $default  вывод с использованием правила 33 (raise_stmt)
+
+
+состояние 43
+
+   39 module: identifier .
+
+    $default  вывод с использованием правила 39 (module)
+
+
+состояние 44
+
+   38 import_stmt: IMPORT module .
+   40 module: module . '.' module
+
+    '.'  сдвиг, и переход в состояние 53
+
+    $default  вывод с использованием правила 38 (import_stmt)
+
+
+состояние 45
+
+   28 print_stmt: PRINT "TODO" .
+
+    $default  вывод с использованием правила 28 (print_stmt)
+
+
+состояние 46
+
+    5 or_expr: "TODO" .
+
+    $default  вывод с использованием правила 5 (or_expr)
+
+
+состояние 47
+
+   45 exec_stmt: EXEC or_expr .
+   46          | EXEC or_expr . IN expression
+   47          | EXEC or_expr . IN expression ',' expression
+
+    IN  сдвиг, и переход в состояние 54
+
+    $default  вывод с использованием правила 45 (exec_stmt)
+
+
+состояние 48
+
+    0 $accept: start $end .
+
+    $default  accept
+
+
+состояние 49
+
+   43 global_stmt_extended: ',' . identifier
+
+    IDENTIFIER  сдвиг, и переход в состояние 37
+
+    identifier  переход в состояние 55
+
+
+состояние 50
+
+   42 global_stmt: GLOBAL identifier global_stmt_extended .
+   44 global_stmt_extended: global_stmt_extended .
+
+    $end      вывод с использованием правила 42 (global_stmt)
+    $end      [вывод с использованием правила 44 (global_stmt_extended)]
+    $default  вывод с использованием правила 42 (global_stmt)
+
+
+состояние 51
+
+   22 assert_stmt: ASSERT expression "," . expression
+
+    "TODO"  сдвиг, и переход в состояние 40
+
+    expression  переход в состояние 56
+
+
+состояние 52
+
+   34 raise_stmt: RAISE expression ',' . expression
+   35           | RAISE expression ',' . expression ',' expression
+
+    "TODO"  сдвиг, и переход в состояние 40
+
+    expression  переход в состояние 57
+
+
+состояние 53
+
+   40 module: module '.' . module
+
+    IDENTIFIER  сдвиг, и переход в состояние 37
+
+    identifier  переход в состояние 43
+    module      переход в состояние 58
+
+
+состояние 54
+
+   46 exec_stmt: EXEC or_expr IN . expression
+   47          | EXEC or_expr IN . expression ',' expression
+
+    "TODO"  сдвиг, и переход в состояние 40
+
+    expression  переход в состояние 59
+
+
+состояние 55
+
+   43 global_stmt_extended: ',' identifier .
+
+    $default  вывод с использованием правила 43 (global_stmt_extended)
+
+
+состояние 56
+
+   22 assert_stmt: ASSERT expression "," expression .
+
+    $default  вывод с использованием правила 22 (assert_stmt)
+
+
+состояние 57
+
+   34 raise_stmt: RAISE expression ',' expression .
+   35           | RAISE expression ',' expression . ',' expression
+
+    ','  сдвиг, и переход в состояние 60
+
+    $default  вывод с использованием правила 34 (raise_stmt)
+
+
+состояние 58
+
+   40 module: module . '.' module
+   40       | module '.' module .
+
+    '.'  сдвиг, и переход в состояние 53
+
+    '.'       [вывод с использованием правила 40 (module)]
+    $default  вывод с использованием правила 40 (module)
+
+
+состояние 59
+
+   46 exec_stmt: EXEC or_expr IN expression .
+   47          | EXEC or_expr IN expression . ',' expression
+
+    ','  сдвиг, и переход в состояние 61
+
+    $default  вывод с использованием правила 46 (exec_stmt)
+
+
+состояние 60
+
+   35 raise_stmt: RAISE expression ',' expression ',' . expression
+
+    "TODO"  сдвиг, и переход в состояние 40
+
+    expression  переход в состояние 62
+
+
+состояние 61
+
+   47 exec_stmt: EXEC or_expr IN expression ',' . expression
+
+    "TODO"  сдвиг, и переход в состояние 40
+
+    expression  переход в состояние 63
+
+
+состояние 62
+
+   35 raise_stmt: RAISE expression ',' expression ',' expression .
+
+    $default  вывод с использованием правила 35 (raise_stmt)
+
+
+состояние 63
+
+   47 exec_stmt: EXEC or_expr IN expression ',' expression .
+
+    $default  вывод с использованием правила 47 (exec_stmt)

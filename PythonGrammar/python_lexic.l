@@ -108,7 +108,7 @@ WHITESPACE		[ \t\v\n\f]
 "}"					{ return '}'; }
 "."					{ return '.'; }
 "&"					{ return '&'; }
-"!"					{ return '!'; }
+"@"					{ return '@'; }
 "~"					{ return '~'; }
 "-"					{ return '-'; }
 "+"					{ return '+'; }

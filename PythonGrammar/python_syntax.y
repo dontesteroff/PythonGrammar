@@ -69,6 +69,8 @@
 %token DOUBLESLASH
 
 %token NEWLINE
+%token INDENT
+%token DEDENT
 
 %{
 %}
@@ -548,8 +550,151 @@
 		| EXEC or_expr IN expression
 		| EXEC or_expr IN expression ',' expression
 		
+	compound_stmt:
+		if_stmt
+		| while_stmt
+		| for_stmt
+		| try_stmt
+		| with_stmt
+		| funcdef
+		| classdef
+		
+	suite:
+		stmt_list NEWLINE
+		| NEWLINE INDENT statements DEDENT
+		
+	statement:
+		stmt_list NEWLINE
+		| compound_stmt
+		
+	statements:
+		statement
+		| statements statement
+		
+	stmt_list:
+		simple_stmt
+		| simple_stmt ';'
+		| simple_stmt simple_stmts
+		| simple_stmt simple_stmts ';'
+		
+	simple_stmts:
+		';' simple_stmt
+		| simple_stmts ';' simple_stmt
+		
+	if_stmt:
+		IF expression ':' suite
+		| IF expression ':' suite ELSE ':' suite
+		| IF expression ':' suite elif_stmt
+		| IF expression ':' suite elif_stmt ELSE ':' suite
+		
+	elif_stmt:
+		ELIF expression ':' suite
+		| elif_stmt ELIF expression ':' suite
+		
+	while_stmt:
+		WHILE expression ':' suite
+		| WHILE expression ':' suite ELSE ':' suite
+		
+	for_stmt:
+		FOR target_list IN expression_list ':' suite
+		| FOR target_list IN expression_list ':' suite ELSE ':' suite
+		
+	try_stmt:
+		try1_stmt
+		| try2_stmt
+		
+	try1_stmt:
+		TRY ':' suite except_stmt
+		| TRY ':' suite except_stmts ELSE ':' suite
+		| TRY ':' suite except_stmts FINALLY ':' suite
+		| TRY ':' suite except_stmts ELSE ':' suite FINALLY ':' suite
+		
+	except_stmt:
+		EXCEPT ':' suite
+		| EXCEPT expression ':' suite
+		| EXCEPT expression ',' target ':' suite
+		| except_stmts EXCEPT ':' suite
+		| except_stmts EXCEPT expression ':' suite
+		| except_stmts EXCEPT expression ',' target ':' suite
+		
+	try2_stmt:
+		TRY ':' suite FINALLY ':' suite
+		
+	with_stmt:
+		WITH expression ':' expression
+		| WITH expression AS target ':' expression
+	
+	funcdef:
+		DEF funcname '(' ')' ':' suite
+		| decorators DEF funcname '(' ')' ':' suite
+		| DEF funcname '(' parameter_list ')' ':' suite
+		| decorators DEF funcname '(' parameter_list ')' ':' suite
+		
+	decorators:
+		decorator
+		| decorators decorator
+		
+	decorator:
+		'@' dotted_name NEWLINE
+		| '@' dotted_name '(' ')' NEWLINE
+		| '@' dotted_name '(' argument_list ')' NEWLINE
+		| '@' dotted_name '(' argument_list ',' ')' NEWLINE
+		
+	dotted_name:
+		identifier
+		| identifier dot_identifiers
+		
+	dot_identifiers:
+		'.' identifier
+		| dot_identifiers '.' identifier
+		
 	parameter_list:
-		"TODO"
+		STAR identifier
+		| STAR identifier ',' DOUBLESTAR identifier
+		| DOUBLESTAR identifier
+		| defparameter
+		| defparameter ','
+		| defparameters STAR identifier
+		| defparameters STAR identifier ',' DOUBLESTAR identifier
+		| defparameters DOUBLESTAR identifier
+		| defparameters defparameter
+		| defparameters defparameter ','
+		
+	defparameter:
+		parameter
+		| parameter '=' expression
+		
+	defparameters:
+		defparameter ','
+		defparameters defparameter ','
+	
+	sublist:
+		parameter
+		| parameter ','
+		| parameter parameters
+		| parameter parameters ','
+	
+	parameter:
+		identifier
+		| '(' sublist ')'
+		
+	parameters:
+		',' parameter
+		| parameters ',' parameter
+		
+	funcname:
+		identifier
+		
+	classdef:
+		CLASS classname ':' suite
+		| CLASS classname inheritance ':' suite
+		
+	inheritance:
+		'(' ')'
+		| '(' expression_list ')'
+		
+	classname:
+		identifier
 		
 	input:
 		"TODO"

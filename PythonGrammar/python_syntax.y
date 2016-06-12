@@ -80,15 +80,9 @@
 	#define YYDEBUG 1
 %}
 
-%union
-{
-	int int_type;
-	char* string_type;
-}
+%start input
 
 %%
-	start:
-		input
 	
 	identifier:
 		IDENTIFIER
@@ -606,17 +600,17 @@
 		
 	try1_stmt:
 		TRY ':' suite except_stmt
-		| TRY ':' suite except_stmts ELSE ':' suite
-		| TRY ':' suite except_stmts FINALLY ':' suite
-		| TRY ':' suite except_stmts ELSE ':' suite FINALLY ':' suite
+		| TRY ':' suite except_stmt ELSE ':' suite
+		| TRY ':' suite except_stmt FINALLY ':' suite
+		| TRY ':' suite except_stmt ELSE ':' suite FINALLY ':' suite
 		
 	except_stmt:
 		EXCEPT ':' suite
 		| EXCEPT expression ':' suite
 		| EXCEPT expression ',' target ':' suite
-		| except_stmts EXCEPT ':' suite
-		| except_stmts EXCEPT expression ':' suite
-		| except_stmts EXCEPT expression ',' target ':' suite
+		| except_stmt EXCEPT ':' suite
+		| except_stmt EXCEPT expression ':' suite
+		| except_stmt EXCEPT expression ',' target ':' suite
 		
 	try2_stmt:
 		TRY ':' suite FINALLY ':' suite
@@ -667,7 +661,7 @@
 		
 	defparameters:
 		defparameter ','
-		defparameters defparameter ','
+		| defparameters defparameter ','
 	
 	sublist:
 		parameter
@@ -696,24 +690,12 @@
 		
 	classname:
 		identifier
-	
-	file_input:
-		newlines
-		| statements
-	
-	eval_input:
-		expression_list
-		| expression_list newlines
-	
+
 	newlines:
 		NEWLINE
 		| newlines NEWLINE
-	
-	input_input:
-		expression_list NEWLINE
 		
 	input:
-		file_input
-		| eval_input
-		| input_input
+		newlines
+		| statements
 %%

@@ -105,7 +105,9 @@
      DOUBLESTAR = 321,
      SLASH = 322,
      DOUBLESLASH = 323,
-     NEWLINE = 324
+     NEWLINE = 324,
+     INDENT = 325,
+     DEDENT = 326
    };
 #endif
 /* Tokens.  */
@@ -176,25 +178,14 @@
 #define SLASH 322
 #define DOUBLESLASH 323
 #define NEWLINE 324
+#define INDENT 325
+#define DEDENT 326
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE
-{
-
-/* Line 1676 of yacc.c  */
-#line 82 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
-
-	int int_type;
-	char* string_type;
-
-
-
-/* Line 1676 of yacc.c  */
-#line 197 "y.tab.h"
-} YYSTYPE;
+typedef int YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

@@ -1,52 +1,594 @@
+Nonterminals useless in grammar
+
+   identifier
+   stringliteral
+   longinteger
+   integer
+   floatnumber
+   imagnumber
+   atom
+   enclosure
+   literal
+   parenth_form
+   list_display
+   list_comprehension
+   list_for
+   old_expression_list
+   old_expressions
+   list_iter
+   list_if
+   generator_expression
+   genexpr_for
+   genexpr_iter
+   genexpr_if
+   dict_display
+   key_datum_list
+   key_datum
+   key_datums
+   string_conversion
+   yield_atom
+   yield_expression
+   primary
+   attributeref
+   subscription
+   slicing
+   simple_slicing
+   extended_slicing
+   slice_list
+   slice_item
+   slice_items
+   proper_slice
+   short_slice
+   long_slice
+   lower_bound
+   upper_bound
+   stride
+   ellipsis
+   call
+   argument_list
+   positional_arguments
+   keyword_arguments
+   keyword_item
+   keyword_items
+   power
+   u_expr
+   m_expr
+   a_expr
+   shift_expr
+   and_expr
+   xor_expr
+   or_expr
+   comparison
+   comparison_operators_or_exprs
+   comp_operator
+   expression
+   old_expression
+   conditional_expression
+   or_test
+   and_test
+   not_test
+   lambda_form
+   old_lambda_form
+   expression_list
+   expressions
+   simple_stmt
+   expression_stmt
+   assert_stmt
+   assignment_stmt
+   assignment_stmt_targer_list
+   target_list
+   target
+   augmented_assignment_stmt
+   augop
+   pass_stmt
+   del_stmt
+   print_stmt
+   return_stmt
+   yield_stmt
+   raise_stmt
+   break_stmt
+   continue_stmt
+   import_stmt
+   module
+   relative_module
+   dot_modules
+   dots
+   modules
+   import_stmt_identifiers
+   name
+   global_stmt
+   global_stmt_identifiers
+   exec_stmt
+   parameter_list
+
+
 Terminals unused in grammar
 
    FALSE
    NONE
    TRUE
    AND
+   AS
+   ASSERT
+   BREAK
    CLASS
+   CONTINUE
    DEF
+   DEL
    ELIF
    ELSE
    EXCEPT
    FINALLY
+   FOR
+   FROM
+   GLOBAL
+   IF
+   IMPORT
+   IN
    IS
    LAMBDA
    NOT
    OR
+   PASS
+   RAISE
+   RETURN
    TRY
    WHILE
    WITH
+   YIELD
+   PRINT
+   EXEC
+   IDENTIFIER
+   SHORTSTRING
+   LONGSTRING
+   DECINTEGER
+   OCTINTEGER
+   HEXINTEGER
+   POINTFLOAT
+   EXPONENTFLOAT
+   IMAGNUMBER
+   ELLIPSIS
+   RIGHT_ASSIGN
+   LEFT_ASSIGN
+   ADD_ASSIGN
+   SUB_ASSIGN
+   MUL_ASSIGN
+   POW_ASSIGN
+   DIV_ASSIGN
+   MOD_ASSIGN
+   AND_ASSIGN
+   XOR_ASSIGN
+   OR_ASSIGN
+   RIGHT_OP
+   LEFT_OP
    PTR_OP
    LE_OP
    GE_OP
    EQ_OP
    NE_OP
+   STAR
+   DOUBLESTAR
+   SLASH
+   DOUBLESLASH
    NEWLINE
+   'l'
+   'L'
+   '('
+   ')'
+   '['
+   ']'
+   ','
+   '{'
+   '}'
+   ':'
+   '`'
+   '.'
+   '='
+   '-'
+   '+'
+   '~'
+   '%'
+   '&'
+   '^'
+   '|'
+   "<"
+   ">"
+   "=="
+   ">="
+   "<="
+   "<>"
+   "!="
 
 
-Rules useless in parser due to conflicts
+Rules useless in grammar
 
-  209 relative_module: module
+    3 identifier: IDENTIFIER
 
+    4 stringliteral: SHORTSTRING
+    5              | LONGSTRING
 
-Состояние 79 конфликты: 1 сдвига/вывода
-Состояние 93 конфликты: 1 вывода/вывода
-Состояние 134 конфликты: 1 сдвига/вывода
-Состояние 170 конфликты: 1 сдвига/вывода
-Состояние 171 конфликты: 1 сдвига/вывода
-Состояние 172 конфликты: 1 сдвига/вывода
-Состояние 173 конфликты: 1 сдвига/вывода
-Состояние 179 конфликты: 1 сдвига/вывода
-Состояние 192 конфликты: 1 сдвига/вывода
-Состояние 195 конфликты: 1 сдвига/вывода
-Состояние 214 конфликты: 1 сдвига/вывода
-Состояние 222 конфликты: 1 сдвига/вывода
-Состояние 224 конфликты: 1 сдвига/вывода
-Состояние 254 конфликты: 1 сдвига/вывода
-Состояние 284 конфликты: 1 сдвига/вывода
-Состояние 287 конфликты: 1 сдвига/вывода
-Состояние 325 конфликты: 1 сдвига/вывода
+    6 longinteger: integer 'l'
+    7            | integer 'L'
+
+    8 integer: DECINTEGER
+    9        | OCTINTEGER
+   10        | HEXINTEGER
+
+   11 floatnumber: POINTFLOAT
+   12            | EXPONENTFLOAT
+
+   13 imagnumber: IMAGNUMBER
+
+   14 atom: identifier
+   15     | literal
+   16     | enclosure
+
+   17 enclosure: parenth_form
+   18          | list_display
+   19          | generator_expression
+   20          | dict_display
+   21          | string_conversion
+   22          | yield_atom
+
+   23 literal: stringliteral
+   24        | integer
+   25        | longinteger
+   26        | floatnumber
+   27        | imagnumber
+
+   28 parenth_form: '(' ')'
+   29             | '(' expression_list ')'
+
+   30 list_display: '[' ']'
+   31             | '[' expression_list ']'
+   32             | '[' list_comprehension ']'
+
+   33 list_comprehension: expression list_for
+
+   34 list_for: FOR target_list IN old_expression_list
+   35         | FOR target_list IN old_expression_list list_iter
+
+   36 old_expression_list: old_expression
+   37                    | old_expression old_expressions
+   38                    | old_expression old_expressions ','
+
+   39 old_expressions: ',' old_expression
+   40                | old_expressions ',' old_expression
+
+   41 list_iter: list_for
+   42          | list_if
+
+   43 list_if: IF old_expression
+   44        | IF old_expression list_iter
+
+   45 generator_expression: '(' expression genexpr_for ')'
+
+   46 genexpr_for: FOR target_list IN or_test
+   47            | FOR target_list IN or_test genexpr_iter
+
+   48 genexpr_iter: genexpr_for
+   49             | genexpr_if
+
+   50 genexpr_if: IF old_expression
+   51           | IF old_expression genexpr_iter
+
+   52 dict_display: '{' '}'
+   53             | '{' key_datum_list '}'
+
+   54 key_datum_list: key_datum
+   55               | key_datum ','
+   56               | key_datum key_datums
+   57               | key_datum key_datums ','
+
+   58 key_datum: expression ':' expression
+
+   59 key_datums: ',' key_datum
+   60           | key_datums ',' key_datum
+
+   61 string_conversion: '`' expression_list '`'
+
+   62 yield_atom: '(' yield_expression ')'
+
+   63 yield_expression: YIELD
+   64                 | YIELD expression_list
+
+   65 primary: atom
+   66        | attributeref
+   67        | subscription
+   68        | slicing
+   69        | call
+
+   70 attributeref: primary '.' identifier
+
+   71 subscription: primary '[' expression_list ']'
+
+   72 slicing: simple_slicing
+   73        | extended_slicing
+
+   74 simple_slicing: primary '[' short_slice ']'
+
+   75 extended_slicing: primary '[' slice_list ']'
+
+   76 slice_list: slice_item
+   77           | slice_item ','
+   78           | slice_item slice_items
+   79           | slice_item slice_items ','
+
+   80 slice_item: expression
+   81           | proper_slice
+   82           | ellipsis
+
+   83 slice_items: ',' slice_item
+   84            | slice_items ',' slice_item
+
+   85 proper_slice: short_slice
+   86             | long_slice
+
+   87 short_slice: ':'
+   88            | lower_bound ':'
+   89            | ':' upper_bound
+   90            | lower_bound ':' upper_bound
+
+   91 long_slice: short_slice ':'
+   92           | short_slice ':' stride
+
+   93 lower_bound: expression
+
+   94 upper_bound: expression
+
+   95 stride: expression
+
+   96 ellipsis: ELLIPSIS
+
+   97 call: primary '(' ')'
+   98     | primary '(' argument_list ')'
+   99     | primary '(' argument_list ',' ')'
+  100     | primary '(' expression genexpr_for ')'
+
+  101 argument_list: positional_arguments
+  102              | positional_arguments ',' keyword_arguments
+  103              | positional_arguments ',' STAR expression
+  104              | positional_arguments ',' DOUBLESTAR expression
+  105              | positional_arguments ',' keyword_arguments ',' STAR expression
+  106              | positional_arguments ',' keyword_arguments ',' DOUBLESTAR expression
+  107              | positional_arguments ',' STAR expression ',' DOUBLESTAR expression
+  108              | positional_arguments ',' keyword_arguments ',' STAR expression ',' DOUBLESTAR expression
+  109              | keyword_arguments
+  110              | keyword_arguments ',' STAR expression
+  111              | keyword_arguments ',' DOUBLESTAR expression
+  112              | keyword_arguments ',' STAR expression ',' DOUBLESTAR expression
+  113              | STAR expression
+  114              | STAR expression ',' DOUBLESTAR expression
+  115              | DOUBLESTAR expression
+
+  116 positional_arguments: expression
+  117                     | expression expressions
+
+  118 keyword_arguments: keyword_item
+  119                  | keyword_item keyword_items
+
+  120 keyword_item: identifier '=' expression
+
+  121 keyword_items: ',' keyword_item
+  122              | keyword_items ',' keyword_item
+
+  123 power: primary
+  124      | DOUBLESTAR u_expr
+
+  125 u_expr: power
+  126       | '-' u_expr
+  127       | '+' u_expr
+  128       | '~' u_expr
+
+  129 m_expr: u_expr
+  130       | m_expr STAR u_expr
+  131       | m_expr DOUBLESLASH u_expr
+  132       | m_expr SLASH u_expr
+  133       | m_expr '%' u_expr
+
+  134 a_expr: m_expr
+  135       | a_expr '+' m_expr
+  136       | a_expr '-' m_expr
+
+  137 shift_expr: a_expr
+  138           | shift_expr RIGHT_OP a_expr
+  139           | shift_expr LEFT_OP a_expr
+
+  140 and_expr: shift_expr
+  141         | and_expr '&' shift_expr
+
+  142 xor_expr: and_expr
+  143         | xor_expr '^' and_expr
+
+  144 or_expr: xor_expr
+  145        | or_expr '|' xor_expr
+
+  146 comparison: or_expr
+  147           | comparison_operators_or_exprs
+
+  148 comparison_operators_or_exprs: comp_operator or_expr
+  149                              | comparison_operators_or_exprs comp_operator or_expr
+
+  150 comp_operator: "<"
+  151              | ">"
+  152              | "=="
+  153              | ">="
+  154              | "<="
+  155              | "<>"
+  156              | "!="
+  157              | IS
+  158              | IS NOT
+  159              | IN
+  160              | NOT IN
+
+  161 expression: conditional_expression
+  162           | lambda_form
+
+  163 old_expression: or_test
+  164               | old_lambda_form
+
+  165 conditional_expression: or_test
+  166                       | or_test IF or_test ELSE expression
+
+  167 or_test: and_test
+  168        | or_test OR and_test
+
+  169 and_test: not_test
+  170         | and_test AND not_test
+
+  171 not_test: comparison
+  172         | NOT not_test
+
+  173 lambda_form: LAMBDA ':' expression
+  174            | LAMBDA parameter_list ':' expression
+
+  175 old_lambda_form: LAMBDA ':' old_expression
+  176                | LAMBDA parameter_list ':' expression
+
+  177 expression_list: expression
+  178                | expression ','
+  179                | expression expressions
+  180                | expression expressions ','
+
+  181 expressions: ',' expression
+  182            | expressions ',' expression
+
+  183 simple_stmt: expression_stmt
+  184            | assert_stmt
+  185            | assignment_stmt
+  186            | augmented_assignment_stmt
+  187            | pass_stmt
+  188            | del_stmt
+  189            | print_stmt
+  190            | return_stmt
+  191            | yield_stmt
+  192            | raise_stmt
+  193            | break_stmt
+  194            | continue_stmt
+  195            | import_stmt
+  196            | global_stmt
+  197            | exec_stmt
+
+  198 expression_stmt: expression_list
+
+  199 assert_stmt: ASSERT expression
+  200            | ASSERT expression ',' expression
+
+  201 assignment_stmt: assignment_stmt_targer_list expression_list
+  202                | assignment_stmt_targer_list yield_expression
+
+  203 assignment_stmt_targer_list: target_list '='
+  204                            | assignment_stmt_targer_list target_list '='
+
+  205 target_list: target
+  206            | target_list ',' target
+  207            | target_list ','
+
+  208 target: identifier
+  209       | '(' target_list ')'
+  210       | '[' target_list ']'
+  211       | attributeref
+  212       | subscription
+  213       | slicing
+
+  214 augmented_assignment_stmt: target augop expression_list
+  215                          | target augop yield_expression
+
+  216 augop: RIGHT_ASSIGN
+  217      | LEFT_ASSIGN
+  218      | ADD_ASSIGN
+  219      | SUB_ASSIGN
+  220      | MUL_ASSIGN
+  221      | POW_ASSIGN
+  222      | DIV_ASSIGN
+  223      | MOD_ASSIGN
+  224      | AND_ASSIGN
+  225      | XOR_ASSIGN
+  226      | OR_ASSIGN
+  227      | RIGHT_OP
+  228      | LEFT_OP
+
+  229 pass_stmt: PASS
+
+  230 del_stmt: DEL target_list
+
+  231 print_stmt: PRINT
+  232           | PRINT expression
+  233           | PRINT expression ','
+  234           | PRINT expression expressions
+  235           | PRINT expression expressions ','
+  236           | PRINT RIGHT_OP expression
+  237           | PRINT RIGHT_OP expression expressions
+  238           | PRINT RIGHT_OP expression expressions ','
+
+  239 return_stmt: RETURN
+  240            | RETURN expression_list
+
+  241 yield_stmt: yield_expression
+
+  242 raise_stmt: RAISE
+  243           | RAISE expression
+  244           | RAISE expression ',' expression
+  245           | RAISE expression ',' expression ',' expression
+
+  246 break_stmt: BREAK
+
+  247 continue_stmt: CONTINUE
+
+  248 import_stmt: IMPORT module
+  249            | IMPORT module AS name
+  250            | IMPORT module modules
+  251            | IMPORT module AS name modules
+  252            | FROM relative_module IMPORT identifier
+  253            | FROM relative_module IMPORT identifier AS name
+  254            | FROM relative_module IMPORT identifier import_stmt_identifiers
+  255            | FROM relative_module IMPORT identifier AS name import_stmt_identifiers
+  256            | FROM relative_module IMPORT '(' identifier ')'
+  257            | FROM relative_module IMPORT '(' identifier AS name ')'
+  258            | FROM relative_module IMPORT '(' identifier import_stmt_identifiers ')'
+  259            | FROM relative_module IMPORT '(' identifier AS name import_stmt_identifiers ')'
+  260            | FROM relative_module IMPORT '(' identifier ',' ')'
+  261            | FROM relative_module IMPORT '(' identifier AS name ',' ')'
+  262            | FROM relative_module IMPORT '(' identifier import_stmt_identifiers ',' ')'
+  263            | FROM relative_module IMPORT '(' identifier AS name import_stmt_identifiers ',' ')'
+  264            | FROM module IMPORT STAR
+
+  265 module: identifier
+  266       | module '.' module
+
+  267 relative_module: module
+  268                | dot_modules
+  269                | dots
+
+  270 dot_modules: '.' module
+  271            | dot_modules '.' module
+
+  272 dots: '.'
+  273     | dots '.'
+
+  274 modules: ',' module
+  275        | ',' module AS name
+  276        | modules ',' module
+  277        | modules ',' module AS name
+
+  278 import_stmt_identifiers: ',' identifier
+  279                        | ',' identifier AS name
+  280                        | import_stmt_identifiers ',' identifier
+  281                        | import_stmt_identifiers ',' identifier AS name
+
+  282 name: identifier
+
+  283 global_stmt: GLOBAL identifier
+  284            | GLOBAL identifier global_stmt_identifiers
+
+  285 global_stmt_identifiers: ',' identifier
+  286                        | global_stmt_identifiers ',' identifier
+
+  287 exec_stmt: EXEC or_expr
+  288          | EXEC or_expr IN expression
+  289          | EXEC or_expr IN expression ',' expression
+
+  290 parameter_list: "TODO"
 
 
 Грамматика
@@ -55,4104 +597,153 @@ Rules useless in parser due to conflicts
 
     1 start: input
 
-    2 identifier: IDENTIFIER
-
-    3 stringliteral: SHORTSTRING
-    4              | LONGSTRING
-
-    5 longinteger: integer 'l'
-    6            | integer 'L'
-
-    7 integer: DECINTEGER
-    8        | OCTINTEGER
-    9        | HEXINTEGER
-
-   10 floatnumber: POINTFLOAT
-   11            | EXPONENTFLOAT
-
-   12 imagnumber: IMAGNUMBER
-
-   13 atom: identifier
-   14     | literal
-   15     | enclosure
-
-   16 enclosure: parenth_form
-   17          | list_display
-   18          | generator_expression
-   19          | dict_display
-   20          | string_conversion
-   21          | yield_atom
-
-   22 literal: stringliteral
-   23        | integer
-   24        | longinteger
-   25        | floatnumber
-   26        | imagnumber
-
-   27 parenth_form: '(' ')'
-   28             | '(' expression_list ')'
-
-   29 list_display: '[' ']'
-   30             | '[' expression_list ']'
-   31             | '[' list_comprehension ']'
-
-   32 list_comprehension: expression list_for
-
-   33 list_for: FOR target_list IN old_expression_list
-   34         | FOR target_list IN old_expression_list list_iter
-
-   35 old_expression_list: old_expression
-   36                    | old_expression old_expressions
-   37                    | old_expression old_expressions ','
-
-   38 old_expressions: ',' old_expression
-   39                | old_expressions ',' old_expression
-
-   40 list_iter: list_for
-   41          | list_if
-
-   42 list_if: IF old_expression
-   43        | IF old_expression list_iter
-
-   44 generator_expression: '(' expression genexpr_for ')'
-
-   45 genexpr_for: FOR target_list IN or_test
-   46            | FOR target_list IN or_test genexpr_iter
-
-   47 genexpr_iter: genexpr_for
-   48             | genexpr_if
-
-   49 genexpr_if: IF old_expression
-   50           | IF old_expression genexpr_iter
-
-   51 dict_display: '{' '}'
-   52             | '{' key_datum_list '}'
-
-   53 key_datum_list: key_datum
-   54               | key_datum ','
-   55               | key_datum key_datums
-   56               | key_datum key_datums ','
-
-   57 key_datum: expression ':' expression
-
-   58 key_datums: ',' key_datum
-   59           | key_datums ',' key_datum
-
-   60 string_conversion: '`' expression_list '`'
-
-   61 yield_atom: '(' yield_expression ')'
-
-   62 yield_expression: YIELD
-   63                 | YIELD expression_list
-
-   64 primary: atom
-   65        | attributeref
-   66        | subscription
-   67        | slicing
-   68        | call
-
-   69 attributeref: primary '.' identifier
-
-   70 subscription: primary '[' expression_list ']'
-
-   71 slicing: simple_slicing
-   72        | extended_slicing
-
-   73 simple_slicing: primary '[' short_slice ']'
-
-   74 extended_slicing: primary '[' slice_list ']'
-
-   75 slice_list: slice_item
-   76           | slice_item ','
-   77           | slice_item slice_items
-   78           | slice_item slice_items ','
-
-   79 slice_item: expression
-   80           | proper_slice
-   81           | ellipsis
-
-   82 slice_items: ',' slice_item
-   83            | slice_items ',' slice_item
-
-   84 proper_slice: short_slice
-   85             | long_slice
-
-   86 short_slice: ':'
-   87            | lower_bound ':'
-   88            | ':' upper_bound
-   89            | lower_bound ':' upper_bound
-
-   90 long_slice: short_slice ':'
-   91           | short_slice ':' stride
-
-   92 lower_bound: expression
-
-   93 upper_bound: expression
-
-   94 stride: expression
-
-   95 ellipsis: ELLIPSIS
-
-   96 call: primary '(' ')'
-   97     | primary '(' argument_list ')'
-   98     | primary '(' argument_list ',' ')'
-   99     | primary '(' expression genexpr_for ')'
-
-  100 argument_list: positional_arguments
-  101              | positional_arguments ',' keyword_arguments
-  102              | positional_arguments ',' STAR expression
-  103              | positional_arguments ',' DOUBLESTAR expression
-  104              | positional_arguments ',' keyword_arguments ',' STAR expression
-  105              | positional_arguments ',' keyword_arguments ',' DOUBLESTAR expression
-  106              | positional_arguments ',' STAR expression ',' DOUBLESTAR expression
-  107              | positional_arguments ',' keyword_arguments ',' STAR expression ',' DOUBLESTAR expression
-  108              | keyword_arguments
-  109              | keyword_arguments ',' STAR expression
-  110              | keyword_arguments ',' DOUBLESTAR expression
-  111              | keyword_arguments ',' STAR expression ',' DOUBLESTAR expression
-  112              | STAR expression
-  113              | STAR expression ',' DOUBLESTAR expression
-  114              | DOUBLESTAR expression
-
-  115 positional_arguments: expression
-  116                     | expression expressions
-
-  117 keyword_arguments: keyword_item
-  118                  | keyword_item keyword_items
-
-  119 keyword_item: identifier '=' expression
-
-  120 keyword_items: ',' keyword_item
-  121              | keyword_items ',' keyword_item
-
-  122 or_expr: "TODO"
-
-  123 simple_stmt: expression_stmt
-  124            | assert_stmt
-  125            | assignment_stmt
-  126            | augmented_assignment_stmt
-  127            | pass_stmt
-  128            | del_stmt
-  129            | print_stmt
-  130            | return_stmt
-  131            | yield_stmt
-  132            | raise_stmt
-  133            | break_stmt
-  134            | continue_stmt
-  135            | import_stmt
-  136            | global_stmt
-  137            | exec_stmt
-
-  138 expression_stmt: expression_list
-
-  139 assert_stmt: ASSERT expression
-  140            | ASSERT expression ',' expression
-
-  141 assignment_stmt: assignment_stmt_targer_list expression_list
-  142                | assignment_stmt_targer_list yield_expression
-
-  143 assignment_stmt_targer_list: target_list '='
-  144                            | assignment_stmt_targer_list target_list '='
-
-  145 target_list: target
-  146            | target_list ',' target
-  147            | target_list ','
-
-  148 target: identifier
-  149       | '(' target_list ')'
-  150       | '[' target_list ']'
-  151       | attributeref
-  152       | subscription
-  153       | slicing
-
-  154 augmented_assignment_stmt: target augop expression_list
-  155                          | target augop yield_expression
-
-  156 augop: RIGHT_ASSIGN
-  157      | LEFT_ASSIGN
-  158      | ADD_ASSIGN
-  159      | SUB_ASSIGN
-  160      | MUL_ASSIGN
-  161      | POW_ASSIGN
-  162      | DIV_ASSIGN
-  163      | MOD_ASSIGN
-  164      | AND_ASSIGN
-  165      | XOR_ASSIGN
-  166      | OR_ASSIGN
-  167      | RIGHT_OP
-  168      | LEFT_OP
-
-  169 pass_stmt: PASS
-
-  170 del_stmt: DEL target_list
-
-  171 print_stmt: PRINT
-  172           | PRINT expression
-  173           | PRINT expression ','
-  174           | PRINT expression expressions
-  175           | PRINT expression expressions ','
-  176           | PRINT RIGHT_OP expression
-  177           | PRINT RIGHT_OP expression expressions
-  178           | PRINT RIGHT_OP expression expressions ','
-
-  179 expressions: ',' expression
-  180            | expressions ',' expression
-
-  181 return_stmt: RETURN
-  182            | RETURN expression_list
-
-  183 yield_stmt: yield_expression
-
-  184 raise_stmt: RAISE
-  185           | RAISE expression
-  186           | RAISE expression ',' expression
-  187           | RAISE expression ',' expression ',' expression
-
-  188 break_stmt: BREAK
-
-  189 continue_stmt: CONTINUE
-
-  190 import_stmt: IMPORT module
-  191            | IMPORT module AS name
-  192            | IMPORT module modules
-  193            | IMPORT module AS name modules
-  194            | FROM relative_module IMPORT identifier
-  195            | FROM relative_module IMPORT identifier AS name
-  196            | FROM relative_module IMPORT identifier import_stmt_identifiers
-  197            | FROM relative_module IMPORT identifier AS name import_stmt_identifiers
-  198            | FROM relative_module IMPORT '(' identifier ')'
-  199            | FROM relative_module IMPORT '(' identifier AS name ')'
-  200            | FROM relative_module IMPORT '(' identifier import_stmt_identifiers ')'
-  201            | FROM relative_module IMPORT '(' identifier AS name import_stmt_identifiers ')'
-  202            | FROM relative_module IMPORT '(' identifier ',' ')'
-  203            | FROM relative_module IMPORT '(' identifier AS name ',' ')'
-  204            | FROM relative_module IMPORT '(' identifier import_stmt_identifiers ',' ')'
-  205            | FROM relative_module IMPORT '(' identifier AS name import_stmt_identifiers ',' ')'
-  206            | FROM module IMPORT STAR
-
-  207 module: identifier
-  208       | module '.' module
-
-  209 relative_module: module
-  210                | dot_modules
-  211                | dots
-
-  212 dot_modules: '.' module
-  213            | dot_modules '.' module
-
-  214 dots: '.'
-  215     | dots '.'
-
-  216 modules: ',' module
-  217        | ',' module AS name
-  218        | modules ',' module
-  219        | modules ',' module AS name
-
-  220 import_stmt_identifiers: ',' identifier
-  221                        | ',' identifier AS name
-  222                        | import_stmt_identifiers ',' identifier
-  223                        | import_stmt_identifiers ',' identifier AS name
-
-  224 name: identifier
-
-  225 global_stmt: GLOBAL identifier
-  226            | GLOBAL identifier global_stmt_identifiers
-
-  227 global_stmt_identifiers: ',' identifier
-  228                        | global_stmt_identifiers ',' identifier
-
-  229 exec_stmt: EXEC or_expr
-  230          | EXEC or_expr IN expression
-  231          | EXEC or_expr IN expression ',' expression
-
-  232 expression: "TODO"
-
-  233 old_expression: "TODO"
-
-  234 or_test: "TODO"
-
-  235 expression_list: "TODO"
-
-  236 input: simple_stmt
+    2 input: "TODO"
 
 
 Терминальные символы с правилами, в которых они появляются
 
 $end (0) 0
-'(' (40) 27 28 44 61 96 97 98 99 149 198 199 200 201 202 203 204 205
-')' (41) 27 28 44 61 96 97 98 99 149 198 199 200 201 202 203 204 205
-',' (44) 37 38 39 54 56 58 59 76 78 82 83 98 101 102 103 104 105 106
-    107 109 110 111 113 120 121 140 146 147 173 175 178 179 180 186
-    187 202 203 204 205 216 217 218 219 220 221 222 223 227 228 231
-'.' (46) 69 208 212 213 214 215
-':' (58) 57 86 87 88 89 90 91
-'=' (61) 119 143 144
-'L' (76) 6
-'[' (91) 29 30 31 70 73 74 150
-']' (93) 29 30 31 70 73 74 150
-'`' (96) 60
-'l' (108) 5
-'{' (123) 51 52
-'}' (125) 51 52
+'%' (37)
+'&' (38)
+'(' (40)
+')' (41)
+'+' (43)
+',' (44)
+'-' (45)
+'.' (46)
+':' (58)
+'=' (61)
+'L' (76)
+'[' (91)
+']' (93)
+'^' (94)
+'`' (96)
+'l' (108)
+'{' (123)
+'|' (124)
+'}' (125)
+'~' (126)
 error (256)
 FALSE (258)
 NONE (259)
 TRUE (260)
 AND (261)
-AS (262) 191 193 195 197 199 201 203 205 217 219 221 223
-ASSERT (263) 139 140
-BREAK (264) 188
+AS (262)
+ASSERT (263)
+BREAK (264)
 CLASS (265)
-CONTINUE (266) 189
+CONTINUE (266)
 DEF (267)
-DEL (268) 170
+DEL (268)
 ELIF (269)
 ELSE (270)
 EXCEPT (271)
 FINALLY (272)
-FOR (273) 33 34 45 46
-FROM (274) 194 195 196 197 198 199 200 201 202 203 204 205 206
-GLOBAL (275) 225 226
-IF (276) 42 43 49 50
-IMPORT (277) 190 191 192 193 194 195 196 197 198 199 200 201 202 203
-    204 205 206
-IN (278) 33 34 45 46 230 231
+FOR (273)
+FROM (274)
+GLOBAL (275)
+IF (276)
+IMPORT (277)
+IN (278)
 IS (279)
 LAMBDA (280)
 NOT (281)
 OR (282)
-PASS (283) 169
-RAISE (284) 184 185 186 187
-RETURN (285) 181 182
+PASS (283)
+RAISE (284)
+RETURN (285)
 TRY (286)
 WHILE (287)
 WITH (288)
-YIELD (289) 62 63
-PRINT (290) 171 172 173 174 175 176 177 178
-EXEC (291) 229 230 231
-IDENTIFIER (292) 2
-SHORTSTRING (293) 3
-LONGSTRING (294) 4
-DECINTEGER (295) 7
-OCTINTEGER (296) 8
-HEXINTEGER (297) 9
-POINTFLOAT (298) 10
-EXPONENTFLOAT (299) 11
-IMAGNUMBER (300) 12
-ELLIPSIS (301) 95
-RIGHT_ASSIGN (302) 156
-LEFT_ASSIGN (303) 157
-ADD_ASSIGN (304) 158
-SUB_ASSIGN (305) 159
-MUL_ASSIGN (306) 160
-POW_ASSIGN (307) 161
-DIV_ASSIGN (308) 162
-MOD_ASSIGN (309) 163
-AND_ASSIGN (310) 164
-XOR_ASSIGN (311) 165
-OR_ASSIGN (312) 166
-RIGHT_OP (313) 167 176 177 178
-LEFT_OP (314) 168
+YIELD (289)
+PRINT (290)
+EXEC (291)
+IDENTIFIER (292)
+SHORTSTRING (293)
+LONGSTRING (294)
+DECINTEGER (295)
+OCTINTEGER (296)
+HEXINTEGER (297)
+POINTFLOAT (298)
+EXPONENTFLOAT (299)
+IMAGNUMBER (300)
+ELLIPSIS (301)
+RIGHT_ASSIGN (302)
+LEFT_ASSIGN (303)
+ADD_ASSIGN (304)
+SUB_ASSIGN (305)
+MUL_ASSIGN (306)
+POW_ASSIGN (307)
+DIV_ASSIGN (308)
+MOD_ASSIGN (309)
+AND_ASSIGN (310)
+XOR_ASSIGN (311)
+OR_ASSIGN (312)
+RIGHT_OP (313)
+LEFT_OP (314)
 PTR_OP (315)
 LE_OP (316)
 GE_OP (317)
 EQ_OP (318)
 NE_OP (319)
-STAR (320) 102 104 106 107 109 111 112 113 206
-DOUBLESTAR (321) 103 105 106 107 110 111 113 114
-NEWLINE (322)
-"TODO" (323) 122 232 233 234 235
+STAR (320)
+DOUBLESTAR (321)
+SLASH (322)
+DOUBLESLASH (323)
+NEWLINE (324)
+"<" (325)
+">" (326)
+"==" (327)
+">=" (328)
+"<=" (329)
+"<>" (330)
+"!=" (331)
+"TODO" (332) 2
 
 
 Нетерминальные символы с правилами, в которых они появляются
 
-$accept (82)
+$accept (98)
     налево: 0
-start (83)
+start (99)
     налево: 1, направо: 0
-identifier (84)
-    налево: 2, направо: 13 69 119 148 194 195 196 197 198 199 200 201
-    202 203 204 205 207 220 221 222 223 224 225 226 227 228
-stringliteral (85)
-    налево: 3 4, направо: 22
-longinteger (86)
-    налево: 5 6, направо: 24
-integer (87)
-    налево: 7 8 9, направо: 5 6 23
-floatnumber (88)
-    налево: 10 11, направо: 25
-imagnumber (89)
-    налево: 12, направо: 26
-atom (90)
-    налево: 13 14 15, направо: 64
-enclosure (91)
-    налево: 16 17 18 19 20 21, направо: 15
-literal (92)
-    налево: 22 23 24 25 26, направо: 14
-parenth_form (93)
-    налево: 27 28, направо: 16
-list_display (94)
-    налево: 29 30 31, направо: 17
-list_comprehension (95)
-    налево: 32, направо: 31
-list_for (96)
-    налево: 33 34, направо: 32 40
-old_expression_list (97)
-    налево: 35 36 37, направо: 33 34
-old_expressions (98)
-    налево: 38 39, направо: 36 37 39
-list_iter (99)
-    налево: 40 41, направо: 34 43
-list_if (100)
-    налево: 42 43, направо: 41
-generator_expression (101)
-    налево: 44, направо: 18
-genexpr_for (102)
-    налево: 45 46, направо: 44 47 99
-genexpr_iter (103)
-    налево: 47 48, направо: 46 50
-genexpr_if (104)
-    налево: 49 50, направо: 48
-dict_display (105)
-    налево: 51 52, направо: 19
-key_datum_list (106)
-    налево: 53 54 55 56, направо: 52
-key_datum (107)
-    налево: 57, направо: 53 54 55 56 58 59
-key_datums (108)
-    налево: 58 59, направо: 55 56 59
-string_conversion (109)
-    налево: 60, направо: 20
-yield_atom (110)
-    налево: 61, направо: 21
-yield_expression (111)
-    налево: 62 63, направо: 61 142 155 183
-primary (112)
-    налево: 64 65 66 67 68, направо: 69 70 73 74 96 97 98 99
-attributeref (113)
-    налево: 69, направо: 65 151
-subscription (114)
-    налево: 70, направо: 66 152
-slicing (115)
-    налево: 71 72, направо: 67 153
-simple_slicing (116)
-    налево: 73, направо: 71
-extended_slicing (117)
-    налево: 74, направо: 72
-slice_list (118)
-    налево: 75 76 77 78, направо: 74
-slice_item (119)
-    налево: 79 80 81, направо: 75 76 77 78 82 83
-slice_items (120)
-    налево: 82 83, направо: 77 78 83
-proper_slice (121)
-    налево: 84 85, направо: 80
-short_slice (122)
-    налево: 86 87 88 89, направо: 73 84 90 91
-long_slice (123)
-    налево: 90 91, направо: 85
-lower_bound (124)
-    налево: 92, направо: 87 89
-upper_bound (125)
-    налево: 93, направо: 88 89
-stride (126)
-    налево: 94, направо: 91
-ellipsis (127)
-    налево: 95, направо: 81
-call (128)
-    налево: 96 97 98 99, направо: 68
-argument_list (129)
-    налево: 100 101 102 103 104 105 106 107 108 109 110 111 112 113
-    114, направо: 97 98
-positional_arguments (130)
-    налево: 115 116, направо: 100 101 102 103 104 105 106 107
-keyword_arguments (131)
-    налево: 117 118, направо: 101 104 105 107 108 109 110 111
-keyword_item (132)
-    налево: 119, направо: 117 118 120 121
-keyword_items (133)
-    налево: 120 121, направо: 118 121
-or_expr (134)
-    налево: 122, направо: 229 230 231
-simple_stmt (135)
-    налево: 123 124 125 126 127 128 129 130 131 132 133 134 135 136
-    137, направо: 236
-expression_stmt (136)
-    налево: 138, направо: 123
-assert_stmt (137)
-    налево: 139 140, направо: 124
-assignment_stmt (138)
-    налево: 141 142, направо: 125
-assignment_stmt_targer_list (139)
-    налево: 143 144, направо: 141 142 144
-target_list (140)
-    налево: 145 146 147, направо: 33 34 45 46 143 144 146 147 149 150
-    170
-target (141)
-    налево: 148 149 150 151 152 153, направо: 145 146 154 155
-augmented_assignment_stmt (142)
-    налево: 154 155, направо: 126
-augop (143)
-    налево: 156 157 158 159 160 161 162 163 164 165 166 167 168, направо:
-    154 155
-pass_stmt (144)
-    налево: 169, направо: 127
-del_stmt (145)
-    налево: 170, направо: 128
-print_stmt (146)
-    налево: 171 172 173 174 175 176 177 178, направо: 129
-expressions (147)
-    налево: 179 180, направо: 116 174 175 177 178 180
-return_stmt (148)
-    налево: 181 182, направо: 130
-yield_stmt (149)
-    налево: 183, направо: 131
-raise_stmt (150)
-    налево: 184 185 186 187, направо: 132
-break_stmt (151)
-    налево: 188, направо: 133
-continue_stmt (152)
-    налево: 189, направо: 134
-import_stmt (153)
-    налево: 190 191 192 193 194 195 196 197 198 199 200 201 202 203
-    204 205 206, направо: 135
-module (154)
-    налево: 207 208, направо: 190 191 192 193 206 208 209 212 213 216
-    217 218 219
-relative_module (155)
-    налево: 209 210 211, направо: 194 195 196 197 198 199 200 201 202
-    203 204 205
-dot_modules (156)
-    налево: 212 213, направо: 210 213
-dots (157)
-    налево: 214 215, направо: 211 215
-modules (158)
-    налево: 216 217 218 219, направо: 192 193 218 219
-import_stmt_identifiers (159)
-    налево: 220 221 222 223, направо: 196 197 200 201 204 205 222 223
-name (160)
-    налево: 224, направо: 191 193 195 197 199 201 203 205 217 219 221
-    223
-global_stmt (161)
-    налево: 225 226, направо: 136
-global_stmt_identifiers (162)
-    налево: 227 228, направо: 226 228
-exec_stmt (163)
-    налево: 229 230 231, направо: 137
-expression (164)
-    налево: 232, направо: 32 44 57 79 92 93 94 99 102 103 104 105 106
-    107 109 110 111 112 113 114 115 116 119 139 140 172 173 174 175
-    176 177 178 179 180 185 186 187 230 231
-old_expression (165)
-    налево: 233, направо: 35 36 37 38 39 42 43 49 50
-or_test (166)
-    налево: 234, направо: 45 46
-expression_list (167)
-    налево: 235, направо: 28 30 60 63 70 138 141 154 182
-input (168)
-    налево: 236, направо: 1
+input (100)
+    налево: 2, направо: 1
 
 
 состояние 0
 
     0 $accept: . start $end
 
-    ASSERT         сдвиг, и переход в состояние 1
-    BREAK          сдвиг, и переход в состояние 2
-    CONTINUE       сдвиг, и переход в состояние 3
-    DEL            сдвиг, и переход в состояние 4
-    FROM           сдвиг, и переход в состояние 5
-    GLOBAL         сдвиг, и переход в состояние 6
-    IMPORT         сдвиг, и переход в состояние 7
-    PASS           сдвиг, и переход в состояние 8
-    RAISE          сдвиг, и переход в состояние 9
-    RETURN         сдвиг, и переход в состояние 10
-    YIELD          сдвиг, и переход в состояние 11
-    PRINT          сдвиг, и переход в состояние 12
-    EXEC           сдвиг, и переход в состояние 13
-    IDENTIFIER     сдвиг, и переход в состояние 14
-    SHORTSTRING    сдвиг, и переход в состояние 15
-    LONGSTRING     сдвиг, и переход в состояние 16
-    DECINTEGER     сдвиг, и переход в состояние 17
-    OCTINTEGER     сдвиг, и переход в состояние 18
-    HEXINTEGER     сдвиг, и переход в состояние 19
-    POINTFLOAT     сдвиг, и переход в состояние 20
-    EXPONENTFLOAT  сдвиг, и переход в состояние 21
-    IMAGNUMBER     сдвиг, и переход в состояние 22
-    '('            сдвиг, и переход в состояние 23
-    '['            сдвиг, и переход в состояние 24
-    '{'            сдвиг, и переход в состояние 25
-    '`'            сдвиг, и переход в состояние 26
-    "TODO"         сдвиг, и переход в состояние 27
+    "TODO"  сдвиг, и переход в состояние 1
 
-    start                        переход в состояние 28
-    identifier                   переход в состояние 29
-    stringliteral                переход в состояние 30
-    longinteger                  переход в состояние 31
-    integer                      переход в состояние 32
-    floatnumber                  переход в состояние 33
-    imagnumber                   переход в состояние 34
-    atom                         переход в состояние 35
-    enclosure                    переход в состояние 36
-    literal                      переход в состояние 37
-    parenth_form                 переход в состояние 38
-    list_display                 переход в состояние 39
-    generator_expression         переход в состояние 40
-    dict_display                 переход в состояние 41
-    string_conversion            переход в состояние 42
-    yield_atom                   переход в состояние 43
-    yield_expression             переход в состояние 44
-    primary                      переход в состояние 45
-    attributeref                 переход в состояние 46
-    subscription                 переход в состояние 47
-    slicing                      переход в состояние 48
-    simple_slicing               переход в состояние 49
-    extended_slicing             переход в состояние 50
-    call                         переход в состояние 51
-    simple_stmt                  переход в состояние 52
-    expression_stmt              переход в состояние 53
-    assert_stmt                  переход в состояние 54
-    assignment_stmt              переход в состояние 55
-    assignment_stmt_targer_list  переход в состояние 56
-    target_list                  переход в состояние 57
-    target                       переход в состояние 58
-    augmented_assignment_stmt    переход в состояние 59
-    pass_stmt                    переход в состояние 60
-    del_stmt                     переход в состояние 61
-    print_stmt                   переход в состояние 62
-    return_stmt                  переход в состояние 63
-    yield_stmt                   переход в состояние 64
-    raise_stmt                   переход в состояние 65
-    break_stmt                   переход в состояние 66
-    continue_stmt                переход в состояние 67
-    import_stmt                  переход в состояние 68
-    global_stmt                  переход в состояние 69
-    exec_stmt                    переход в состояние 70
-    expression_list              переход в состояние 71
-    input                        переход в состояние 72
+    start  переход в состояние 2
+    input  переход в состояние 3
 
 
 состояние 1
 
-  139 assert_stmt: ASSERT . expression
-  140            | ASSERT . expression ',' expression
+    2 input: "TODO" .
 
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 74
+    $default  вывод с использованием правила 2 (input)
 
 
 состояние 2
 
-  188 break_stmt: BREAK .
+    0 $accept: start . $end
 
-    $default  вывод с использованием правила 188 (break_stmt)
+    $end  сдвиг, и переход в состояние 4
 
 
 состояние 3
-
-  189 continue_stmt: CONTINUE .
-
-    $default  вывод с использованием правила 189 (continue_stmt)
-
-
-состояние 4
-
-  170 del_stmt: DEL . target_list
-
-    IDENTIFIER     сдвиг, и переход в состояние 14
-    SHORTSTRING    сдвиг, и переход в состояние 15
-    LONGSTRING     сдвиг, и переход в состояние 16
-    DECINTEGER     сдвиг, и переход в состояние 17
-    OCTINTEGER     сдвиг, и переход в состояние 18
-    HEXINTEGER     сдвиг, и переход в состояние 19
-    POINTFLOAT     сдвиг, и переход в состояние 20
-    EXPONENTFLOAT  сдвиг, и переход в состояние 21
-    IMAGNUMBER     сдвиг, и переход в состояние 22
-    '('            сдвиг, и переход в состояние 23
-    '['            сдвиг, и переход в состояние 24
-    '{'            сдвиг, и переход в состояние 25
-    '`'            сдвиг, и переход в состояние 26
-
-    identifier            переход в состояние 29
-    stringliteral         переход в состояние 30
-    longinteger           переход в состояние 31
-    integer               переход в состояние 32
-    floatnumber           переход в состояние 33
-    imagnumber            переход в состояние 34
-    atom                  переход в состояние 35
-    enclosure             переход в состояние 36
-    literal               переход в состояние 37
-    parenth_form          переход в состояние 38
-    list_display          переход в состояние 39
-    generator_expression  переход в состояние 40
-    dict_display          переход в состояние 41
-    string_conversion     переход в состояние 42
-    yield_atom            переход в состояние 43
-    primary               переход в состояние 45
-    attributeref          переход в состояние 46
-    subscription          переход в состояние 47
-    slicing               переход в состояние 48
-    simple_slicing        переход в состояние 49
-    extended_slicing      переход в состояние 50
-    call                  переход в состояние 51
-    target_list           переход в состояние 75
-    target                переход в состояние 76
-
-
-состояние 5
-
-  194 import_stmt: FROM . relative_module IMPORT identifier
-  195            | FROM . relative_module IMPORT identifier AS name
-  196            | FROM . relative_module IMPORT identifier import_stmt_identifiers
-  197            | FROM . relative_module IMPORT identifier AS name import_stmt_identifiers
-  198            | FROM . relative_module IMPORT '(' identifier ')'
-  199            | FROM . relative_module IMPORT '(' identifier AS name ')'
-  200            | FROM . relative_module IMPORT '(' identifier import_stmt_identifiers ')'
-  201            | FROM . relative_module IMPORT '(' identifier AS name import_stmt_identifiers ')'
-  202            | FROM . relative_module IMPORT '(' identifier ',' ')'
-  203            | FROM . relative_module IMPORT '(' identifier AS name ',' ')'
-  204            | FROM . relative_module IMPORT '(' identifier import_stmt_identifiers ',' ')'
-  205            | FROM . relative_module IMPORT '(' identifier AS name import_stmt_identifiers ',' ')'
-  206            | FROM . module IMPORT STAR
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-    '.'         сдвиг, и переход в состояние 77
-
-    identifier       переход в состояние 78
-    module           переход в состояние 79
-    relative_module  переход в состояние 80
-    dot_modules      переход в состояние 81
-    dots             переход в состояние 82
-
-
-состояние 6
-
-  225 global_stmt: GLOBAL . identifier
-  226            | GLOBAL . identifier global_stmt_identifiers
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    identifier  переход в состояние 83
-
-
-состояние 7
-
-  190 import_stmt: IMPORT . module
-  191            | IMPORT . module AS name
-  192            | IMPORT . module modules
-  193            | IMPORT . module AS name modules
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    identifier  переход в состояние 78
-    module      переход в состояние 84
-
-
-состояние 8
-
-  169 pass_stmt: PASS .
-
-    $default  вывод с использованием правила 169 (pass_stmt)
-
-
-состояние 9
-
-  184 raise_stmt: RAISE .
-  185           | RAISE . expression
-  186           | RAISE . expression ',' expression
-  187           | RAISE . expression ',' expression ',' expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    $default  вывод с использованием правила 184 (raise_stmt)
-
-    expression  переход в состояние 85
-
-
-состояние 10
-
-  181 return_stmt: RETURN .
-  182            | RETURN . expression_list
-
-    "TODO"  сдвиг, и переход в состояние 27
-
-    $default  вывод с использованием правила 181 (return_stmt)
-
-    expression_list  переход в состояние 86
-
-
-состояние 11
-
-   62 yield_expression: YIELD .
-   63                 | YIELD . expression_list
-
-    "TODO"  сдвиг, и переход в состояние 27
-
-    $default  вывод с использованием правила 62 (yield_expression)
-
-    expression_list  переход в состояние 87
-
-
-состояние 12
-
-  171 print_stmt: PRINT .
-  172           | PRINT . expression
-  173           | PRINT . expression ','
-  174           | PRINT . expression expressions
-  175           | PRINT . expression expressions ','
-  176           | PRINT . RIGHT_OP expression
-  177           | PRINT . RIGHT_OP expression expressions
-  178           | PRINT . RIGHT_OP expression expressions ','
-
-    RIGHT_OP  сдвиг, и переход в состояние 88
-    "TODO"    сдвиг, и переход в состояние 73
-
-    $default  вывод с использованием правила 171 (print_stmt)
-
-    expression  переход в состояние 89
-
-
-состояние 13
-
-  229 exec_stmt: EXEC . or_expr
-  230          | EXEC . or_expr IN expression
-  231          | EXEC . or_expr IN expression ',' expression
-
-    "TODO"  сдвиг, и переход в состояние 90
-
-    or_expr  переход в состояние 91
-
-
-состояние 14
-
-    2 identifier: IDENTIFIER .
-
-    $default  вывод с использованием правила 2 (identifier)
-
-
-состояние 15
-
-    3 stringliteral: SHORTSTRING .
-
-    $default  вывод с использованием правила 3 (stringliteral)
-
-
-состояние 16
-
-    4 stringliteral: LONGSTRING .
-
-    $default  вывод с использованием правила 4 (stringliteral)
-
-
-состояние 17
-
-    7 integer: DECINTEGER .
-
-    $default  вывод с использованием правила 7 (integer)
-
-
-состояние 18
-
-    8 integer: OCTINTEGER .
-
-    $default  вывод с использованием правила 8 (integer)
-
-
-состояние 19
-
-    9 integer: HEXINTEGER .
-
-    $default  вывод с использованием правила 9 (integer)
-
-
-состояние 20
-
-   10 floatnumber: POINTFLOAT .
-
-    $default  вывод с использованием правила 10 (floatnumber)
-
-
-состояние 21
-
-   11 floatnumber: EXPONENTFLOAT .
-
-    $default  вывод с использованием правила 11 (floatnumber)
-
-
-состояние 22
-
-   12 imagnumber: IMAGNUMBER .
-
-    $default  вывод с использованием правила 12 (imagnumber)
-
-
-состояние 23
-
-   27 parenth_form: '(' . ')'
-   28             | '(' . expression_list ')'
-   44 generator_expression: '(' . expression genexpr_for ')'
-   61 yield_atom: '(' . yield_expression ')'
-  149 target: '(' . target_list ')'
-
-    YIELD          сдвиг, и переход в состояние 11
-    IDENTIFIER     сдвиг, и переход в состояние 14
-    SHORTSTRING    сдвиг, и переход в состояние 15
-    LONGSTRING     сдвиг, и переход в состояние 16
-    DECINTEGER     сдвиг, и переход в состояние 17
-    OCTINTEGER     сдвиг, и переход в состояние 18
-    HEXINTEGER     сдвиг, и переход в состояние 19
-    POINTFLOAT     сдвиг, и переход в состояние 20
-    EXPONENTFLOAT  сдвиг, и переход в состояние 21
-    IMAGNUMBER     сдвиг, и переход в состояние 22
-    '('            сдвиг, и переход в состояние 23
-    ')'            сдвиг, и переход в состояние 92
-    '['            сдвиг, и переход в состояние 24
-    '{'            сдвиг, и переход в состояние 25
-    '`'            сдвиг, и переход в состояние 26
-    "TODO"         сдвиг, и переход в состояние 93
-
-    identifier            переход в состояние 29
-    stringliteral         переход в состояние 30
-    longinteger           переход в состояние 31
-    integer               переход в состояние 32
-    floatnumber           переход в состояние 33
-    imagnumber            переход в состояние 34
-    atom                  переход в состояние 35
-    enclosure             переход в состояние 36
-    literal               переход в состояние 37
-    parenth_form          переход в состояние 38
-    list_display          переход в состояние 39
-    generator_expression  переход в состояние 40
-    dict_display          переход в состояние 41
-    string_conversion     переход в состояние 42
-    yield_atom            переход в состояние 43
-    yield_expression      переход в состояние 94
-    primary               переход в состояние 45
-    attributeref          переход в состояние 46
-    subscription          переход в состояние 47
-    slicing               переход в состояние 48
-    simple_slicing        переход в состояние 49
-    extended_slicing      переход в состояние 50
-    call                  переход в состояние 51
-    target_list           переход в состояние 95
-    target                переход в состояние 76
-    expression            переход в состояние 96
-    expression_list       переход в состояние 97
-
-
-состояние 24
-
-   29 list_display: '[' . ']'
-   30             | '[' . expression_list ']'
-   31             | '[' . list_comprehension ']'
-  150 target: '[' . target_list ']'
-
-    IDENTIFIER     сдвиг, и переход в состояние 14
-    SHORTSTRING    сдвиг, и переход в состояние 15
-    LONGSTRING     сдвиг, и переход в состояние 16
-    DECINTEGER     сдвиг, и переход в состояние 17
-    OCTINTEGER     сдвиг, и переход в состояние 18
-    HEXINTEGER     сдвиг, и переход в состояние 19
-    POINTFLOAT     сдвиг, и переход в состояние 20
-    EXPONENTFLOAT  сдвиг, и переход в состояние 21
-    IMAGNUMBER     сдвиг, и переход в состояние 22
-    '('            сдвиг, и переход в состояние 23
-    '['            сдвиг, и переход в состояние 24
-    ']'            сдвиг, и переход в состояние 98
-    '{'            сдвиг, и переход в состояние 25
-    '`'            сдвиг, и переход в состояние 26
-    "TODO"         сдвиг, и переход в состояние 93
-
-    identifier            переход в состояние 29
-    stringliteral         переход в состояние 30
-    longinteger           переход в состояние 31
-    integer               переход в состояние 32
-    floatnumber           переход в состояние 33
-    imagnumber            переход в состояние 34
-    atom                  переход в состояние 35
-    enclosure             переход в состояние 36
-    literal               переход в состояние 37
-    parenth_form          переход в состояние 38
-    list_display          переход в состояние 39
-    list_comprehension    переход в состояние 99
-    generator_expression  переход в состояние 40
-    dict_display          переход в состояние 41
-    string_conversion     переход в состояние 42
-    yield_atom            переход в состояние 43
-    primary               переход в состояние 45
-    attributeref          переход в состояние 46
-    subscription          переход в состояние 47
-    slicing               переход в состояние 48
-    simple_slicing        переход в состояние 49
-    extended_slicing      переход в состояние 50
-    call                  переход в состояние 51
-    target_list           переход в состояние 100
-    target                переход в состояние 76
-    expression            переход в состояние 101
-    expression_list       переход в состояние 102
-
-
-состояние 25
-
-   51 dict_display: '{' . '}'
-   52             | '{' . key_datum_list '}'
-
-    '}'     сдвиг, и переход в состояние 103
-    "TODO"  сдвиг, и переход в состояние 73
-
-    key_datum_list  переход в состояние 104
-    key_datum       переход в состояние 105
-    expression      переход в состояние 106
-
-
-состояние 26
-
-   60 string_conversion: '`' . expression_list '`'
-
-    "TODO"  сдвиг, и переход в состояние 27
-
-    expression_list  переход в состояние 107
-
-
-состояние 27
-
-  235 expression_list: "TODO" .
-
-    $default  вывод с использованием правила 235 (expression_list)
-
-
-состояние 28
-
-    0 $accept: start . $end
-
-    $end  сдвиг, и переход в состояние 108
-
-
-состояние 29
-
-   13 atom: identifier .
-  148 target: identifier .
-
-    '('       вывод с использованием правила 13 (atom)
-    '['       вывод с использованием правила 13 (atom)
-    '.'       вывод с использованием правила 13 (atom)
-    $default  вывод с использованием правила 148 (target)
-
-
-состояние 30
-
-   22 literal: stringliteral .
-
-    $default  вывод с использованием правила 22 (literal)
-
-
-состояние 31
-
-   24 literal: longinteger .
-
-    $default  вывод с использованием правила 24 (literal)
-
-
-состояние 32
-
-    5 longinteger: integer . 'l'
-    6            | integer . 'L'
-   23 literal: integer .
-
-    'l'  сдвиг, и переход в состояние 109
-    'L'  сдвиг, и переход в состояние 110
-
-    $default  вывод с использованием правила 23 (literal)
-
-
-состояние 33
-
-   25 literal: floatnumber .
-
-    $default  вывод с использованием правила 25 (literal)
-
-
-состояние 34
-
-   26 literal: imagnumber .
-
-    $default  вывод с использованием правила 26 (literal)
-
-
-состояние 35
-
-   64 primary: atom .
-
-    $default  вывод с использованием правила 64 (primary)
-
-
-состояние 36
-
-   15 atom: enclosure .
-
-    $default  вывод с использованием правила 15 (atom)
-
-
-состояние 37
-
-   14 atom: literal .
-
-    $default  вывод с использованием правила 14 (atom)
-
-
-состояние 38
-
-   16 enclosure: parenth_form .
-
-    $default  вывод с использованием правила 16 (enclosure)
-
-
-состояние 39
-
-   17 enclosure: list_display .
-
-    $default  вывод с использованием правила 17 (enclosure)
-
-
-состояние 40
-
-   18 enclosure: generator_expression .
-
-    $default  вывод с использованием правила 18 (enclosure)
-
-
-состояние 41
-
-   19 enclosure: dict_display .
-
-    $default  вывод с использованием правила 19 (enclosure)
-
-
-состояние 42
-
-   20 enclosure: string_conversion .
-
-    $default  вывод с использованием правила 20 (enclosure)
-
-
-состояние 43
-
-   21 enclosure: yield_atom .
-
-    $default  вывод с использованием правила 21 (enclosure)
-
-
-состояние 44
-
-  183 yield_stmt: yield_expression .
-
-    $default  вывод с использованием правила 183 (yield_stmt)
-
-
-состояние 45
-
-   69 attributeref: primary . '.' identifier
-   70 subscription: primary . '[' expression_list ']'
-   73 simple_slicing: primary . '[' short_slice ']'
-   74 extended_slicing: primary . '[' slice_list ']'
-   96 call: primary . '(' ')'
-   97     | primary . '(' argument_list ')'
-   98     | primary . '(' argument_list ',' ')'
-   99     | primary . '(' expression genexpr_for ')'
-
-    '('  сдвиг, и переход в состояние 111
-    '['  сдвиг, и переход в состояние 112
-    '.'  сдвиг, и переход в состояние 113
-
-
-состояние 46
-
-   65 primary: attributeref .
-  151 target: attributeref .
-
-    '('       вывод с использованием правила 65 (primary)
-    '['       вывод с использованием правила 65 (primary)
-    '.'       вывод с использованием правила 65 (primary)
-    $default  вывод с использованием правила 151 (target)
-
-
-состояние 47
-
-   66 primary: subscription .
-  152 target: subscription .
-
-    '('       вывод с использованием правила 66 (primary)
-    '['       вывод с использованием правила 66 (primary)
-    '.'       вывод с использованием правила 66 (primary)
-    $default  вывод с использованием правила 152 (target)
-
-
-состояние 48
-
-   67 primary: slicing .
-  153 target: slicing .
-
-    '('       вывод с использованием правила 67 (primary)
-    '['       вывод с использованием правила 67 (primary)
-    '.'       вывод с использованием правила 67 (primary)
-    $default  вывод с использованием правила 153 (target)
-
-
-состояние 49
-
-   71 slicing: simple_slicing .
-
-    $default  вывод с использованием правила 71 (slicing)
-
-
-состояние 50
-
-   72 slicing: extended_slicing .
-
-    $default  вывод с использованием правила 72 (slicing)
-
-
-состояние 51
-
-   68 primary: call .
-
-    $default  вывод с использованием правила 68 (primary)
-
-
-состояние 52
-
-  236 input: simple_stmt .
-
-    $default  вывод с использованием правила 236 (input)
-
-
-состояние 53
-
-  123 simple_stmt: expression_stmt .
-
-    $default  вывод с использованием правила 123 (simple_stmt)
-
-
-состояние 54
-
-  124 simple_stmt: assert_stmt .
-
-    $default  вывод с использованием правила 124 (simple_stmt)
-
-
-состояние 55
-
-  125 simple_stmt: assignment_stmt .
-
-    $default  вывод с использованием правила 125 (simple_stmt)
-
-
-состояние 56
-
-  141 assignment_stmt: assignment_stmt_targer_list . expression_list
-  142                | assignment_stmt_targer_list . yield_expression
-  144 assignment_stmt_targer_list: assignment_stmt_targer_list . target_list '='
-
-    YIELD          сдвиг, и переход в состояние 11
-    IDENTIFIER     сдвиг, и переход в состояние 14
-    SHORTSTRING    сдвиг, и переход в состояние 15
-    LONGSTRING     сдвиг, и переход в состояние 16
-    DECINTEGER     сдвиг, и переход в состояние 17
-    OCTINTEGER     сдвиг, и переход в состояние 18
-    HEXINTEGER     сдвиг, и переход в состояние 19
-    POINTFLOAT     сдвиг, и переход в состояние 20
-    EXPONENTFLOAT  сдвиг, и переход в состояние 21
-    IMAGNUMBER     сдвиг, и переход в состояние 22
-    '('            сдвиг, и переход в состояние 23
-    '['            сдвиг, и переход в состояние 24
-    '{'            сдвиг, и переход в состояние 25
-    '`'            сдвиг, и переход в состояние 26
-    "TODO"         сдвиг, и переход в состояние 27
-
-    identifier            переход в состояние 29
-    stringliteral         переход в состояние 30
-    longinteger           переход в состояние 31
-    integer               переход в состояние 32
-    floatnumber           переход в состояние 33
-    imagnumber            переход в состояние 34
-    atom                  переход в состояние 35
-    enclosure             переход в состояние 36
-    literal               переход в состояние 37
-    parenth_form          переход в состояние 38
-    list_display          переход в состояние 39
-    generator_expression  переход в состояние 40
-    dict_display          переход в состояние 41
-    string_conversion     переход в состояние 42
-    yield_atom            переход в состояние 43
-    yield_expression      переход в состояние 114
-    primary               переход в состояние 45
-    attributeref          переход в состояние 46
-    subscription          переход в состояние 47
-    slicing               переход в состояние 48
-    simple_slicing        переход в состояние 49
-    extended_slicing      переход в состояние 50
-    call                  переход в состояние 51
-    target_list           переход в состояние 115
-    target                переход в состояние 76
-    expression_list       переход в состояние 116
-
-
-состояние 57
-
-  143 assignment_stmt_targer_list: target_list . '='
-  146 target_list: target_list . ',' target
-  147            | target_list . ','
-
-    ','  сдвиг, и переход в состояние 117
-    '='  сдвиг, и переход в состояние 118
-
-
-состояние 58
-
-  145 target_list: target .
-  154 augmented_assignment_stmt: target . augop expression_list
-  155                          | target . augop yield_expression
-
-    RIGHT_ASSIGN  сдвиг, и переход в состояние 119
-    LEFT_ASSIGN   сдвиг, и переход в состояние 120
-    ADD_ASSIGN    сдвиг, и переход в состояние 121
-    SUB_ASSIGN    сдвиг, и переход в состояние 122
-    MUL_ASSIGN    сдвиг, и переход в состояние 123
-    POW_ASSIGN    сдвиг, и переход в состояние 124
-    DIV_ASSIGN    сдвиг, и переход в состояние 125
-    MOD_ASSIGN    сдвиг, и переход в состояние 126
-    AND_ASSIGN    сдвиг, и переход в состояние 127
-    XOR_ASSIGN    сдвиг, и переход в состояние 128
-    OR_ASSIGN     сдвиг, и переход в состояние 129
-    RIGHT_OP      сдвиг, и переход в состояние 130
-    LEFT_OP       сдвиг, и переход в состояние 131
-
-    $default  вывод с использованием правила 145 (target_list)
-
-    augop  переход в состояние 132
-
-
-состояние 59
-
-  126 simple_stmt: augmented_assignment_stmt .
-
-    $default  вывод с использованием правила 126 (simple_stmt)
-
-
-состояние 60
-
-  127 simple_stmt: pass_stmt .
-
-    $default  вывод с использованием правила 127 (simple_stmt)
-
-
-состояние 61
-
-  128 simple_stmt: del_stmt .
-
-    $default  вывод с использованием правила 128 (simple_stmt)
-
-
-состояние 62
-
-  129 simple_stmt: print_stmt .
-
-    $default  вывод с использованием правила 129 (simple_stmt)
-
-
-состояние 63
-
-  130 simple_stmt: return_stmt .
-
-    $default  вывод с использованием правила 130 (simple_stmt)
-
-
-состояние 64
-
-  131 simple_stmt: yield_stmt .
-
-    $default  вывод с использованием правила 131 (simple_stmt)
-
-
-состояние 65
-
-  132 simple_stmt: raise_stmt .
-
-    $default  вывод с использованием правила 132 (simple_stmt)
-
-
-состояние 66
-
-  133 simple_stmt: break_stmt .
-
-    $default  вывод с использованием правила 133 (simple_stmt)
-
-
-состояние 67
-
-  134 simple_stmt: continue_stmt .
-
-    $default  вывод с использованием правила 134 (simple_stmt)
-
-
-состояние 68
-
-  135 simple_stmt: import_stmt .
-
-    $default  вывод с использованием правила 135 (simple_stmt)
-
-
-состояние 69
-
-  136 simple_stmt: global_stmt .
-
-    $default  вывод с использованием правила 136 (simple_stmt)
-
-
-состояние 70
-
-  137 simple_stmt: exec_stmt .
-
-    $default  вывод с использованием правила 137 (simple_stmt)
-
-
-состояние 71
-
-  138 expression_stmt: expression_list .
-
-    $default  вывод с использованием правила 138 (expression_stmt)
-
-
-состояние 72
 
     1 start: input .
 
     $default  вывод с использованием правила 1 (start)
 
 
-состояние 73
-
-  232 expression: "TODO" .
-
-    $default  вывод с использованием правила 232 (expression)
-
-
-состояние 74
-
-  139 assert_stmt: ASSERT expression .
-  140            | ASSERT expression . ',' expression
-
-    ','  сдвиг, и переход в состояние 133
-
-    $default  вывод с использованием правила 139 (assert_stmt)
-
-
-состояние 75
-
-  146 target_list: target_list . ',' target
-  147            | target_list . ','
-  170 del_stmt: DEL target_list .
-
-    ','  сдвиг, и переход в состояние 117
-
-    $default  вывод с использованием правила 170 (del_stmt)
-
-
-состояние 76
-
-  145 target_list: target .
-
-    $default  вывод с использованием правила 145 (target_list)
-
-
-состояние 77
-
-  212 dot_modules: '.' . module
-  214 dots: '.' .
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    $default  вывод с использованием правила 214 (dots)
-
-    identifier  переход в состояние 78
-    module      переход в состояние 134
-
-
-состояние 78
-
-  207 module: identifier .
-
-    $default  вывод с использованием правила 207 (module)
-
-
-состояние 79
-
-  206 import_stmt: FROM module . IMPORT STAR
-  208 module: module . '.' module
-  209 relative_module: module .
-
-    IMPORT  сдвиг, и переход в состояние 135
-    '.'     сдвиг, и переход в состояние 136
-
-    IMPORT  [вывод с использованием правила 209 (relative_module)]
-
-
-состояние 80
-
-  194 import_stmt: FROM relative_module . IMPORT identifier
-  195            | FROM relative_module . IMPORT identifier AS name
-  196            | FROM relative_module . IMPORT identifier import_stmt_identifiers
-  197            | FROM relative_module . IMPORT identifier AS name import_stmt_identifiers
-  198            | FROM relative_module . IMPORT '(' identifier ')'
-  199            | FROM relative_module . IMPORT '(' identifier AS name ')'
-  200            | FROM relative_module . IMPORT '(' identifier import_stmt_identifiers ')'
-  201            | FROM relative_module . IMPORT '(' identifier AS name import_stmt_identifiers ')'
-  202            | FROM relative_module . IMPORT '(' identifier ',' ')'
-  203            | FROM relative_module . IMPORT '(' identifier AS name ',' ')'
-  204            | FROM relative_module . IMPORT '(' identifier import_stmt_identifiers ',' ')'
-  205            | FROM relative_module . IMPORT '(' identifier AS name import_stmt_identifiers ',' ')'
-
-    IMPORT  сдвиг, и переход в состояние 137
-
-
-состояние 81
-
-  210 relative_module: dot_modules .
-  213 dot_modules: dot_modules . '.' module
-
-    '.'  сдвиг, и переход в состояние 138
-
-    $default  вывод с использованием правила 210 (relative_module)
-
-
-состояние 82
-
-  211 relative_module: dots .
-  215 dots: dots . '.'
-
-    '.'  сдвиг, и переход в состояние 139
-
-    $default  вывод с использованием правила 211 (relative_module)
-
-
-состояние 83
-
-  225 global_stmt: GLOBAL identifier .
-  226            | GLOBAL identifier . global_stmt_identifiers
-
-    ','  сдвиг, и переход в состояние 140
-
-    $default  вывод с использованием правила 225 (global_stmt)
-
-    global_stmt_identifiers  переход в состояние 141
-
-
-состояние 84
-
-  190 import_stmt: IMPORT module .
-  191            | IMPORT module . AS name
-  192            | IMPORT module . modules
-  193            | IMPORT module . AS name modules
-  208 module: module . '.' module
-
-    AS   сдвиг, и переход в состояние 142
-    ','  сдвиг, и переход в состояние 143
-    '.'  сдвиг, и переход в состояние 136
-
-    $default  вывод с использованием правила 190 (import_stmt)
-
-    modules  переход в состояние 144
-
-
-состояние 85
-
-  185 raise_stmt: RAISE expression .
-  186           | RAISE expression . ',' expression
-  187           | RAISE expression . ',' expression ',' expression
-
-    ','  сдвиг, и переход в состояние 145
-
-    $default  вывод с использованием правила 185 (raise_stmt)
-
-
-состояние 86
-
-  182 return_stmt: RETURN expression_list .
-
-    $default  вывод с использованием правила 182 (return_stmt)
-
-
-состояние 87
-
-   63 yield_expression: YIELD expression_list .
-
-    $default  вывод с использованием правила 63 (yield_expression)
-
-
-состояние 88
-
-  176 print_stmt: PRINT RIGHT_OP . expression
-  177           | PRINT RIGHT_OP . expression expressions
-  178           | PRINT RIGHT_OP . expression expressions ','
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 146
-
-
-состояние 89
-
-  172 print_stmt: PRINT expression .
-  173           | PRINT expression . ','
-  174           | PRINT expression . expressions
-  175           | PRINT expression . expressions ','
-
-    ','  сдвиг, и переход в состояние 147
-
-    $default  вывод с использованием правила 172 (print_stmt)
-
-    expressions  переход в состояние 148
-
-
-состояние 90
-
-  122 or_expr: "TODO" .
-
-    $default  вывод с использованием правила 122 (or_expr)
-
-
-состояние 91
-
-  229 exec_stmt: EXEC or_expr .
-  230          | EXEC or_expr . IN expression
-  231          | EXEC or_expr . IN expression ',' expression
-
-    IN  сдвиг, и переход в состояние 149
-
-    $default  вывод с использованием правила 229 (exec_stmt)
-
-
-состояние 92
-
-   27 parenth_form: '(' ')' .
-
-    $default  вывод с использованием правила 27 (parenth_form)
-
-
-состояние 93
-
-  232 expression: "TODO" .
-  235 expression_list: "TODO" .
-
-    ')'       вывод с использованием правила 235 (expression_list)
-    ']'       вывод с использованием правила 232 (expression)
-    ']'       [вывод с использованием правила 235 (expression_list)]
-    $default  вывод с использованием правила 232 (expression)
-
-
-состояние 94
-
-   61 yield_atom: '(' yield_expression . ')'
-
-    ')'  сдвиг, и переход в состояние 150
-
-
-состояние 95
-
-  146 target_list: target_list . ',' target
-  147            | target_list . ','
-  149 target: '(' target_list . ')'
-
-    ')'  сдвиг, и переход в состояние 151
-    ','  сдвиг, и переход в состояние 117
-
-
-состояние 96
-
-   44 generator_expression: '(' expression . genexpr_for ')'
-
-    FOR  сдвиг, и переход в состояние 152
-
-    genexpr_for  переход в состояние 153
-
-
-состояние 97
-
-   28 parenth_form: '(' expression_list . ')'
-
-    ')'  сдвиг, и переход в состояние 154
-
-
-состояние 98
-
-   29 list_display: '[' ']' .
-
-    $default  вывод с использованием правила 29 (list_display)
-
-
-состояние 99
-
-   31 list_display: '[' list_comprehension . ']'
-
-    ']'  сдвиг, и переход в состояние 155
-
-
-состояние 100
-
-  146 target_list: target_list . ',' target
-  147            | target_list . ','
-  150 target: '[' target_list . ']'
-
-    ']'  сдвиг, и переход в состояние 156
-    ','  сдвиг, и переход в состояние 117
-
-
-состояние 101
-
-   32 list_comprehension: expression . list_for
-
-    FOR  сдвиг, и переход в состояние 157
-
-    list_for  переход в состояние 158
-
-
-состояние 102
-
-   30 list_display: '[' expression_list . ']'
-
-    ']'  сдвиг, и переход в состояние 159
-
-
-состояние 103
-
-   51 dict_display: '{' '}' .
-
-    $default  вывод с использованием правила 51 (dict_display)
-
-
-состояние 104
-
-   52 dict_display: '{' key_datum_list . '}'
-
-    '}'  сдвиг, и переход в состояние 160
-
-
-состояние 105
-
-   53 key_datum_list: key_datum .
-   54               | key_datum . ','
-   55               | key_datum . key_datums
-   56               | key_datum . key_datums ','
-
-    ','  сдвиг, и переход в состояние 161
-
-    $default  вывод с использованием правила 53 (key_datum_list)
-
-    key_datums  переход в состояние 162
-
-
-состояние 106
-
-   57 key_datum: expression . ':' expression
-
-    ':'  сдвиг, и переход в состояние 163
-
-
-состояние 107
-
-   60 string_conversion: '`' expression_list . '`'
-
-    '`'  сдвиг, и переход в состояние 164
-
-
-состояние 108
+состояние 4
 
     0 $accept: start $end .
 
     $default  accept
-
-
-состояние 109
-
-    5 longinteger: integer 'l' .
-
-    $default  вывод с использованием правила 5 (longinteger)
-
-
-состояние 110
-
-    6 longinteger: integer 'L' .
-
-    $default  вывод с использованием правила 6 (longinteger)
-
-
-состояние 111
-
-   96 call: primary '(' . ')'
-   97     | primary '(' . argument_list ')'
-   98     | primary '(' . argument_list ',' ')'
-   99     | primary '(' . expression genexpr_for ')'
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-    STAR        сдвиг, и переход в состояние 165
-    DOUBLESTAR  сдвиг, и переход в состояние 166
-    ')'         сдвиг, и переход в состояние 167
-    "TODO"      сдвиг, и переход в состояние 73
-
-    identifier            переход в состояние 168
-    argument_list         переход в состояние 169
-    positional_arguments  переход в состояние 170
-    keyword_arguments     переход в состояние 171
-    keyword_item          переход в состояние 172
-    expression            переход в состояние 173
-
-
-состояние 112
-
-   70 subscription: primary '[' . expression_list ']'
-   73 simple_slicing: primary '[' . short_slice ']'
-   74 extended_slicing: primary '[' . slice_list ']'
-
-    ELLIPSIS  сдвиг, и переход в состояние 174
-    ':'       сдвиг, и переход в состояние 175
-    "TODO"    сдвиг, и переход в состояние 93
-
-    slice_list       переход в состояние 176
-    slice_item       переход в состояние 177
-    proper_slice     переход в состояние 178
-    short_slice      переход в состояние 179
-    long_slice       переход в состояние 180
-    lower_bound      переход в состояние 181
-    ellipsis         переход в состояние 182
-    expression       переход в состояние 183
-    expression_list  переход в состояние 184
-
-
-состояние 113
-
-   69 attributeref: primary '.' . identifier
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    identifier  переход в состояние 185
-
-
-состояние 114
-
-  142 assignment_stmt: assignment_stmt_targer_list yield_expression .
-
-    $default  вывод с использованием правила 142 (assignment_stmt)
-
-
-состояние 115
-
-  144 assignment_stmt_targer_list: assignment_stmt_targer_list target_list . '='
-  146 target_list: target_list . ',' target
-  147            | target_list . ','
-
-    ','  сдвиг, и переход в состояние 117
-    '='  сдвиг, и переход в состояние 186
-
-
-состояние 116
-
-  141 assignment_stmt: assignment_stmt_targer_list expression_list .
-
-    $default  вывод с использованием правила 141 (assignment_stmt)
-
-
-состояние 117
-
-  146 target_list: target_list ',' . target
-  147            | target_list ',' .
-
-    IDENTIFIER     сдвиг, и переход в состояние 14
-    SHORTSTRING    сдвиг, и переход в состояние 15
-    LONGSTRING     сдвиг, и переход в состояние 16
-    DECINTEGER     сдвиг, и переход в состояние 17
-    OCTINTEGER     сдвиг, и переход в состояние 18
-    HEXINTEGER     сдвиг, и переход в состояние 19
-    POINTFLOAT     сдвиг, и переход в состояние 20
-    EXPONENTFLOAT  сдвиг, и переход в состояние 21
-    IMAGNUMBER     сдвиг, и переход в состояние 22
-    '('            сдвиг, и переход в состояние 23
-    '['            сдвиг, и переход в состояние 24
-    '{'            сдвиг, и переход в состояние 25
-    '`'            сдвиг, и переход в состояние 26
-
-    $default  вывод с использованием правила 147 (target_list)
-
-    identifier            переход в состояние 29
-    stringliteral         переход в состояние 30
-    longinteger           переход в состояние 31
-    integer               переход в состояние 32
-    floatnumber           переход в состояние 33
-    imagnumber            переход в состояние 34
-    atom                  переход в состояние 35
-    enclosure             переход в состояние 36
-    literal               переход в состояние 37
-    parenth_form          переход в состояние 38
-    list_display          переход в состояние 39
-    generator_expression  переход в состояние 40
-    dict_display          переход в состояние 41
-    string_conversion     переход в состояние 42
-    yield_atom            переход в состояние 43
-    primary               переход в состояние 45
-    attributeref          переход в состояние 46
-    subscription          переход в состояние 47
-    slicing               переход в состояние 48
-    simple_slicing        переход в состояние 49
-    extended_slicing      переход в состояние 50
-    call                  переход в состояние 51
-    target                переход в состояние 187
-
-
-состояние 118
-
-  143 assignment_stmt_targer_list: target_list '=' .
-
-    $default  вывод с использованием правила 143 (assignment_stmt_targer_list)
-
-
-состояние 119
-
-  156 augop: RIGHT_ASSIGN .
-
-    $default  вывод с использованием правила 156 (augop)
-
-
-состояние 120
-
-  157 augop: LEFT_ASSIGN .
-
-    $default  вывод с использованием правила 157 (augop)
-
-
-состояние 121
-
-  158 augop: ADD_ASSIGN .
-
-    $default  вывод с использованием правила 158 (augop)
-
-
-состояние 122
-
-  159 augop: SUB_ASSIGN .
-
-    $default  вывод с использованием правила 159 (augop)
-
-
-состояние 123
-
-  160 augop: MUL_ASSIGN .
-
-    $default  вывод с использованием правила 160 (augop)
-
-
-состояние 124
-
-  161 augop: POW_ASSIGN .
-
-    $default  вывод с использованием правила 161 (augop)
-
-
-состояние 125
-
-  162 augop: DIV_ASSIGN .
-
-    $default  вывод с использованием правила 162 (augop)
-
-
-состояние 126
-
-  163 augop: MOD_ASSIGN .
-
-    $default  вывод с использованием правила 163 (augop)
-
-
-состояние 127
-
-  164 augop: AND_ASSIGN .
-
-    $default  вывод с использованием правила 164 (augop)
-
-
-состояние 128
-
-  165 augop: XOR_ASSIGN .
-
-    $default  вывод с использованием правила 165 (augop)
-
-
-состояние 129
-
-  166 augop: OR_ASSIGN .
-
-    $default  вывод с использованием правила 166 (augop)
-
-
-состояние 130
-
-  167 augop: RIGHT_OP .
-
-    $default  вывод с использованием правила 167 (augop)
-
-
-состояние 131
-
-  168 augop: LEFT_OP .
-
-    $default  вывод с использованием правила 168 (augop)
-
-
-состояние 132
-
-  154 augmented_assignment_stmt: target augop . expression_list
-  155                          | target augop . yield_expression
-
-    YIELD   сдвиг, и переход в состояние 11
-    "TODO"  сдвиг, и переход в состояние 27
-
-    yield_expression  переход в состояние 188
-    expression_list   переход в состояние 189
-
-
-состояние 133
-
-  140 assert_stmt: ASSERT expression ',' . expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 190
-
-
-состояние 134
-
-  208 module: module . '.' module
-  212 dot_modules: '.' module .
-
-    '.'  сдвиг, и переход в состояние 136
-
-    '.'       [вывод с использованием правила 212 (dot_modules)]
-    $default  вывод с использованием правила 212 (dot_modules)
-
-
-состояние 135
-
-  206 import_stmt: FROM module IMPORT . STAR
-
-    STAR  сдвиг, и переход в состояние 191
-
-
-состояние 136
-
-  208 module: module '.' . module
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    identifier  переход в состояние 78
-    module      переход в состояние 192
-
-
-состояние 137
-
-  194 import_stmt: FROM relative_module IMPORT . identifier
-  195            | FROM relative_module IMPORT . identifier AS name
-  196            | FROM relative_module IMPORT . identifier import_stmt_identifiers
-  197            | FROM relative_module IMPORT . identifier AS name import_stmt_identifiers
-  198            | FROM relative_module IMPORT . '(' identifier ')'
-  199            | FROM relative_module IMPORT . '(' identifier AS name ')'
-  200            | FROM relative_module IMPORT . '(' identifier import_stmt_identifiers ')'
-  201            | FROM relative_module IMPORT . '(' identifier AS name import_stmt_identifiers ')'
-  202            | FROM relative_module IMPORT . '(' identifier ',' ')'
-  203            | FROM relative_module IMPORT . '(' identifier AS name ',' ')'
-  204            | FROM relative_module IMPORT . '(' identifier import_stmt_identifiers ',' ')'
-  205            | FROM relative_module IMPORT . '(' identifier AS name import_stmt_identifiers ',' ')'
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-    '('         сдвиг, и переход в состояние 193
-
-    identifier  переход в состояние 194
-
-
-состояние 138
-
-  213 dot_modules: dot_modules '.' . module
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    identifier  переход в состояние 78
-    module      переход в состояние 195
-
-
-состояние 139
-
-  215 dots: dots '.' .
-
-    $default  вывод с использованием правила 215 (dots)
-
-
-состояние 140
-
-  227 global_stmt_identifiers: ',' . identifier
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    identifier  переход в состояние 196
-
-
-состояние 141
-
-  226 global_stmt: GLOBAL identifier global_stmt_identifiers .
-  228 global_stmt_identifiers: global_stmt_identifiers . ',' identifier
-
-    ','  сдвиг, и переход в состояние 197
-
-    $default  вывод с использованием правила 226 (global_stmt)
-
-
-состояние 142
-
-  191 import_stmt: IMPORT module AS . name
-  193            | IMPORT module AS . name modules
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    identifier  переход в состояние 198
-    name        переход в состояние 199
-
-
-состояние 143
-
-  216 modules: ',' . module
-  217        | ',' . module AS name
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    identifier  переход в состояние 78
-    module      переход в состояние 200
-
-
-состояние 144
-
-  192 import_stmt: IMPORT module modules .
-  218 modules: modules . ',' module
-  219        | modules . ',' module AS name
-
-    ','  сдвиг, и переход в состояние 201
-
-    $default  вывод с использованием правила 192 (import_stmt)
-
-
-состояние 145
-
-  186 raise_stmt: RAISE expression ',' . expression
-  187           | RAISE expression ',' . expression ',' expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 202
-
-
-состояние 146
-
-  176 print_stmt: PRINT RIGHT_OP expression .
-  177           | PRINT RIGHT_OP expression . expressions
-  178           | PRINT RIGHT_OP expression . expressions ','
-
-    ','  сдвиг, и переход в состояние 203
-
-    $default  вывод с использованием правила 176 (print_stmt)
-
-    expressions  переход в состояние 204
-
-
-состояние 147
-
-  173 print_stmt: PRINT expression ',' .
-  179 expressions: ',' . expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    $default  вывод с использованием правила 173 (print_stmt)
-
-    expression  переход в состояние 205
-
-
-состояние 148
-
-  174 print_stmt: PRINT expression expressions .
-  175           | PRINT expression expressions . ','
-  180 expressions: expressions . ',' expression
-
-    ','  сдвиг, и переход в состояние 206
-
-    $default  вывод с использованием правила 174 (print_stmt)
-
-
-состояние 149
-
-  230 exec_stmt: EXEC or_expr IN . expression
-  231          | EXEC or_expr IN . expression ',' expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 207
-
-
-состояние 150
-
-   61 yield_atom: '(' yield_expression ')' .
-
-    $default  вывод с использованием правила 61 (yield_atom)
-
-
-состояние 151
-
-  149 target: '(' target_list ')' .
-
-    $default  вывод с использованием правила 149 (target)
-
-
-состояние 152
-
-   45 genexpr_for: FOR . target_list IN or_test
-   46            | FOR . target_list IN or_test genexpr_iter
-
-    IDENTIFIER     сдвиг, и переход в состояние 14
-    SHORTSTRING    сдвиг, и переход в состояние 15
-    LONGSTRING     сдвиг, и переход в состояние 16
-    DECINTEGER     сдвиг, и переход в состояние 17
-    OCTINTEGER     сдвиг, и переход в состояние 18
-    HEXINTEGER     сдвиг, и переход в состояние 19
-    POINTFLOAT     сдвиг, и переход в состояние 20
-    EXPONENTFLOAT  сдвиг, и переход в состояние 21
-    IMAGNUMBER     сдвиг, и переход в состояние 22
-    '('            сдвиг, и переход в состояние 23
-    '['            сдвиг, и переход в состояние 24
-    '{'            сдвиг, и переход в состояние 25
-    '`'            сдвиг, и переход в состояние 26
-
-    identifier            переход в состояние 29
-    stringliteral         переход в состояние 30
-    longinteger           переход в состояние 31
-    integer               переход в состояние 32
-    floatnumber           переход в состояние 33
-    imagnumber            переход в состояние 34
-    atom                  переход в состояние 35
-    enclosure             переход в состояние 36
-    literal               переход в состояние 37
-    parenth_form          переход в состояние 38
-    list_display          переход в состояние 39
-    generator_expression  переход в состояние 40
-    dict_display          переход в состояние 41
-    string_conversion     переход в состояние 42
-    yield_atom            переход в состояние 43
-    primary               переход в состояние 45
-    attributeref          переход в состояние 46
-    subscription          переход в состояние 47
-    slicing               переход в состояние 48
-    simple_slicing        переход в состояние 49
-    extended_slicing      переход в состояние 50
-    call                  переход в состояние 51
-    target_list           переход в состояние 208
-    target                переход в состояние 76
-
-
-состояние 153
-
-   44 generator_expression: '(' expression genexpr_for . ')'
-
-    ')'  сдвиг, и переход в состояние 209
-
-
-состояние 154
-
-   28 parenth_form: '(' expression_list ')' .
-
-    $default  вывод с использованием правила 28 (parenth_form)
-
-
-состояние 155
-
-   31 list_display: '[' list_comprehension ']' .
-
-    $default  вывод с использованием правила 31 (list_display)
-
-
-состояние 156
-
-  150 target: '[' target_list ']' .
-
-    $default  вывод с использованием правила 150 (target)
-
-
-состояние 157
-
-   33 list_for: FOR . target_list IN old_expression_list
-   34         | FOR . target_list IN old_expression_list list_iter
-
-    IDENTIFIER     сдвиг, и переход в состояние 14
-    SHORTSTRING    сдвиг, и переход в состояние 15
-    LONGSTRING     сдвиг, и переход в состояние 16
-    DECINTEGER     сдвиг, и переход в состояние 17
-    OCTINTEGER     сдвиг, и переход в состояние 18
-    HEXINTEGER     сдвиг, и переход в состояние 19
-    POINTFLOAT     сдвиг, и переход в состояние 20
-    EXPONENTFLOAT  сдвиг, и переход в состояние 21
-    IMAGNUMBER     сдвиг, и переход в состояние 22
-    '('            сдвиг, и переход в состояние 23
-    '['            сдвиг, и переход в состояние 24
-    '{'            сдвиг, и переход в состояние 25
-    '`'            сдвиг, и переход в состояние 26
-
-    identifier            переход в состояние 29
-    stringliteral         переход в состояние 30
-    longinteger           переход в состояние 31
-    integer               переход в состояние 32
-    floatnumber           переход в состояние 33
-    imagnumber            переход в состояние 34
-    atom                  переход в состояние 35
-    enclosure             переход в состояние 36
-    literal               переход в состояние 37
-    parenth_form          переход в состояние 38
-    list_display          переход в состояние 39
-    generator_expression  переход в состояние 40
-    dict_display          переход в состояние 41
-    string_conversion     переход в состояние 42
-    yield_atom            переход в состояние 43
-    primary               переход в состояние 45
-    attributeref          переход в состояние 46
-    subscription          переход в состояние 47
-    slicing               переход в состояние 48
-    simple_slicing        переход в состояние 49
-    extended_slicing      переход в состояние 50
-    call                  переход в состояние 51
-    target_list           переход в состояние 210
-    target                переход в состояние 76
-
-
-состояние 158
-
-   32 list_comprehension: expression list_for .
-
-    $default  вывод с использованием правила 32 (list_comprehension)
-
-
-состояние 159
-
-   30 list_display: '[' expression_list ']' .
-
-    $default  вывод с использованием правила 30 (list_display)
-
-
-состояние 160
-
-   52 dict_display: '{' key_datum_list '}' .
-
-    $default  вывод с использованием правила 52 (dict_display)
-
-
-состояние 161
-
-   54 key_datum_list: key_datum ',' .
-   58 key_datums: ',' . key_datum
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    $default  вывод с использованием правила 54 (key_datum_list)
-
-    key_datum   переход в состояние 211
-    expression  переход в состояние 106
-
-
-состояние 162
-
-   55 key_datum_list: key_datum key_datums .
-   56               | key_datum key_datums . ','
-   59 key_datums: key_datums . ',' key_datum
-
-    ','  сдвиг, и переход в состояние 212
-
-    $default  вывод с использованием правила 55 (key_datum_list)
-
-
-состояние 163
-
-   57 key_datum: expression ':' . expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 213
-
-
-состояние 164
-
-   60 string_conversion: '`' expression_list '`' .
-
-    $default  вывод с использованием правила 60 (string_conversion)
-
-
-состояние 165
-
-  112 argument_list: STAR . expression
-  113              | STAR . expression ',' DOUBLESTAR expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 214
-
-
-состояние 166
-
-  114 argument_list: DOUBLESTAR . expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 215
-
-
-состояние 167
-
-   96 call: primary '(' ')' .
-
-    $default  вывод с использованием правила 96 (call)
-
-
-состояние 168
-
-  119 keyword_item: identifier . '=' expression
-
-    '='  сдвиг, и переход в состояние 216
-
-
-состояние 169
-
-   97 call: primary '(' argument_list . ')'
-   98     | primary '(' argument_list . ',' ')'
-
-    ')'  сдвиг, и переход в состояние 217
-    ','  сдвиг, и переход в состояние 218
-
-
-состояние 170
-
-  100 argument_list: positional_arguments .
-  101              | positional_arguments . ',' keyword_arguments
-  102              | positional_arguments . ',' STAR expression
-  103              | positional_arguments . ',' DOUBLESTAR expression
-  104              | positional_arguments . ',' keyword_arguments ',' STAR expression
-  105              | positional_arguments . ',' keyword_arguments ',' DOUBLESTAR expression
-  106              | positional_arguments . ',' STAR expression ',' DOUBLESTAR expression
-  107              | positional_arguments . ',' keyword_arguments ',' STAR expression ',' DOUBLESTAR expression
-
-    ','  сдвиг, и переход в состояние 219
-
-    ','       [вывод с использованием правила 100 (argument_list)]
-    $default  вывод с использованием правила 100 (argument_list)
-
-
-состояние 171
-
-  108 argument_list: keyword_arguments .
-  109              | keyword_arguments . ',' STAR expression
-  110              | keyword_arguments . ',' DOUBLESTAR expression
-  111              | keyword_arguments . ',' STAR expression ',' DOUBLESTAR expression
-
-    ','  сдвиг, и переход в состояние 220
-
-    ','       [вывод с использованием правила 108 (argument_list)]
-    $default  вывод с использованием правила 108 (argument_list)
-
-
-состояние 172
-
-  117 keyword_arguments: keyword_item .
-  118                  | keyword_item . keyword_items
-
-    ','  сдвиг, и переход в состояние 221
-
-    ','       [вывод с использованием правила 117 (keyword_arguments)]
-    $default  вывод с использованием правила 117 (keyword_arguments)
-
-    keyword_items  переход в состояние 222
-
-
-состояние 173
-
-   99 call: primary '(' expression . genexpr_for ')'
-  115 positional_arguments: expression .
-  116                     | expression . expressions
-
-    FOR  сдвиг, и переход в состояние 152
-    ','  сдвиг, и переход в состояние 203
-
-    ','       [вывод с использованием правила 115 (positional_arguments)]
-    $default  вывод с использованием правила 115 (positional_arguments)
-
-    genexpr_for  переход в состояние 223
-    expressions  переход в состояние 224
-
-
-состояние 174
-
-   95 ellipsis: ELLIPSIS .
-
-    $default  вывод с использованием правила 95 (ellipsis)
-
-
-состояние 175
-
-   86 short_slice: ':' .
-   88            | ':' . upper_bound
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    $default  вывод с использованием правила 86 (short_slice)
-
-    upper_bound  переход в состояние 225
-    expression   переход в состояние 226
-
-
-состояние 176
-
-   74 extended_slicing: primary '[' slice_list . ']'
-
-    ']'  сдвиг, и переход в состояние 227
-
-
-состояние 177
-
-   75 slice_list: slice_item .
-   76           | slice_item . ','
-   77           | slice_item . slice_items
-   78           | slice_item . slice_items ','
-
-    ','  сдвиг, и переход в состояние 228
-
-    $default  вывод с использованием правила 75 (slice_list)
-
-    slice_items  переход в состояние 229
-
-
-состояние 178
-
-   80 slice_item: proper_slice .
-
-    $default  вывод с использованием правила 80 (slice_item)
-
-
-состояние 179
-
-   73 simple_slicing: primary '[' short_slice . ']'
-   84 proper_slice: short_slice .
-   90 long_slice: short_slice . ':'
-   91           | short_slice . ':' stride
-
-    ']'  сдвиг, и переход в состояние 230
-    ':'  сдвиг, и переход в состояние 231
-
-    ']'       [вывод с использованием правила 84 (proper_slice)]
-    $default  вывод с использованием правила 84 (proper_slice)
-
-
-состояние 180
-
-   85 proper_slice: long_slice .
-
-    $default  вывод с использованием правила 85 (proper_slice)
-
-
-состояние 181
-
-   87 short_slice: lower_bound . ':'
-   89            | lower_bound . ':' upper_bound
-
-    ':'  сдвиг, и переход в состояние 232
-
-
-состояние 182
-
-   81 slice_item: ellipsis .
-
-    $default  вывод с использованием правила 81 (slice_item)
-
-
-состояние 183
-
-   79 slice_item: expression .
-   92 lower_bound: expression .
-
-    ':'       вывод с использованием правила 92 (lower_bound)
-    $default  вывод с использованием правила 79 (slice_item)
-
-
-состояние 184
-
-   70 subscription: primary '[' expression_list . ']'
-
-    ']'  сдвиг, и переход в состояние 233
-
-
-состояние 185
-
-   69 attributeref: primary '.' identifier .
-
-    $default  вывод с использованием правила 69 (attributeref)
-
-
-состояние 186
-
-  144 assignment_stmt_targer_list: assignment_stmt_targer_list target_list '=' .
-
-    $default  вывод с использованием правила 144 (assignment_stmt_targer_list)
-
-
-состояние 187
-
-  146 target_list: target_list ',' target .
-
-    $default  вывод с использованием правила 146 (target_list)
-
-
-состояние 188
-
-  155 augmented_assignment_stmt: target augop yield_expression .
-
-    $default  вывод с использованием правила 155 (augmented_assignment_stmt)
-
-
-состояние 189
-
-  154 augmented_assignment_stmt: target augop expression_list .
-
-    $default  вывод с использованием правила 154 (augmented_assignment_stmt)
-
-
-состояние 190
-
-  140 assert_stmt: ASSERT expression ',' expression .
-
-    $default  вывод с использованием правила 140 (assert_stmt)
-
-
-состояние 191
-
-  206 import_stmt: FROM module IMPORT STAR .
-
-    $default  вывод с использованием правила 206 (import_stmt)
-
-
-состояние 192
-
-  208 module: module . '.' module
-  208       | module '.' module .
-
-    '.'  сдвиг, и переход в состояние 136
-
-    '.'       [вывод с использованием правила 208 (module)]
-    $default  вывод с использованием правила 208 (module)
-
-
-состояние 193
-
-  198 import_stmt: FROM relative_module IMPORT '(' . identifier ')'
-  199            | FROM relative_module IMPORT '(' . identifier AS name ')'
-  200            | FROM relative_module IMPORT '(' . identifier import_stmt_identifiers ')'
-  201            | FROM relative_module IMPORT '(' . identifier AS name import_stmt_identifiers ')'
-  202            | FROM relative_module IMPORT '(' . identifier ',' ')'
-  203            | FROM relative_module IMPORT '(' . identifier AS name ',' ')'
-  204            | FROM relative_module IMPORT '(' . identifier import_stmt_identifiers ',' ')'
-  205            | FROM relative_module IMPORT '(' . identifier AS name import_stmt_identifiers ',' ')'
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    identifier  переход в состояние 234
-
-
-состояние 194
-
-  194 import_stmt: FROM relative_module IMPORT identifier .
-  195            | FROM relative_module IMPORT identifier . AS name
-  196            | FROM relative_module IMPORT identifier . import_stmt_identifiers
-  197            | FROM relative_module IMPORT identifier . AS name import_stmt_identifiers
-
-    AS   сдвиг, и переход в состояние 235
-    ','  сдвиг, и переход в состояние 236
-
-    $default  вывод с использованием правила 194 (import_stmt)
-
-    import_stmt_identifiers  переход в состояние 237
-
-
-состояние 195
-
-  208 module: module . '.' module
-  213 dot_modules: dot_modules '.' module .
-
-    '.'  сдвиг, и переход в состояние 136
-
-    '.'       [вывод с использованием правила 213 (dot_modules)]
-    $default  вывод с использованием правила 213 (dot_modules)
-
-
-состояние 196
-
-  227 global_stmt_identifiers: ',' identifier .
-
-    $default  вывод с использованием правила 227 (global_stmt_identifiers)
-
-
-состояние 197
-
-  228 global_stmt_identifiers: global_stmt_identifiers ',' . identifier
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    identifier  переход в состояние 238
-
-
-состояние 198
-
-  224 name: identifier .
-
-    $default  вывод с использованием правила 224 (name)
-
-
-состояние 199
-
-  191 import_stmt: IMPORT module AS name .
-  193            | IMPORT module AS name . modules
-
-    ','  сдвиг, и переход в состояние 143
-
-    $default  вывод с использованием правила 191 (import_stmt)
-
-    modules  переход в состояние 239
-
-
-состояние 200
-
-  208 module: module . '.' module
-  216 modules: ',' module .
-  217        | ',' module . AS name
-
-    AS   сдвиг, и переход в состояние 240
-    '.'  сдвиг, и переход в состояние 136
-
-    $default  вывод с использованием правила 216 (modules)
-
-
-состояние 201
-
-  218 modules: modules ',' . module
-  219        | modules ',' . module AS name
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    identifier  переход в состояние 78
-    module      переход в состояние 241
-
-
-состояние 202
-
-  186 raise_stmt: RAISE expression ',' expression .
-  187           | RAISE expression ',' expression . ',' expression
-
-    ','  сдвиг, и переход в состояние 242
-
-    $default  вывод с использованием правила 186 (raise_stmt)
-
-
-состояние 203
-
-  179 expressions: ',' . expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 205
-
-
-состояние 204
-
-  177 print_stmt: PRINT RIGHT_OP expression expressions .
-  178           | PRINT RIGHT_OP expression expressions . ','
-  180 expressions: expressions . ',' expression
-
-    ','  сдвиг, и переход в состояние 243
-
-    $default  вывод с использованием правила 177 (print_stmt)
-
-
-состояние 205
-
-  179 expressions: ',' expression .
-
-    $default  вывод с использованием правила 179 (expressions)
-
-
-состояние 206
-
-  175 print_stmt: PRINT expression expressions ',' .
-  180 expressions: expressions ',' . expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    $default  вывод с использованием правила 175 (print_stmt)
-
-    expression  переход в состояние 244
-
-
-состояние 207
-
-  230 exec_stmt: EXEC or_expr IN expression .
-  231          | EXEC or_expr IN expression . ',' expression
-
-    ','  сдвиг, и переход в состояние 245
-
-    $default  вывод с использованием правила 230 (exec_stmt)
-
-
-состояние 208
-
-   45 genexpr_for: FOR target_list . IN or_test
-   46            | FOR target_list . IN or_test genexpr_iter
-  146 target_list: target_list . ',' target
-  147            | target_list . ','
-
-    IN   сдвиг, и переход в состояние 246
-    ','  сдвиг, и переход в состояние 117
-
-
-состояние 209
-
-   44 generator_expression: '(' expression genexpr_for ')' .
-
-    $default  вывод с использованием правила 44 (generator_expression)
-
-
-состояние 210
-
-   33 list_for: FOR target_list . IN old_expression_list
-   34         | FOR target_list . IN old_expression_list list_iter
-  146 target_list: target_list . ',' target
-  147            | target_list . ','
-
-    IN   сдвиг, и переход в состояние 247
-    ','  сдвиг, и переход в состояние 117
-
-
-состояние 211
-
-   58 key_datums: ',' key_datum .
-
-    $default  вывод с использованием правила 58 (key_datums)
-
-
-состояние 212
-
-   56 key_datum_list: key_datum key_datums ',' .
-   59 key_datums: key_datums ',' . key_datum
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    $default  вывод с использованием правила 56 (key_datum_list)
-
-    key_datum   переход в состояние 248
-    expression  переход в состояние 106
-
-
-состояние 213
-
-   57 key_datum: expression ':' expression .
-
-    $default  вывод с использованием правила 57 (key_datum)
-
-
-состояние 214
-
-  112 argument_list: STAR expression .
-  113              | STAR expression . ',' DOUBLESTAR expression
-
-    ','  сдвиг, и переход в состояние 249
-
-    ','       [вывод с использованием правила 112 (argument_list)]
-    $default  вывод с использованием правила 112 (argument_list)
-
-
-состояние 215
-
-  114 argument_list: DOUBLESTAR expression .
-
-    $default  вывод с использованием правила 114 (argument_list)
-
-
-состояние 216
-
-  119 keyword_item: identifier '=' . expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 250
-
-
-состояние 217
-
-   97 call: primary '(' argument_list ')' .
-
-    $default  вывод с использованием правила 97 (call)
-
-
-состояние 218
-
-   98 call: primary '(' argument_list ',' . ')'
-
-    ')'  сдвиг, и переход в состояние 251
-
-
-состояние 219
-
-  101 argument_list: positional_arguments ',' . keyword_arguments
-  102              | positional_arguments ',' . STAR expression
-  103              | positional_arguments ',' . DOUBLESTAR expression
-  104              | positional_arguments ',' . keyword_arguments ',' STAR expression
-  105              | positional_arguments ',' . keyword_arguments ',' DOUBLESTAR expression
-  106              | positional_arguments ',' . STAR expression ',' DOUBLESTAR expression
-  107              | positional_arguments ',' . keyword_arguments ',' STAR expression ',' DOUBLESTAR expression
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-    STAR        сдвиг, и переход в состояние 252
-    DOUBLESTAR  сдвиг, и переход в состояние 253
-
-    identifier         переход в состояние 168
-    keyword_arguments  переход в состояние 254
-    keyword_item       переход в состояние 172
-
-
-состояние 220
-
-  109 argument_list: keyword_arguments ',' . STAR expression
-  110              | keyword_arguments ',' . DOUBLESTAR expression
-  111              | keyword_arguments ',' . STAR expression ',' DOUBLESTAR expression
-
-    STAR        сдвиг, и переход в состояние 255
-    DOUBLESTAR  сдвиг, и переход в состояние 256
-
-
-состояние 221
-
-  120 keyword_items: ',' . keyword_item
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    identifier    переход в состояние 168
-    keyword_item  переход в состояние 257
-
-
-состояние 222
-
-  118 keyword_arguments: keyword_item keyword_items .
-  121 keyword_items: keyword_items . ',' keyword_item
-
-    ','  сдвиг, и переход в состояние 258
-
-    ','       [вывод с использованием правила 118 (keyword_arguments)]
-    $default  вывод с использованием правила 118 (keyword_arguments)
-
-
-состояние 223
-
-   99 call: primary '(' expression genexpr_for . ')'
-
-    ')'  сдвиг, и переход в состояние 259
-
-
-состояние 224
-
-  116 positional_arguments: expression expressions .
-  180 expressions: expressions . ',' expression
-
-    ','  сдвиг, и переход в состояние 260
-
-    ','       [вывод с использованием правила 116 (positional_arguments)]
-    $default  вывод с использованием правила 116 (positional_arguments)
-
-
-состояние 225
-
-   88 short_slice: ':' upper_bound .
-
-    $default  вывод с использованием правила 88 (short_slice)
-
-
-состояние 226
-
-   93 upper_bound: expression .
-
-    $default  вывод с использованием правила 93 (upper_bound)
-
-
-состояние 227
-
-   74 extended_slicing: primary '[' slice_list ']' .
-
-    $default  вывод с использованием правила 74 (extended_slicing)
-
-
-состояние 228
-
-   76 slice_list: slice_item ',' .
-   82 slice_items: ',' . slice_item
-
-    ELLIPSIS  сдвиг, и переход в состояние 174
-    ':'       сдвиг, и переход в состояние 175
-    "TODO"    сдвиг, и переход в состояние 73
-
-    $default  вывод с использованием правила 76 (slice_list)
-
-    slice_item    переход в состояние 261
-    proper_slice  переход в состояние 178
-    short_slice   переход в состояние 262
-    long_slice    переход в состояние 180
-    lower_bound   переход в состояние 181
-    ellipsis      переход в состояние 182
-    expression    переход в состояние 183
-
-
-состояние 229
-
-   77 slice_list: slice_item slice_items .
-   78           | slice_item slice_items . ','
-   83 slice_items: slice_items . ',' slice_item
-
-    ','  сдвиг, и переход в состояние 263
-
-    $default  вывод с использованием правила 77 (slice_list)
-
-
-состояние 230
-
-   73 simple_slicing: primary '[' short_slice ']' .
-
-    $default  вывод с использованием правила 73 (simple_slicing)
-
-
-состояние 231
-
-   90 long_slice: short_slice ':' .
-   91           | short_slice ':' . stride
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    $default  вывод с использованием правила 90 (long_slice)
-
-    stride      переход в состояние 264
-    expression  переход в состояние 265
-
-
-состояние 232
-
-   87 short_slice: lower_bound ':' .
-   89            | lower_bound ':' . upper_bound
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    $default  вывод с использованием правила 87 (short_slice)
-
-    upper_bound  переход в состояние 266
-    expression   переход в состояние 226
-
-
-состояние 233
-
-   70 subscription: primary '[' expression_list ']' .
-
-    $default  вывод с использованием правила 70 (subscription)
-
-
-состояние 234
-
-  198 import_stmt: FROM relative_module IMPORT '(' identifier . ')'
-  199            | FROM relative_module IMPORT '(' identifier . AS name ')'
-  200            | FROM relative_module IMPORT '(' identifier . import_stmt_identifiers ')'
-  201            | FROM relative_module IMPORT '(' identifier . AS name import_stmt_identifiers ')'
-  202            | FROM relative_module IMPORT '(' identifier . ',' ')'
-  203            | FROM relative_module IMPORT '(' identifier . AS name ',' ')'
-  204            | FROM relative_module IMPORT '(' identifier . import_stmt_identifiers ',' ')'
-  205            | FROM relative_module IMPORT '(' identifier . AS name import_stmt_identifiers ',' ')'
-
-    AS   сдвиг, и переход в состояние 267
-    ')'  сдвиг, и переход в состояние 268
-    ','  сдвиг, и переход в состояние 269
-
-    import_stmt_identifiers  переход в состояние 270
-
-
-состояние 235
-
-  195 import_stmt: FROM relative_module IMPORT identifier AS . name
-  197            | FROM relative_module IMPORT identifier AS . name import_stmt_identifiers
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    identifier  переход в состояние 198
-    name        переход в состояние 271
-
-
-состояние 236
-
-  220 import_stmt_identifiers: ',' . identifier
-  221                        | ',' . identifier AS name
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    identifier  переход в состояние 272
-
-
-состояние 237
-
-  196 import_stmt: FROM relative_module IMPORT identifier import_stmt_identifiers .
-  222 import_stmt_identifiers: import_stmt_identifiers . ',' identifier
-  223                        | import_stmt_identifiers . ',' identifier AS name
-
-    ','  сдвиг, и переход в состояние 273
-
-    $default  вывод с использованием правила 196 (import_stmt)
-
-
-состояние 238
-
-  228 global_stmt_identifiers: global_stmt_identifiers ',' identifier .
-
-    $default  вывод с использованием правила 228 (global_stmt_identifiers)
-
-
-состояние 239
-
-  193 import_stmt: IMPORT module AS name modules .
-  218 modules: modules . ',' module
-  219        | modules . ',' module AS name
-
-    ','  сдвиг, и переход в состояние 201
-
-    $default  вывод с использованием правила 193 (import_stmt)
-
-
-состояние 240
-
-  217 modules: ',' module AS . name
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    identifier  переход в состояние 198
-    name        переход в состояние 274
-
-
-состояние 241
-
-  208 module: module . '.' module
-  218 modules: modules ',' module .
-  219        | modules ',' module . AS name
-
-    AS   сдвиг, и переход в состояние 275
-    '.'  сдвиг, и переход в состояние 136
-
-    $default  вывод с использованием правила 218 (modules)
-
-
-состояние 242
-
-  187 raise_stmt: RAISE expression ',' expression ',' . expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 276
-
-
-состояние 243
-
-  178 print_stmt: PRINT RIGHT_OP expression expressions ',' .
-  180 expressions: expressions ',' . expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    $default  вывод с использованием правила 178 (print_stmt)
-
-    expression  переход в состояние 244
-
-
-состояние 244
-
-  180 expressions: expressions ',' expression .
-
-    $default  вывод с использованием правила 180 (expressions)
-
-
-состояние 245
-
-  231 exec_stmt: EXEC or_expr IN expression ',' . expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 277
-
-
-состояние 246
-
-   45 genexpr_for: FOR target_list IN . or_test
-   46            | FOR target_list IN . or_test genexpr_iter
-
-    "TODO"  сдвиг, и переход в состояние 278
-
-    or_test  переход в состояние 279
-
-
-состояние 247
-
-   33 list_for: FOR target_list IN . old_expression_list
-   34         | FOR target_list IN . old_expression_list list_iter
-
-    "TODO"  сдвиг, и переход в состояние 280
-
-    old_expression_list  переход в состояние 281
-    old_expression       переход в состояние 282
-
-
-состояние 248
-
-   59 key_datums: key_datums ',' key_datum .
-
-    $default  вывод с использованием правила 59 (key_datums)
-
-
-состояние 249
-
-  113 argument_list: STAR expression ',' . DOUBLESTAR expression
-
-    DOUBLESTAR  сдвиг, и переход в состояние 283
-
-
-состояние 250
-
-  119 keyword_item: identifier '=' expression .
-
-    $default  вывод с использованием правила 119 (keyword_item)
-
-
-состояние 251
-
-   98 call: primary '(' argument_list ',' ')' .
-
-    $default  вывод с использованием правила 98 (call)
-
-
-состояние 252
-
-  102 argument_list: positional_arguments ',' STAR . expression
-  106              | positional_arguments ',' STAR . expression ',' DOUBLESTAR expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 284
-
-
-состояние 253
-
-  103 argument_list: positional_arguments ',' DOUBLESTAR . expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 285
-
-
-состояние 254
-
-  101 argument_list: positional_arguments ',' keyword_arguments .
-  104              | positional_arguments ',' keyword_arguments . ',' STAR expression
-  105              | positional_arguments ',' keyword_arguments . ',' DOUBLESTAR expression
-  107              | positional_arguments ',' keyword_arguments . ',' STAR expression ',' DOUBLESTAR expression
-
-    ','  сдвиг, и переход в состояние 286
-
-    ','       [вывод с использованием правила 101 (argument_list)]
-    $default  вывод с использованием правила 101 (argument_list)
-
-
-состояние 255
-
-  109 argument_list: keyword_arguments ',' STAR . expression
-  111              | keyword_arguments ',' STAR . expression ',' DOUBLESTAR expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 287
-
-
-состояние 256
-
-  110 argument_list: keyword_arguments ',' DOUBLESTAR . expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 288
-
-
-состояние 257
-
-  120 keyword_items: ',' keyword_item .
-
-    $default  вывод с использованием правила 120 (keyword_items)
-
-
-состояние 258
-
-  121 keyword_items: keyword_items ',' . keyword_item
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    identifier    переход в состояние 168
-    keyword_item  переход в состояние 289
-
-
-состояние 259
-
-   99 call: primary '(' expression genexpr_for ')' .
-
-    $default  вывод с использованием правила 99 (call)
-
-
-состояние 260
-
-  180 expressions: expressions ',' . expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 244
-
-
-состояние 261
-
-   82 slice_items: ',' slice_item .
-
-    $default  вывод с использованием правила 82 (slice_items)
-
-
-состояние 262
-
-   84 proper_slice: short_slice .
-   90 long_slice: short_slice . ':'
-   91           | short_slice . ':' stride
-
-    ':'  сдвиг, и переход в состояние 231
-
-    $default  вывод с использованием правила 84 (proper_slice)
-
-
-состояние 263
-
-   78 slice_list: slice_item slice_items ',' .
-   83 slice_items: slice_items ',' . slice_item
-
-    ELLIPSIS  сдвиг, и переход в состояние 174
-    ':'       сдвиг, и переход в состояние 175
-    "TODO"    сдвиг, и переход в состояние 73
-
-    $default  вывод с использованием правила 78 (slice_list)
-
-    slice_item    переход в состояние 290
-    proper_slice  переход в состояние 178
-    short_slice   переход в состояние 262
-    long_slice    переход в состояние 180
-    lower_bound   переход в состояние 181
-    ellipsis      переход в состояние 182
-    expression    переход в состояние 183
-
-
-состояние 264
-
-   91 long_slice: short_slice ':' stride .
-
-    $default  вывод с использованием правила 91 (long_slice)
-
-
-состояние 265
-
-   94 stride: expression .
-
-    $default  вывод с использованием правила 94 (stride)
-
-
-состояние 266
-
-   89 short_slice: lower_bound ':' upper_bound .
-
-    $default  вывод с использованием правила 89 (short_slice)
-
-
-состояние 267
-
-  199 import_stmt: FROM relative_module IMPORT '(' identifier AS . name ')'
-  201            | FROM relative_module IMPORT '(' identifier AS . name import_stmt_identifiers ')'
-  203            | FROM relative_module IMPORT '(' identifier AS . name ',' ')'
-  205            | FROM relative_module IMPORT '(' identifier AS . name import_stmt_identifiers ',' ')'
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    identifier  переход в состояние 198
-    name        переход в состояние 291
-
-
-состояние 268
-
-  198 import_stmt: FROM relative_module IMPORT '(' identifier ')' .
-
-    $default  вывод с использованием правила 198 (import_stmt)
-
-
-состояние 269
-
-  202 import_stmt: FROM relative_module IMPORT '(' identifier ',' . ')'
-  220 import_stmt_identifiers: ',' . identifier
-  221                        | ',' . identifier AS name
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-    ')'         сдвиг, и переход в состояние 292
-
-    identifier  переход в состояние 272
-
-
-состояние 270
-
-  200 import_stmt: FROM relative_module IMPORT '(' identifier import_stmt_identifiers . ')'
-  204            | FROM relative_module IMPORT '(' identifier import_stmt_identifiers . ',' ')'
-  222 import_stmt_identifiers: import_stmt_identifiers . ',' identifier
-  223                        | import_stmt_identifiers . ',' identifier AS name
-
-    ')'  сдвиг, и переход в состояние 293
-    ','  сдвиг, и переход в состояние 294
-
-
-состояние 271
-
-  195 import_stmt: FROM relative_module IMPORT identifier AS name .
-  197            | FROM relative_module IMPORT identifier AS name . import_stmt_identifiers
-
-    ','  сдвиг, и переход в состояние 236
-
-    $default  вывод с использованием правила 195 (import_stmt)
-
-    import_stmt_identifiers  переход в состояние 295
-
-
-состояние 272
-
-  220 import_stmt_identifiers: ',' identifier .
-  221                        | ',' identifier . AS name
-
-    AS  сдвиг, и переход в состояние 296
-
-    $default  вывод с использованием правила 220 (import_stmt_identifiers)
-
-
-состояние 273
-
-  222 import_stmt_identifiers: import_stmt_identifiers ',' . identifier
-  223                        | import_stmt_identifiers ',' . identifier AS name
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    identifier  переход в состояние 297
-
-
-состояние 274
-
-  217 modules: ',' module AS name .
-
-    $default  вывод с использованием правила 217 (modules)
-
-
-состояние 275
-
-  219 modules: modules ',' module AS . name
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    identifier  переход в состояние 198
-    name        переход в состояние 298
-
-
-состояние 276
-
-  187 raise_stmt: RAISE expression ',' expression ',' expression .
-
-    $default  вывод с использованием правила 187 (raise_stmt)
-
-
-состояние 277
-
-  231 exec_stmt: EXEC or_expr IN expression ',' expression .
-
-    $default  вывод с использованием правила 231 (exec_stmt)
-
-
-состояние 278
-
-  234 or_test: "TODO" .
-
-    $default  вывод с использованием правила 234 (or_test)
-
-
-состояние 279
-
-   45 genexpr_for: FOR target_list IN or_test .
-   46            | FOR target_list IN or_test . genexpr_iter
-
-    FOR  сдвиг, и переход в состояние 152
-    IF   сдвиг, и переход в состояние 299
-
-    $default  вывод с использованием правила 45 (genexpr_for)
-
-    genexpr_for   переход в состояние 300
-    genexpr_iter  переход в состояние 301
-    genexpr_if    переход в состояние 302
-
-
-состояние 280
-
-  233 old_expression: "TODO" .
-
-    $default  вывод с использованием правила 233 (old_expression)
-
-
-состояние 281
-
-   33 list_for: FOR target_list IN old_expression_list .
-   34         | FOR target_list IN old_expression_list . list_iter
-
-    FOR  сдвиг, и переход в состояние 157
-    IF   сдвиг, и переход в состояние 303
-
-    $default  вывод с использованием правила 33 (list_for)
-
-    list_for   переход в состояние 304
-    list_iter  переход в состояние 305
-    list_if    переход в состояние 306
-
-
-состояние 282
-
-   35 old_expression_list: old_expression .
-   36                    | old_expression . old_expressions
-   37                    | old_expression . old_expressions ','
-
-    ','  сдвиг, и переход в состояние 307
-
-    $default  вывод с использованием правила 35 (old_expression_list)
-
-    old_expressions  переход в состояние 308
-
-
-состояние 283
-
-  113 argument_list: STAR expression ',' DOUBLESTAR . expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 309
-
-
-состояние 284
-
-  102 argument_list: positional_arguments ',' STAR expression .
-  106              | positional_arguments ',' STAR expression . ',' DOUBLESTAR expression
-
-    ','  сдвиг, и переход в состояние 310
-
-    ','       [вывод с использованием правила 102 (argument_list)]
-    $default  вывод с использованием правила 102 (argument_list)
-
-
-состояние 285
-
-  103 argument_list: positional_arguments ',' DOUBLESTAR expression .
-
-    $default  вывод с использованием правила 103 (argument_list)
-
-
-состояние 286
-
-  104 argument_list: positional_arguments ',' keyword_arguments ',' . STAR expression
-  105              | positional_arguments ',' keyword_arguments ',' . DOUBLESTAR expression
-  107              | positional_arguments ',' keyword_arguments ',' . STAR expression ',' DOUBLESTAR expression
-
-    STAR        сдвиг, и переход в состояние 311
-    DOUBLESTAR  сдвиг, и переход в состояние 312
-
-
-состояние 287
-
-  109 argument_list: keyword_arguments ',' STAR expression .
-  111              | keyword_arguments ',' STAR expression . ',' DOUBLESTAR expression
-
-    ','  сдвиг, и переход в состояние 313
-
-    ','       [вывод с использованием правила 109 (argument_list)]
-    $default  вывод с использованием правила 109 (argument_list)
-
-
-состояние 288
-
-  110 argument_list: keyword_arguments ',' DOUBLESTAR expression .
-
-    $default  вывод с использованием правила 110 (argument_list)
-
-
-состояние 289
-
-  121 keyword_items: keyword_items ',' keyword_item .
-
-    $default  вывод с использованием правила 121 (keyword_items)
-
-
-состояние 290
-
-   83 slice_items: slice_items ',' slice_item .
-
-    $default  вывод с использованием правила 83 (slice_items)
-
-
-состояние 291
-
-  199 import_stmt: FROM relative_module IMPORT '(' identifier AS name . ')'
-  201            | FROM relative_module IMPORT '(' identifier AS name . import_stmt_identifiers ')'
-  203            | FROM relative_module IMPORT '(' identifier AS name . ',' ')'
-  205            | FROM relative_module IMPORT '(' identifier AS name . import_stmt_identifiers ',' ')'
-
-    ')'  сдвиг, и переход в состояние 314
-    ','  сдвиг, и переход в состояние 315
-
-    import_stmt_identifiers  переход в состояние 316
-
-
-состояние 292
-
-  202 import_stmt: FROM relative_module IMPORT '(' identifier ',' ')' .
-
-    $default  вывод с использованием правила 202 (import_stmt)
-
-
-состояние 293
-
-  200 import_stmt: FROM relative_module IMPORT '(' identifier import_stmt_identifiers ')' .
-
-    $default  вывод с использованием правила 200 (import_stmt)
-
-
-состояние 294
-
-  204 import_stmt: FROM relative_module IMPORT '(' identifier import_stmt_identifiers ',' . ')'
-  222 import_stmt_identifiers: import_stmt_identifiers ',' . identifier
-  223                        | import_stmt_identifiers ',' . identifier AS name
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-    ')'         сдвиг, и переход в состояние 317
-
-    identifier  переход в состояние 297
-
-
-состояние 295
-
-  197 import_stmt: FROM relative_module IMPORT identifier AS name import_stmt_identifiers .
-  222 import_stmt_identifiers: import_stmt_identifiers . ',' identifier
-  223                        | import_stmt_identifiers . ',' identifier AS name
-
-    ','  сдвиг, и переход в состояние 273
-
-    $default  вывод с использованием правила 197 (import_stmt)
-
-
-состояние 296
-
-  221 import_stmt_identifiers: ',' identifier AS . name
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    identifier  переход в состояние 198
-    name        переход в состояние 318
-
-
-состояние 297
-
-  222 import_stmt_identifiers: import_stmt_identifiers ',' identifier .
-  223                        | import_stmt_identifiers ',' identifier . AS name
-
-    AS  сдвиг, и переход в состояние 319
-
-    $default  вывод с использованием правила 222 (import_stmt_identifiers)
-
-
-состояние 298
-
-  219 modules: modules ',' module AS name .
-
-    $default  вывод с использованием правила 219 (modules)
-
-
-состояние 299
-
-   49 genexpr_if: IF . old_expression
-   50           | IF . old_expression genexpr_iter
-
-    "TODO"  сдвиг, и переход в состояние 280
-
-    old_expression  переход в состояние 320
-
-
-состояние 300
-
-   47 genexpr_iter: genexpr_for .
-
-    $default  вывод с использованием правила 47 (genexpr_iter)
-
-
-состояние 301
-
-   46 genexpr_for: FOR target_list IN or_test genexpr_iter .
-
-    $default  вывод с использованием правила 46 (genexpr_for)
-
-
-состояние 302
-
-   48 genexpr_iter: genexpr_if .
-
-    $default  вывод с использованием правила 48 (genexpr_iter)
-
-
-состояние 303
-
-   42 list_if: IF . old_expression
-   43        | IF . old_expression list_iter
-
-    "TODO"  сдвиг, и переход в состояние 280
-
-    old_expression  переход в состояние 321
-
-
-состояние 304
-
-   40 list_iter: list_for .
-
-    $default  вывод с использованием правила 40 (list_iter)
-
-
-состояние 305
-
-   34 list_for: FOR target_list IN old_expression_list list_iter .
-
-    $default  вывод с использованием правила 34 (list_for)
-
-
-состояние 306
-
-   41 list_iter: list_if .
-
-    $default  вывод с использованием правила 41 (list_iter)
-
-
-состояние 307
-
-   38 old_expressions: ',' . old_expression
-
-    "TODO"  сдвиг, и переход в состояние 280
-
-    old_expression  переход в состояние 322
-
-
-состояние 308
-
-   36 old_expression_list: old_expression old_expressions .
-   37                    | old_expression old_expressions . ','
-   39 old_expressions: old_expressions . ',' old_expression
-
-    ','  сдвиг, и переход в состояние 323
-
-    $default  вывод с использованием правила 36 (old_expression_list)
-
-
-состояние 309
-
-  113 argument_list: STAR expression ',' DOUBLESTAR expression .
-
-    $default  вывод с использованием правила 113 (argument_list)
-
-
-состояние 310
-
-  106 argument_list: positional_arguments ',' STAR expression ',' . DOUBLESTAR expression
-
-    DOUBLESTAR  сдвиг, и переход в состояние 324
-
-
-состояние 311
-
-  104 argument_list: positional_arguments ',' keyword_arguments ',' STAR . expression
-  107              | positional_arguments ',' keyword_arguments ',' STAR . expression ',' DOUBLESTAR expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 325
-
-
-состояние 312
-
-  105 argument_list: positional_arguments ',' keyword_arguments ',' DOUBLESTAR . expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 326
-
-
-состояние 313
-
-  111 argument_list: keyword_arguments ',' STAR expression ',' . DOUBLESTAR expression
-
-    DOUBLESTAR  сдвиг, и переход в состояние 327
-
-
-состояние 314
-
-  199 import_stmt: FROM relative_module IMPORT '(' identifier AS name ')' .
-
-    $default  вывод с использованием правила 199 (import_stmt)
-
-
-состояние 315
-
-  203 import_stmt: FROM relative_module IMPORT '(' identifier AS name ',' . ')'
-  220 import_stmt_identifiers: ',' . identifier
-  221                        | ',' . identifier AS name
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-    ')'         сдвиг, и переход в состояние 328
-
-    identifier  переход в состояние 272
-
-
-состояние 316
-
-  201 import_stmt: FROM relative_module IMPORT '(' identifier AS name import_stmt_identifiers . ')'
-  205            | FROM relative_module IMPORT '(' identifier AS name import_stmt_identifiers . ',' ')'
-  222 import_stmt_identifiers: import_stmt_identifiers . ',' identifier
-  223                        | import_stmt_identifiers . ',' identifier AS name
-
-    ')'  сдвиг, и переход в состояние 329
-    ','  сдвиг, и переход в состояние 330
-
-
-состояние 317
-
-  204 import_stmt: FROM relative_module IMPORT '(' identifier import_stmt_identifiers ',' ')' .
-
-    $default  вывод с использованием правила 204 (import_stmt)
-
-
-состояние 318
-
-  221 import_stmt_identifiers: ',' identifier AS name .
-
-    $default  вывод с использованием правила 221 (import_stmt_identifiers)
-
-
-состояние 319
-
-  223 import_stmt_identifiers: import_stmt_identifiers ',' identifier AS . name
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-
-    identifier  переход в состояние 198
-    name        переход в состояние 331
-
-
-состояние 320
-
-   49 genexpr_if: IF old_expression .
-   50           | IF old_expression . genexpr_iter
-
-    FOR  сдвиг, и переход в состояние 152
-    IF   сдвиг, и переход в состояние 299
-
-    $default  вывод с использованием правила 49 (genexpr_if)
-
-    genexpr_for   переход в состояние 300
-    genexpr_iter  переход в состояние 332
-    genexpr_if    переход в состояние 302
-
-
-состояние 321
-
-   42 list_if: IF old_expression .
-   43        | IF old_expression . list_iter
-
-    FOR  сдвиг, и переход в состояние 157
-    IF   сдвиг, и переход в состояние 303
-
-    $default  вывод с использованием правила 42 (list_if)
-
-    list_for   переход в состояние 304
-    list_iter  переход в состояние 333
-    list_if    переход в состояние 306
-
-
-состояние 322
-
-   38 old_expressions: ',' old_expression .
-
-    $default  вывод с использованием правила 38 (old_expressions)
-
-
-состояние 323
-
-   37 old_expression_list: old_expression old_expressions ',' .
-   39 old_expressions: old_expressions ',' . old_expression
-
-    "TODO"  сдвиг, и переход в состояние 280
-
-    $default  вывод с использованием правила 37 (old_expression_list)
-
-    old_expression  переход в состояние 334
-
-
-состояние 324
-
-  106 argument_list: positional_arguments ',' STAR expression ',' DOUBLESTAR . expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 335
-
-
-состояние 325
-
-  104 argument_list: positional_arguments ',' keyword_arguments ',' STAR expression .
-  107              | positional_arguments ',' keyword_arguments ',' STAR expression . ',' DOUBLESTAR expression
-
-    ','  сдвиг, и переход в состояние 336
-
-    ','       [вывод с использованием правила 104 (argument_list)]
-    $default  вывод с использованием правила 104 (argument_list)
-
-
-состояние 326
-
-  105 argument_list: positional_arguments ',' keyword_arguments ',' DOUBLESTAR expression .
-
-    $default  вывод с использованием правила 105 (argument_list)
-
-
-состояние 327
-
-  111 argument_list: keyword_arguments ',' STAR expression ',' DOUBLESTAR . expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 337
-
-
-состояние 328
-
-  203 import_stmt: FROM relative_module IMPORT '(' identifier AS name ',' ')' .
-
-    $default  вывод с использованием правила 203 (import_stmt)
-
-
-состояние 329
-
-  201 import_stmt: FROM relative_module IMPORT '(' identifier AS name import_stmt_identifiers ')' .
-
-    $default  вывод с использованием правила 201 (import_stmt)
-
-
-состояние 330
-
-  205 import_stmt: FROM relative_module IMPORT '(' identifier AS name import_stmt_identifiers ',' . ')'
-  222 import_stmt_identifiers: import_stmt_identifiers ',' . identifier
-  223                        | import_stmt_identifiers ',' . identifier AS name
-
-    IDENTIFIER  сдвиг, и переход в состояние 14
-    ')'         сдвиг, и переход в состояние 338
-
-    identifier  переход в состояние 297
-
-
-состояние 331
-
-  223 import_stmt_identifiers: import_stmt_identifiers ',' identifier AS name .
-
-    $default  вывод с использованием правила 223 (import_stmt_identifiers)
-
-
-состояние 332
-
-   50 genexpr_if: IF old_expression genexpr_iter .
-
-    $default  вывод с использованием правила 50 (genexpr_if)
-
-
-состояние 333
-
-   43 list_if: IF old_expression list_iter .
-
-    $default  вывод с использованием правила 43 (list_if)
-
-
-состояние 334
-
-   39 old_expressions: old_expressions ',' old_expression .
-
-    $default  вывод с использованием правила 39 (old_expressions)
-
-
-состояние 335
-
-  106 argument_list: positional_arguments ',' STAR expression ',' DOUBLESTAR expression .
-
-    $default  вывод с использованием правила 106 (argument_list)
-
-
-состояние 336
-
-  107 argument_list: positional_arguments ',' keyword_arguments ',' STAR expression ',' . DOUBLESTAR expression
-
-    DOUBLESTAR  сдвиг, и переход в состояние 339
-
-
-состояние 337
-
-  111 argument_list: keyword_arguments ',' STAR expression ',' DOUBLESTAR expression .
-
-    $default  вывод с использованием правила 111 (argument_list)
-
-
-состояние 338
-
-  205 import_stmt: FROM relative_module IMPORT '(' identifier AS name import_stmt_identifiers ',' ')' .
-
-    $default  вывод с использованием правила 205 (import_stmt)
-
-
-состояние 339
-
-  107 argument_list: positional_arguments ',' keyword_arguments ',' STAR expression ',' DOUBLESTAR . expression
-
-    "TODO"  сдвиг, и переход в состояние 73
-
-    expression  переход в состояние 340
-
-
-состояние 340
-
-  107 argument_list: positional_arguments ',' keyword_arguments ',' STAR expression ',' DOUBLESTAR expression .
-
-    $default  вывод с использованием правила 107 (argument_list)

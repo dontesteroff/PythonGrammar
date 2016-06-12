@@ -65,6 +65,8 @@
 %token NE_OP
 %token STAR
 %token DOUBLESTAR
+%token SLASH
+%token DOUBLESLASH
 
 %token NEWLINE
 
@@ -300,8 +302,98 @@
 		',' keyword_item
 		| keyword_items ',' keyword_item
 		
+	power:
+		primary
+		| DOUBLESTAR u_expr
+		
+	u_expr:
+		power
+		| '-' u_expr
+		| '+' u_expr
+		| '~' u_expr
+		
+	m_expr:
+		u_expr
+		| m_expr STAR u_expr
+		| m_expr DOUBLESLASH u_expr
+		| m_expr SLASH u_expr
+		| m_expr '%' u_expr
+		
+	a_expr:
+		m_expr
+		| a_expr '+' m_expr
+		| a_expr '-' m_expr
+		
+	shift_expr:
+		a_expr
+		| shift_expr RIGHT_OP a_expr
+		| shift_expr LEFT_OP a_expr
+		
+	and_expr:
+		shift_expr
+		| and_expr '&' shift_expr
+		
+	xor_expr:
+		and_expr
+		| xor_expr '^' and_expr
+		
 	or_expr:
-		"TODO"
+		xor_expr
+		| or_expr '|' xor_expr
+		
+	comparison:
+		or_expr
+		| comparison_operators_or_exprs
+		
+	comparison_operators_or_exprs:
+		comp_operator or_expr
+		| comparison_operators_or_exprs comp_operator or_expr
+		
+	comp_operator:
+		"<" | ">" | "==" | ">=" | "<=" | "<>" | "!="
+		| IS | IS NOT | IN | NOT IN
+		
+	expression:
+		conditional_expression
+		| lambda_form
+		
+	old_expression:
+		or_test
+		| old_lambda_form
+		
+	conditional_expression:
+		or_test
+		| or_test IF or_test ELSE expression
+		
+	or_test:
+		and_test
+		| or_test OR and_test
+		
+	and_test:
+		not_test
+		| and_test AND not_test
+		
+	not_test:
+		comparison
+		| NOT not_test
+		
+	lambda_form:
+		LAMBDA ':' expression
+		| LAMBDA parameter_list ':' expression
+		
+	old_lambda_form:
+		LAMBDA ':' old_expression
+		| LAMBDA parameter_list ':' expression
+		
+	expression_list:
+		expression
+		| expression ','
+		| expression expressions
+		| expression expressions ','
+		
+	expressions:
+		',' expression
+		| expressions ',' expression
 		
 	simple_stmt:
 		expression_stmt
@@ -372,10 +464,6 @@
 		| PRINT RIGHT_OP expression
 		| PRINT RIGHT_OP expression expressions
 		| PRINT RIGHT_OP expression expressions ','
-		
-	expressions:
-		',' expression
-		| expressions ',' expression
 	
 	return_stmt:
 		RETURN
@@ -460,18 +548,9 @@
 		| EXEC or_expr IN expression
 		| EXEC or_expr IN expression ',' expression
 		
-	expression:
-		"TODO"
-		
-	old_expression:
-		"TODO"
-		
-	or_test:
-		"TODO"
-		
-	expression_list:
+	parameter_list:
 		"TODO"
 		
 	input:
-		simple_stmt
+		"TODO"
 %%

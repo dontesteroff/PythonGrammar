@@ -112,8 +112,6 @@ WHITESPACE		[ \t\v\n\f]
 "~"					{ return '~'; }
 "-"					{ return '-'; }
 "+"					{ return '+'; }
-"*"					{ return '*'; }
-"/"					{ return '/'; }
 "%"					{ return '%'; }
 "<"					{ return '<'; }
 ">"					{ return '>'; }
@@ -122,6 +120,8 @@ WHITESPACE		[ \t\v\n\f]
 "`"					{ return '`'; }
 "*"					{ return STAR; }
 "**"				{ return DOUBLESTAR; }
+"/"					{ return SLASH; }
+"//"					{ return DOUBLESLASH; }
 				
 {IDENTIFIER}		{
 						printf("IDENTIFIER: %s\n", yytext);

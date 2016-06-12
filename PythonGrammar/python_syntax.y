@@ -101,6 +101,19 @@
 	imagnumber:
 		IMAGNUMBER
 	
+	atom:
+		identifier
+		| literal
+		| enclosure		
+		
+	enclosure:
+		parenth_form
+		| list_display
+		| generator_expression
+		| dict_display
+		| string_conversion
+		| yield_atom
+	
 	literal:
 		stringliteral
 		| integer
@@ -108,13 +121,73 @@
 		| floatnumber
 		| imagnumber
 		
-	atom:
-		identifier
-		| literal
-		| enclosure		
+	parenth_form:
+		'(' ')'
+		| '(' expression_list ')'
 		
-	enclosure:
-		"TODO"
+	list_display:
+		'[' ']'
+		| '[' expression_list ']'
+		| '[' list_comprehension ']'
+		
+	list_comprehension:
+		expression list_for
+		
+	list_for:
+		FOR target_list IN old_expression_list
+		| FOR target_list IN old_expression_list list_iter
+		
+	old_expression_list:
+		old_expression
+		| old_expression old_expressions
+		| old_expression old_expressions ','
+		
+	old_expressions:
+		',' old_expression
+		| old_expressions ',' old_expression
+		
+	list_iter:
+		list_for
+		| list_if
+		
+	list_if:
+		IF old_expression
+		| IF old_expression list_iter
+		
+	generator_expression:
+		'(' expression genexpr_for ')'
+		
+	genexpr_for:
+		FOR target_list IN or_test
+		| FOR target_list IN or_test genexpr_iter
+		
+	genexpr_iter:
+		genexpr_for
+		| genexpr_if
+		
+	genexpr_if:
+		IF old_expression
+		| IF old_expression genexpr_iter
+		
+	dict_display:
+		'{' '}'
+		| '{' key_datum_list '}'
+		
+	key_datum_list:
+		key_datum
+		| key_datum ','
+		| key_datum key_datums
+		| key_datum key_datums ','
+		
+	key_datums:
+		',' key_datum
+		| key_datums ',' key_datum
+		
+	string_conversion:
+		'`' expression_list '`'
+		
+	yield_atom:
+		'(' yield_expression ')'
 		
 	yield_expression:
 		YIELD

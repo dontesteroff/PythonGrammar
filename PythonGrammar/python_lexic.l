@@ -28,7 +28,7 @@ EXPONENTFLOAT	({INTPART}|{POINTFLOAT}){EXPONENT}
 
 IMAGNUMBER		({POINTFLOAT}|{EXPONENTFLOAT}|{INTPART})("j"|"J")
 
-STRINGPREFIX	("r"|"u"|"ur"|"R"|"U"|"UR"|"Ur"|"uR")?
+STRINGPREFIX	("r"|"u"|"ur"|"R"|"U"|"UR"|"Ur"|"uR")
 SHORTSTRINGITEM	([^\n\'\"\\])|([\\].)
 LONGSTRINGITEM	([^\\])|([\\].)
 SHORTSTRING		{STRINGPREFIX}?([']{SHORTSTRINGITEM}*['])|(["]{SHORTSTRINGITEM}*["])
@@ -104,6 +104,8 @@ WHITESPACE		[ \t\v\n\f]
 ")"					{ return ')'; }
 "["					{ return '['; }
 "]"					{ return ']'; }
+"{"					{ return '{'; }
+"}"					{ return '}'; }
 "."					{ return '.'; }
 "&"					{ return '&'; }
 "!"					{ return '!'; }
@@ -117,7 +119,7 @@ WHITESPACE		[ \t\v\n\f]
 ">"					{ return '>'; }
 "^"					{ return '^'; }
 "|"					{ return '|'; }
-"?"					{ return '?'; }
+"`"					{ return '`'; }
 "*"					{ return '*'; }
 				
 {IDENTIFIER}		{

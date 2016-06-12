@@ -101,7 +101,9 @@
      GE_OP = 317,
      EQ_OP = 318,
      NE_OP = 319,
-     NEWLINE = 320
+     STAR = 320,
+     DOUBLESTAR = 321,
+     NEWLINE = 322
    };
 #endif
 /* Tokens.  */
@@ -167,7 +169,9 @@
 #define GE_OP 317
 #define EQ_OP 318
 #define NE_OP 319
-#define NEWLINE 320
+#define STAR 320
+#define DOUBLESTAR 321
+#define NEWLINE 322
 
 
 
@@ -177,7 +181,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 78 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
+#line 80 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_syntax.y"
 
 	int int_type;
 	char* string_type;
@@ -185,7 +189,7 @@ typedef union YYSTYPE
 
 
 /* Line 1676 of yacc.c  */
-#line 189 "y.tab.h"
+#line 193 "y.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

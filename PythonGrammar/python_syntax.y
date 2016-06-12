@@ -63,6 +63,8 @@
 %token GE_OP
 %token EQ_OP
 %token NE_OP
+%token STAR
+%token DOUBLESTAR
 
 %token NEWLINE
 
@@ -179,6 +181,9 @@
 		| key_datum key_datums
 		| key_datum key_datums ','
 		
+	key_datum:
+		expression ':' expression
+		
 	key_datums:
 		',' key_datum
 		| key_datums ',' key_datum
@@ -193,14 +198,107 @@
 		YIELD
 		| YIELD expression_list
 		
+	primary:
+		atom
+		| attributeref
+		| subscription
+		| slicing
+		| call	
+	
 	attributeref:
-		"TODO"
-
+		primary '.' identifier
+		
 	subscription:
-		"TODO"
-
+		primary '[' expression_list ']'
+		
 	slicing:
-		"TODO"
+		simple_slicing
+		| extended_slicing
+		
+	simple_slicing:
+		primary '[' short_slice ']'
+		
+	extended_slicing:
+		primary '[' slice_list ']'
+		
+	slice_list:
+		slice_item
+		| slice_item ','
+		| slice_item slice_items
+		| slice_item slice_items ','
+		
+	slice_item:
+		expression
+		| proper_slice
+		| ellipsis
+		
+	slice_items:
+		',' slice_item
+		| slice_items ',' slice_item
+	
+	proper_slice:
+		short_slice
+		| long_slice
+		
+	short_slice:
+		':'
+		| lower_bound ':'
+		| ':' upper_bound
+		| lower_bound ':' upper_bound
+		
+	long_slice:
+		short_slice ':'
+		| short_slice ':' stride
+		
+	lower_bound:
+		expression
+		
+	upper_bound:
+		expression
+		
+	stride:
+		expression
+		
+	ellipsis:
+		ELLIPSIS
+		
+	call:
+		primary '(' ')'
+		| primary '(' argument_list ')'
+		| primary '(' argument_list ',' ')'
+		| primary '(' expression genexpr_for ')'
+		
+	argument_list:
+		positional_arguments
+		| positional_arguments ',' keyword_arguments
+		| positional_arguments ',' STAR expression
+		| positional_arguments ',' DOUBLESTAR expression
+		| positional_arguments ',' keyword_arguments ',' STAR expression
+		| positional_arguments ',' keyword_arguments ',' DOUBLESTAR expression
+		| positional_arguments ',' STAR expression ',' DOUBLESTAR expression
+		| positional_arguments ',' keyword_arguments ',' STAR expression ',' DOUBLESTAR expression
+		| keyword_arguments
+		| keyword_arguments ',' STAR expression
+		| keyword_arguments ',' DOUBLESTAR expression
+		| keyword_arguments ',' STAR expression ',' DOUBLESTAR expression
+		| STAR expression
+		| STAR expression ',' DOUBLESTAR expression
+		| DOUBLESTAR expression
+		
+	positional_arguments:
+		expression
+		| expression expressions
+		
+	keyword_arguments:
+		keyword_item
+		| keyword_item keyword_items
+		
+	keyword_item:
+		identifier '=' expression
+		
+	keyword_items:
+		',' keyword_item
+		| keyword_items ',' keyword_item
 		
 	or_expr:
 		"TODO"
@@ -315,7 +413,7 @@
 		| FROM relative_module IMPORT '(' identifier AS name ',' ')'
 		| FROM relative_module IMPORT '(' identifier import_stmt_identifiers ',' ')'
 		| FROM relative_module IMPORT '(' identifier AS name import_stmt_identifiers ',' ')'
-		| FROM module IMPORT '*'
+		| FROM module IMPORT STAR
 		
 	module:
 		identifier
@@ -351,11 +449,11 @@
 		
 	global_stmt:
 		GLOBAL identifier
-		| GLOBAL identifier global_stmt_extended
+		| GLOBAL identifier global_stmt_identifiers
 		
-	global_stmt_extended:
+	global_stmt_identifiers:
 		',' identifier
-		| global_stmt_extended
+		| global_stmt_identifiers ',' identifier
 		
 	exec_stmt:
 		EXEC or_expr
@@ -363,6 +461,12 @@
 		| EXEC or_expr IN expression ',' expression
 		
 	expression:
+		"TODO"
+		
+	old_expression:
+		"TODO"
+		
+	or_test:
 		"TODO"
 		
 	expression_list:

@@ -120,7 +120,8 @@ WHITESPACE		[ \t\v\n\f]
 "^"					{ return '^'; }
 "|"					{ return '|'; }
 "`"					{ return '`'; }
-"*"					{ return '*'; }
+"*"					{ return STAR; }
+"**"				{ return DOUBLESTAR; }
 				
 {IDENTIFIER}		{
 						printf("IDENTIFIER: %s\n", yytext);
@@ -178,6 +179,7 @@ WHITESPACE		[ \t\v\n\f]
 					
 {WHITESPACE}+		{ /* whitespace separates tokens */ }
 .					{ /* discard bad characters */ }
+
 %%
 
 int yywrap(void) {

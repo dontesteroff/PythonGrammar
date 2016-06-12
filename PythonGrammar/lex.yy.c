@@ -282,35 +282,35 @@ static void yy_fatal_error YY_PROTO(( yyconst char msg[] ));
 	*yy_cp = '\0'; \
 	yy_c_buf_p = yy_cp;
 
-#define YY_NUM_RULES 92
-#define YY_END_OF_BUFFER 93
+#define YY_NUM_RULES 93
+#define YY_END_OF_BUFFER 94
 static yyconst short int yy_accept[226] =
     {   0,
-        0,    0,   93,   91,   90,   89,   66,   91,   88,   72,
-       65,   91,   58,   59,   70,   69,   55,   68,   64,   71,
-       80,   80,   56,   73,   57,   74,   79,   79,   35,   79,
-       79,   79,   79,   60,   61,   75,   77,   79,   79,   79,
-       79,   79,   79,   79,   79,   36,   79,   79,   79,   79,
-       79,   79,   79,   79,   62,   76,   63,   67,   90,   54,
-        0,   86,    0,   88,   45,   46,    0,   86,    0,    0,
-       42,   40,   41,    0,   83,   44,   83,   81,    0,    0,
-       85,    0,   80,   50,   51,   53,   52,   49,   79,   79,
-       79,    0,    0,   79,   79,   47,   79,    5,   79,   79,
+        0,    0,   94,   92,   91,   90,   66,   92,   89,   72,
+       65,   92,   58,   59,   70,   69,   55,   68,   64,   71,
+       81,   81,   56,   73,   57,   74,   80,   80,   35,   80,
+       80,   80,   80,   60,   61,   75,   77,   80,   80,   80,
+       80,   80,   80,   80,   80,   36,   80,   80,   80,   80,
+       80,   80,   80,   80,   62,   76,   63,   67,   91,   54,
+        0,   87,    0,   89,   45,   46,    0,   87,    0,   79,
+       42,   40,   41,    0,   84,   44,   84,   82,    0,    0,
+       86,    0,   81,   50,   51,   53,   52,   49,   80,   80,
+       80,    0,    0,   80,   80,   47,   80,    5,   80,   80,
 
-       79,   79,   79,   79,   79,   79,   79,   79,   19,   79,
-       21,   22,   79,   79,   25,   79,   79,   79,   79,   79,
-       79,   79,   79,   48,   86,    0,    0,   43,   37,   83,
-        0,   84,   82,   39,   38,   79,   79,    0,   79,    4,
-       79,   79,   79,   79,   10,   11,   79,   79,   79,   79,
-       79,   16,   79,   79,   79,   79,   24,   79,   79,   79,
-       79,   29,   79,   79,   79,    0,    0,    0,    0,    0,
-        0,   79,    2,    3,   79,   79,   79,   79,   12,   13,
-       79,   34,   79,   17,   79,   79,   79,   26,   79,   79,
-       79,   79,   31,   79,    0,    0,    1,   79,    7,    8,
+       80,   80,   80,   80,   80,   80,   80,   80,   19,   80,
+       21,   22,   80,   80,   25,   80,   80,   80,   80,   80,
+       80,   80,   80,   48,   87,    0,    0,   43,   37,   84,
+        0,   85,   83,   39,   38,   80,   80,    0,   80,    4,
+       80,   80,   80,   80,   10,   11,   80,   80,   80,   80,
+       80,   16,   80,   80,   80,   80,   24,   80,   80,   80,
+       80,   29,   80,   80,   80,    0,    0,    0,    0,    0,
+        0,   80,    2,    3,   80,   80,   80,   80,   12,   13,
+       80,   34,   80,   17,   80,   80,   80,   26,   80,   80,
+       80,   80,   31,   80,    0,    0,    1,   80,    7,    8,
 
-       79,   79,   79,   79,   79,   79,   33,   27,   79,   30,
-       32,   87,   87,    6,   79,   14,   79,   18,   20,   23,
-       28,   79,   15,    9,    0
+       80,   80,   80,   80,   80,   80,   33,   27,   80,   30,
+       32,   88,   88,    6,   80,   14,   80,   18,   20,   23,
+       28,   80,   15,    9,    0
     } ;
 
 static yyconst int yy_ec[256] =
@@ -1166,109 +1166,114 @@ YY_RULE_SETUP
 case 78:
 YY_RULE_SETUP
 #line 123 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
-{ return '*'; }
+{ return STAR; }
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
-#line 125 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 124 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+{ return DOUBLESTAR; }
+	YY_BREAK
+case 80:
+YY_RULE_SETUP
+#line 126 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 {
 						printf("IDENTIFIER: %s\n", yytext);
 						return IDENTIFIER;
 					}
 	YY_BREAK
-case 80:
+case 81:
 YY_RULE_SETUP
-#line 130 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 131 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 {
 						printf("DECINTEGER: %s\n", yytext);
 						return DECINTEGER;
 					}
 	YY_BREAK
-case 81:
+case 82:
 YY_RULE_SETUP
-#line 135 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 136 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 {
 						printf("OCTINTEGER: %s\n", yytext);
 						return OCTINTEGER;
 					}
 	YY_BREAK
-case 82:
+case 83:
 YY_RULE_SETUP
-#line 140 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 141 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 {
 						printf("HEXINTEGER: %s\n", yytext);
 						return HEXINTEGER;
 					}
 	YY_BREAK
-case 83:
+case 84:
 YY_RULE_SETUP
-#line 145 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 146 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 {
 						printf("POINTFLOAT: %s\n", yytext);
 						return POINTFLOAT;
 					}
 	YY_BREAK
-case 84:
+case 85:
 YY_RULE_SETUP
-#line 150 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 151 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 {
 						printf("EXPONENTFLOAT: %s\n", yytext);
 						return EXPONENTFLOAT;
 					}
 	YY_BREAK
-case 85:
+case 86:
 YY_RULE_SETUP
-#line 155 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 156 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 {
 						printf("IMAGNUMBER: %s\n", yytext);
 						return IMAGNUMBER;
 					}
 	YY_BREAK
-case 86:
+case 87:
 YY_RULE_SETUP
-#line 161 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 162 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 {
 						printf("SHORTSTRING: %s\n", yytext);
 						return SHORTSTRING;
 					}
 	YY_BREAK
-case 87:
+case 88:
 YY_RULE_SETUP
-#line 166 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 167 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 {
 						printf("LONGSTRING: %s\n", yytext);
 						return LONGSTRING;
 					}
 	YY_BREAK
-case 88:
-YY_RULE_SETUP
-#line 171 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
-
-	YY_BREAK
 case 89:
 YY_RULE_SETUP
-#line 173 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 172 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+
+	YY_BREAK
+case 90:
+YY_RULE_SETUP
+#line 174 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 {
 						line_number++;
 						return NEWLINE;
 					}
 	YY_BREAK
-case 90:
-YY_RULE_SETUP
-#line 179 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
-{ /* whitespace separates tokens */ }
-	YY_BREAK
 case 91:
 YY_RULE_SETUP
 #line 180 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
-{ /* discard bad characters */ }
+{ /* whitespace separates tokens */ }
 	YY_BREAK
 case 92:
 YY_RULE_SETUP
 #line 181 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+{ /* discard bad characters */ }
+	YY_BREAK
+case 93:
+YY_RULE_SETUP
+#line 183 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 ECHO;
 	YY_BREAK
-#line 1272 "lex.yy.c"
+#line 1277 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2154,7 +2159,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 181 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
+#line 183 "D:\\Testing\\Repos\\PythonGrammar\\PythonGrammar\\python_lexic.l"
 
 
 int yywrap(void) {

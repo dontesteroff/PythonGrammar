@@ -87,7 +87,8 @@
 }
 
 %%
-	start: input
+	start:
+		input
 	
 	identifier:
 		IDENTIFIER
@@ -695,7 +696,24 @@
 		
 	classname:
 		identifier
+	
+	file_input:
+		newlines
+		| statements
+	
+	eval_input:
+		expression_list
+		| expression_list newlines
+	
+	newlines:
+		NEWLINE
+		| newlines NEWLINE
+	
+	input_input:
+		expression_list NEWLINE
 		
 	input:
-		"TODO"
+		file_input
+		| eval_input
+		| input_input
 %%
